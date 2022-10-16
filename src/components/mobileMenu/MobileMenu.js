@@ -12,52 +12,58 @@ import quitIcon from '../../assets/Quit.svg';
 
 import './mobileMenu.scss';
 
-const MobileMenu = ({ isActive }) => {
+const MobileMenu = ({ isActive, setIsActiveBurger }) => {
    return (
-      <div className={`mobile-menu ${isActive ? 'active' : null}`}>
-         <div className="mobile-menu__header">
-            <Link to='/profile'>
-               <img className='mobile-menu__user-icon' src={userIcon} alt="user icon" />
-            </Link>
-            <Link className='mobile-menu__user-name' to='/profile'>
-               User Name
-            </Link>
-            <img className='mobile-menu__notifications' src={notificationsIcon} alt="Notifications" />
+      <>
+         <div
+            className={`black-wrapper ${isActive ? 'active' : ''}`}
+            onClick={() => setIsActiveBurger(isActiveBurger => !isActiveBurger)}>
          </div>
-         <div className="mobile-menu__list">
-            <Link to='/profile' className='mobile-menu__link'>
-               <div className="mobile-menu__image">
-                  <img src={profileIcon} alt="Profile" />
-               </div>
-               Мой профиль
-            </Link>
-            <Link to='/favourites' className='mobile-menu__link'>
-               <div className="mobile-menu__image">
-                  <img src={favIcon} alt="Favourite" />
-               </div>
+         <div className={`mobile-menu ${isActive ? 'active' : ''}`}>
+            <div className="mobile-menu__header">
+               <Link to='/profile'>
+                  <img className='mobile-menu__user-icon' src={userIcon} alt="user icon" />
+               </Link>
+               <Link className='mobile-menu__user-name' to='/profile'>
+                  User Name
+               </Link>
+               <img className='mobile-menu__notifications' src={notificationsIcon} alt="Notifications" />
+            </div>
+            <div className="mobile-menu__list">
+               <Link to='/profile' className='mobile-menu__link'>
+                  <div className="mobile-menu__image">
+                     <img src={profileIcon} alt="Profile" />
+                  </div>
+                  Мой профиль
+               </Link>
+               <Link to='/favourites' className='mobile-menu__link'>
+                  <div className="mobile-menu__image">
+                     <img src={favIcon} alt="Favourite" />
+                  </div>
 
-               Мои закладки
-            </Link>
-            <Link to='/catalog' className='mobile-menu__link'>
-               <div className="mobile-menu__image">
-                  <img src={catalogIcon} alt="Catalog" />
-               </div>
+                  Мои закладки
+               </Link>
+               <Link to='/catalog' className='mobile-menu__link'>
+                  <div className="mobile-menu__image">
+                     <img src={catalogIcon} alt="Catalog" />
+                  </div>
 
-               Каталог
-            </Link>
-            <Link to='/faq' className='mobile-menu__link'>
-               <div className="mobile-menu__image">
-                  <img src={faqIcon} alt="FAQ" />
-               </div>
+                  Каталог
+               </Link>
+               <Link to='/faq' className='mobile-menu__link'>
+                  <div className="mobile-menu__image">
+                     <img src={faqIcon} alt="FAQ" />
+                  </div>
 
-               FAQ
-            </Link>
+                  FAQ
+               </Link>
+            </div>
+            <div className="mobile-menu__quit">
+               <img src={quitIcon} alt="Quit" />
+               Выход
+            </div>
          </div>
-         <div className="mobile-menu__quit">
-            <img src={quitIcon} alt="Quit" />
-            Выход
-         </div>
-      </div>
+      </>
    )
 }
 

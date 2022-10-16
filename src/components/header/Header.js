@@ -59,7 +59,7 @@ const Header = () => {
                </div>
                {isMobile && <SearchInput />}
             </div>
-            {isMobile && <MobileMenu isActive={isActiveBurger} />}
+            {isMobile && <MobileMenu setIsActiveBurger={setIsActiveBurger} isActive={isActiveBurger} />}
          </header>
 
       </>

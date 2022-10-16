@@ -1,16 +1,30 @@
 @import '../../styles/theme.scss';
 
+.black-wrapper {
+   display: none;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100vw;
+   z-index: 1;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.404);
+   &.active {
+      display: block;
+   }
+}
+
 .mobile-menu {
    position: absolute;
-   z-index: 1;
-   right: -100%;
+   z-index: 2;
+   left: -100%;
    top: 0;
    width: 80%;
    height: 100vh;
    background-color: $bg-color;
    transition: 0.2s ease;
    &.active {
-      right: 0;
+      left: 0;
    }
    &__header {
       padding: 15px;
