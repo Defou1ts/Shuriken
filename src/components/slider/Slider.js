@@ -16,7 +16,6 @@ const Slider = () => {
    const dispatch = useDispatch();
    const sliderItems = useSelector(state => state.slider.sliderItems);
    const sliderItemsLoadingStatus = useSelector(state => state.slider.sliderItemsLoadingStatus);
-
    const [position, setPosition] = useState(0);
    const [current, setCurrent] = useState(1);
    const count = 3;
@@ -56,6 +55,7 @@ const Slider = () => {
          .map(({ ...props }) => (
             <SliderSlide key={uuidv4()} {...props} />
          ));
+
       const renderedDots = [];
 
       for (let i = 1; i <= count; i++) {
@@ -84,10 +84,20 @@ const Slider = () => {
          <div className="slider__dots">
             {renderedDots}
          </div>
-         <img onClick={prevSlide} src={leftArrow} alt="Prev btn" className="slider__prev-btn slider__arrow" />
-         <img onClick={nextSlide} src={rightArrow} alt="Next btn" className="slider__next-btn slider__arrow" />
+         <img
+            onClick={prevSlide}
+            src={leftArrow}
+            alt="Prev btn"
+            className="slider__prev-btn slider__arrow" />
+         <img
+            onClick={nextSlide}
+            src={rightArrow}
+            alt="Next btn"
+            className="slider__next-btn slider__arrow" />
          <div className="slider__container">
-            <div style={{ left: `-${position}px` }} className="slider__field">
+            <div
+               style={{ left: `-${position}px` }}
+               className="slider__field">
                {renderedSliderItems}
             </div>
          </div>

@@ -37,7 +37,7 @@ const useKodikService = () => {
    const _transformSliderItems = (item) => {
       return {
          title: item.material_data.title,
-         poster: item.material_data.poster_url,
+         poster: item.material_data.screenshots[1],
          id: item.shikimori_id,
       }
    }

@@ -6,6 +6,7 @@ import './header.scss';
 import logo from '../../assets/logo.svg';
 import favourites from '../../assets/myfavorites.svg';
 import profile from '../../assets/profile.svg';
+
 import SearchInput from '../searchInput/SearchInput';
 import MobileMenu from '../mobileMenu/MobileMenu';
 
@@ -13,19 +14,11 @@ import MobileMenu from '../mobileMenu/MobileMenu';
 const Header = () => {
 
    const [isActiveBurger, setIsActiveBurger] = useState(false);
-
    const { isMobile } = useMobile();
-
    const user = true;
 
    useEffect(() => {
-      if (isActiveBurger) {
-
-         document.body.style = `overflow:hidden`
-      } else {
-
-         document.body.style = ``
-      }
+      isActiveBurger ? document.body.style = `overflow:hidden` : document.body.style = ``;
    }, [isActiveBurger]);
 
    return (
@@ -47,13 +40,18 @@ const Header = () => {
                         <Link className='header__link' to={'/catalog'}>Каталог</Link>
                         {!isMobile && <SearchInput />}
                         {user ?
-                           <Link className='header__link' to={'/favourites'}>
-                              <img src={favourites} alt='favourites' />
-                           </Link> : null
+                           (
+                              <>
+                                 <Link className='header__link' to={'/favourites'}>
+                                    <img src={favourites} alt='favourites' />
+                                 </Link>
+                                 <Link className='header__link' to={'/profile'}>
+                                    <img src={profile} alt='profile' />
+                                 </Link>
+                              </>
+                           )
+                           : null
                         }
-                        <Link className='header__link' to={'/profile'}>
-                           <img src={profile} alt='profile' />
-                        </Link>
                      </div>
                   </nav>
                </div>

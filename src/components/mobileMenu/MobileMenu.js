@@ -7,7 +7,7 @@ import profileIcon from '../../assets/profileIcon.svg';
 import catalogIcon from '../../assets/catalogIcon.svg';
 import faqIcon from '../../assets/faqIcon.svg';
 import favIcon from '../../assets/favIcon.svg';
-import quitIcon from '../../assets/Quit.svg';
+import quitIcon from '../../assets/quit.svg';
 
 
 import './mobileMenu.scss';
@@ -40,21 +40,18 @@ const MobileMenu = ({ isActive, setIsActiveBurger }) => {
                   <div className="mobile-menu__image">
                      <img src={favIcon} alt="Favourite" />
                   </div>
-
                   Мои закладки
                </Link>
                <Link to='/catalog' className='mobile-menu__link'>
                   <div className="mobile-menu__image">
                      <img src={catalogIcon} alt="Catalog" />
                   </div>
-
                   Каталог
                </Link>
                <Link to='/faq' className='mobile-menu__link'>
                   <div className="mobile-menu__image">
                      <img src={faqIcon} alt="FAQ" />
                   </div>
-
                   FAQ
                </Link>
             </div>

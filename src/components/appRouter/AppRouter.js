@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import { publicRoutes, privateRoutes } from '../../utils/routes';
 import { HOMEPAGE_ROUTE } from '../../utils/consts';
