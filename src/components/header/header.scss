@@ -1,0 +1,229 @@
+@import '../../styles/theme.scss';
+
+.header {
+   position: fixed;
+   z-index: 1пше;
+   display: flex;
+   height: 130px;
+   background: rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(6px);
+   width: 100%;
+   max-width: 100%;
+   &__body {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 0px 70px;
+   }
+
+   &__burger {
+      display: none;
+      border-radius: 20px;
+      background-color: $red-color;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      transition: 0.2s ease;
+      &:before {
+         content: '';
+         position: absolute;
+         width: 18px;
+         height: 2px;
+         background-color: #F0F0F0;
+         left: 6px;
+         top: 9px;
+         transition: 0.2s ease;
+      }
+      &:after {
+         content: '';
+         position: absolute;
+         width: 18px;
+         height: 2px;
+         background-color: #F0F0F0;
+         left: 6px;
+         bottom: 9px;
+         transition: 0.2s ease;
+      }
+      & span {
+         display: block;
+         width: 18px;
+         height: 2px;
+         background-color: #F0F0F0;
+         position: absolute;
+         left: 6px;
+         bottom: 14px;
+         transition: 0.2s ease;
+      }
+      &.active span {
+         transform: scale(0);
+         transition: 0.2s ease;
+      }
+      &.active::before {
+         transform: rotate(45deg);
+         transition: 0.2s ease;
+         top: 13px;
+      }
+      &.active::after {
+         transform: rotate(-45deg);
+         transition: 0.2s ease;
+         top: 13px;
+      }
+   }
+
+   &__logo {
+      // background: url('../../assets/shuriken.svg') -10px -10px no-repeat;
+      white-space: nowrap;
+      position: relative;
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 48px;
+      line-height: 59px;
+      color: $red-color;
+      z-index: 0;
+      & img {
+         position: absolute;
+         left: -18px;
+         top: -24px;
+         z-index: -1;
+      }
+   }
+
+   &__menu {
+      flex: 1 1 auto;
+      margin: 0px 0px 0px 0px;
+   }
+
+   &__list {
+      display: flex;
+      gap: 0px 70px;
+      justify-content: flex-end;
+   }
+
+   &__link {
+      font-size: 24px;
+      line-height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:first-child {
+         margin: 0px auto 0px 0px;
+      }
+   }
+}
+
+@media(max-width:1140px) {
+   .header {
+      
+      &__burger {
+         
+      }
+
+      &__body {
+         gap: 0px 30px;
+      }
+
+      &__logo {
+         font-size: 36px;
+         & img {
+            position: absolute;
+            left: -13px;
+            top: -13px;
+            z-index: -1;
+            width: 40px;
+            height: 40px;
+         }
+      }
+
+      &__menu {
+      }
+
+      &__list {
+         gap: 0px 30px;
+      }
+
+      &__link {
+         font-size: 18px;
+      }
+}
+}
+
+@media(max-width:744px) {
+   .header {
+      height: 160px;
+      background-color: $bg-color;
+      &__burger {
+         display: block;
+      }
+
+      &__body {
+         height: auto;
+         margin: 25px 0px 0px 0px;
+      }
+
+      &__logo {
+         margin: 0px auto;
+         position: relative;
+         top: 10px;
+         transform: translateX(-20%);
+         & img {
+            top: -5px;
+            left: -5px;
+            width: 33px;
+            height: 33px;
+         }
+         
+      }
+
+      &__menu {
+         display: none;
+         // position: absolute;
+         // width: 100%;
+         // background-color: $bg-color;
+         // left: 0;
+         // top: 0;
+         // height: 100vh;
+      }
+
+      &__list {
+         // flex-direction: column;
+         // align-items: flex-start;
+      }
+
+      &__link {
+         &:first-child {
+            margin: 0px 0px 0px 0px;
+         }
+      }
+}
+}
+
+@media(max-width:360px) {
+      .header {
+
+         
+
+         &__body {
+         }
+
+         &__logo {
+            font-size: 24px;
+            & img {
+               top: 0px;
+               left: -10px;
+            }
+         }
+
+         &__menu {
+         }
+
+         &__list {
+         }
+
+         &__link {
+         }
+   }
+}
+
+
+

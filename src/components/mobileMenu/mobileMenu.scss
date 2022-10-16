@@ -1,0 +1,72 @@
+@import '../../styles/theme.scss';
+
+.mobile-menu {
+   position: absolute;
+   z-index: 1;
+   right: -100%;
+   top: 0;
+   width: 80%;
+   height: 100vh;
+   background-color: $bg-color;
+   transition: 0.2s ease;
+   &.active {
+      right: 0;
+   }
+   &__header {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 0px 5px;
+      border-bottom: 1px solid $red-color;
+   }
+
+   &__user-icon {
+
+
+   }
+
+   &__user-name {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: #DEDEDE;
+
+   }
+   &__notifications {
+      margin: 0px 0px 0px auto;
+   }
+
+   &__image {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+
+   &__list {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px 0px;
+   }
+
+   &__link {
+      display: flex;
+      gap: 0px 10px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: #DEDEDE;
+   }
+
+   &__quit {
+      margin: 100px 15px 0px 15px;
+      display: flex;
+      gap: 0px 10px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: $red-color;
+   }
+}
