@@ -7,7 +7,6 @@ const useKodikService = () => {
    const _apiBase = 'https://kodikapi.com/';
    const _apiToken = '2d343183c2f3cfb3c557e409460875e2';
    const newEpisodesLimit = 4;
-   const newAnimesLimit = window.innerWidth > 1024 ? 5 : 12;
 
    const getSliderItems = async (sliderItemsLimit = 3) => {
       const res = await request(`${_apiBase}list?token=${_apiToken}&limit=${sliderItemsLimit}&sort=shikimori_rating&year=2022&translation_id=610&types=anime-serial`)
@@ -24,8 +23,8 @@ const useKodikService = () => {
       return await res.results;
    }
 
-   const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating }) => {
-      const res = await request(`${_apiBase}list?token=${_apiToken}&sort=created_at&types=anime-serial&with_material_data=true&limit=${newAnimesLimit}&translation_type=voice&genres=${genres}&anime_kind=${type}&translation_id=${voice.length > 0 ? voice : 610}&anime_status=${status}&mpaa_rating=${ageRating}`)
+   const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating, limit }) => {
+      const res = await request(`${_apiBase}list?token=${_apiToken}&sort=created_at&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&genres=${genres}&anime_kind=${type}&translation_id=${voice.length > 0 ? voice : 610}&anime_status=${status}&mpaa_rating=${ageRating}`)
       return await res.results.map(_transformNewAnimes);
    }
 
@@ -54,7 +53,7 @@ const useKodikService = () => {
 
    const _transformNewAnimes = (anime) => {
       return {
-         title: anime.material_data.title,
+         title: anime.material_data.title.length > 13 ? anime.material_data.title.slice(0, 13) + '...' : anime.material_data.title,
          titleEn: anime.material_data.title_en,
          poster: anime.material_data.poster_url,
          id: anime.shikimori_id,

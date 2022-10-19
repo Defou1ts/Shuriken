@@ -4,12 +4,14 @@ import {
    PROFILE_ROUTE,
    FAVOURITES_ROUTE,
    FAQ_ROUTE,
-   ANIME_ROUTE
+   ANIME_ROUTE,
+   LOGIN_ROUTE
 } from "../utils/consts";
 
 import Homepage from "../pages/Homepage";
+import Loginpage from "../pages/Loginpage";
 
-export const publicRoutes = [
+export const generalRoutes = [
    {
       path: HOMEPAGE_ROUTE,
       Component: <Homepage />
@@ -25,6 +27,13 @@ export const publicRoutes = [
    {
       path: ANIME_ROUTE,
       Component: <p>Anime</p>
+   },
+]
+
+export const publicRoutes = [
+   {
+      path: LOGIN_ROUTE,
+      Component: <Loginpage />
    },
 ]
 

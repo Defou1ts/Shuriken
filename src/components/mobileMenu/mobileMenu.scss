@@ -26,6 +26,18 @@
    &.active {
       left: 0;
    }
+   &__login-btn {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6.5px 0px;
+      background: #FF0000;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #FFFFFF;
+   }
    &__header {
       padding: 15px;
       display: flex;

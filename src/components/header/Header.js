@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMobile } from '../../hooks/useMobile';
+
+import {
+   PROFILE_ROUTE,
+   FAVOURITES_ROUTE,
+   CATALOG_ROUTE,
+   LOGIN_ROUTE
+} from '../../utils/consts';
 
 import './header.scss';
 import logo from '../../assets/logo.svg';
@@ -15,7 +22,7 @@ const Header = () => {
 
    const [isActiveBurger, setIsActiveBurger] = useState(false);
    const { isMobile } = useMobile();
-   const user = true;
+   const user = false;
 
    useEffect(() => {
       isActiveBurger ? document.body.style = `overflow:hidden` : document.body.style = ``;
@@ -37,21 +44,19 @@ const Header = () => {
                   </Link>
                   <nav className="header__menu">
                      <div className="header__list">
-                        <Link className='header__link' to={'/catalog'}>Каталог</Link>
+                        <Link className='header__link' to={CATALOG_ROUTE}>Каталог</Link>
                         {!isMobile && <SearchInput />}
                         {user ?
                            (
-                              <>
-                                 <Link className='header__link' to={'/favourites'}>
-                                    <img src={favourites} alt='favourites' />
-                                 </Link>
-                                 <Link className='header__link' to={'/profile'}>
-                                    <img src={profile} alt='profile' />
-                                 </Link>
-                              </>
+                              <Link className='header__link' to={FAVOURITES_ROUTE}>
+                                 <img src={favourites} alt='favourites icon' />
+                              </Link>
                            )
                            : null
                         }
+                        <Link className='header__link' to={PROFILE_ROUTE}>
+                           <img src={profile} alt='profile icon' />
+                        </Link>
                      </div>
                   </nav>
                </div>

@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSliderItems } from '../../slices/sliderSlice';
 import { v4 as uuidv4 } from 'uuid';
 
-
 import './slider.scss';
+
 import SliderSlide from '../sliderSlide/SliderSlide';
+import Spinner from '../spinner/Spinner';
+
 import leftArrow from '../../assets/arrowleft.svg';
 import rightArrow from '../../assets/arrowright.svg';
 
 
 const Slider = () => {
-
+   //TODO: ADD SPINNER AND ERROR MESSAGE
    const dispatch = useDispatch();
    const sliderItems = useSelector(state => state.slider.sliderItems);
    const sliderItemsLoadingStatus = useSelector(state => state.slider.sliderItemsLoadingStatus);
@@ -71,7 +73,9 @@ const Slider = () => {
    }
 
    if (sliderItemsLoadingStatus === 'loading') {
-      return <p>Загрузка</p>
+      return (
+         <Spinner />
+      )
    }
    if (sliderItemsLoadingStatus === 'error') {
       return <p>Ошибка</p>
