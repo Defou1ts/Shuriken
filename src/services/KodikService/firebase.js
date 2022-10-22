@@ -13,3 +13,5 @@ export const initializeFirebase = () => {
 
    const app = initializeApp(firebaseConfig);
 }
+
+

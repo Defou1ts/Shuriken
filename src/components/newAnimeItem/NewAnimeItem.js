@@ -4,7 +4,7 @@ const NewAnimeItem = ({ title, id, index, poster }) => {
    return (
       <Link
          to={`/anime/${id}`}
-         class={`new-anime__item-${index} new-anime__item`}>
+         className={`new-anime__item-${index} new-anime__item`}>
          <div className="new-anime__descr">
             {title}
          </div>

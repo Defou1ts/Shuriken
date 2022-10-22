@@ -3,9 +3,9 @@
 .login {
    background-color: $bg-color;
    position: absolute;
-   z-index: 1;
+   z-index: 2;
    left: 50%;
-   top: 20%;
+   top: 190px;
    transform: translateY(-50%);
    transform: translateX(-50%);
    max-width: 520px;
@@ -56,9 +56,12 @@
 
    &__social-network-logo {
    }
-
+   &__facebook {
+      background-color: $red-color;
+   }
    &__input {
       width: 100%;
+      max-width: 427px;
       height: 50px;
       background: #DEDEDE;
       border-radius: 10px;
@@ -94,6 +97,9 @@
       line-height: 30px;
       color: #FFFFFF;
       background-color: $red-color;
+      &:disabled {
+         background-color: #8f0000;
+      }
    }
    &__register {
       cursor: pointer;
@@ -110,5 +116,18 @@
       font-size: 24px;
       line-height: 30px;
       color: #FFFFFF;
+   }
+}
+
+@media(max-width:744px) {
+   .login {
+      &__forgot {
+         cursor: pointer;
+         margin: 15px 0px 0px 0px;
+         font-weight: 500;
+         font-size: 24px;
+         line-height: 30px;
+         color: #FFFFFF;
+      }
    }
 }

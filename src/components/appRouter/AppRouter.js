@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
 
 import {
    publicRoutes,
@@ -17,7 +18,7 @@ import Spinner from '../spinner/Spinner';
 
 function AppRouter() {
 
-   const user = false;
+   const user = useSelector(state => state.global.user);
 
    const renderRoutes = (arr) => arr
       .map(({ path, Component }) => (<Route key={path} path={path} element={Component} />));

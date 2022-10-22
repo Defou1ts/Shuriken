@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setShowLoginForm, setIsActiveBurger, setUser, setUserData } from '../../slices/globalSlice';
+import { getAuth, signOut } from "firebase/auth";
 
 import {
    PROFILE_ROUTE,
@@ -17,26 +20,37 @@ import faqIcon from '../../assets/faqIcon.svg';
 import favIcon from '../../assets/favIcon.svg';
 import quitIcon from '../../assets/quit.svg';
 
-
 import './mobileMenu.scss';
 
-const MobileMenu = ({ isActive, setIsActiveBurger }) => {
+const MobileMenu = () => {
 
-   const user = false;
+   const dispatch = useDispatch();
+   const user = useSelector(state => state.global.user);
+   const isActiveBurger = useSelector(state => state.global.isActiveBurger);
+   const username = useSelector(state => state.global.userData.username);
    const location = useLocation();
 
-   useEffect(() => {
-      setIsActiveBurger(false);
-   }, [location.key])
+   const exit = () => {
+      const auth = getAuth();
+      signOut(auth).then(() => {
+         dispatch(setUser(null));
+      }).catch((error) => {
+         console.log(error);
+      });
+   }
 
+   useEffect(() => {
+      dispatch(setIsActiveBurger(false));
+
+   }, [location.key]);
 
    return (
       <>
          <div
-            className={`black-wrapper ${isActive ? 'active' : ''}`}
-            onClick={() => setIsActiveBurger(false)}>
+            className={`black-wrapper ${isActiveBurger ? 'active' : ''}`}
+            onClick={() => dispatch(setIsActiveBurger(false))}>
          </div>
-         <div className={`mobile-menu ${isActive ? 'active' : ''}`}>
+         <div className={`mobile-menu ${isActiveBurger ? 'active' : ''}`}>
             <div className="mobile-menu__header">
                {user ?
                   (<>
@@ -47,13 +61,16 @@ const MobileMenu = ({ isActive, setIsActiveBurger }) => {
                            alt="user icon" />
                      </Link>
                      <Link className='mobile-menu__user-name' to={PROFILE_ROUTE}>
-                        User Name
+                        {username}
                      </Link>
                      <img className='mobile-menu__notifications' src={notificationsIcon} alt="Notifications" />
                   </>)
                   :
                   (
-                     <Link className='mobile-menu__login-btn' to={LOGIN_ROUTE}>
+                     <Link
+                        className='mobile-menu__login-btn'
+                        onClick={() => dispatch(setShowLoginForm(true))}
+                        to={LOGIN_ROUTE}>
                         Войти
                      </Link>
                   )
@@ -94,10 +111,12 @@ const MobileMenu = ({ isActive, setIsActiveBurger }) => {
             </div>
             {user ?
                (
-                  <div className="mobile-menu__quit">
+                  <button
+                     className="mobile-menu__quit"
+                     onClick={exit}>
                      <img src={quitIcon} alt="Quit" />
                      Выход
-                  </div>
+                  </button>
                )
                : null
             }

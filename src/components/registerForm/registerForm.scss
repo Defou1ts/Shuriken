@@ -1,0 +1,92 @@
+@import '../../styles/theme.scss';
+
+
+.register {
+   &__background {
+      z-index: -1;
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      position: fixed;
+      video {
+         width: 100%;
+         height: 110%;
+         object-fit: cover;
+      }
+   }
+}
+
+
+.register {
+   height: 100vh;
+   &__form {
+      max-width: 640px;
+      height: 100%;
+      width: 100%;
+      background: rgba(41, 37, 37, 0.7);
+      backdrop-filter: blur(2px);
+      float: right;
+   }
+
+   &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      max-height: 300px;
+      height: 100%;
+      padding: 15px 107px;
+      border-bottom: 1px solid $red-color;
+   }
+
+   &__title {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 40px;
+      color: #FFFFFF;
+   }
+
+   &__body {
+      padding: 40px 0px 0px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+   }
+
+   &__fields {
+      max-width: 427px;
+      width: 100%;
+   }
+
+   &__btns {
+      margin: 56px 0px 0px 0px;
+      max-width: 427px;
+      width: 100%;
+   }
+
+   &__submit {
+      width: 100%;
+      background: #FF0000;
+      border-radius: 10px;
+      padding: 10px 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 30px;
+      color: #FFFFFF;
+   }
+
+   &__login {
+      margin: 56px 0px 0px 0px;
+      text-align: center;
+      span {
+         font-weight: 500;
+         font-size: 24px;
+         line-height: 30px;
+         color: #DEDEDE;
+      }
+   }
+}

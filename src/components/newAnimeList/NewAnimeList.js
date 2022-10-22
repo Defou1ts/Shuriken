@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNewAnimeByOptions } from '../../slices/newAnimeSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -50,7 +50,7 @@ const NewAnimeList = () => {
             </h2>
             <div className="line"></div>
          </div>
-         <div class="new-anime__grid">
+         <div className="new-anime__grid">
             {renderedNewAnime}
          </div>
       </div>

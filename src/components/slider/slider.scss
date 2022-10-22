@@ -49,8 +49,7 @@
    }
    &__container {
       position: relative;
-      min-height: 100%;
-      max-height: 100%;
+      
    }
 
    &__field {
@@ -144,17 +143,15 @@
 
 @media(max-width:744px) {
    .slider {
-      
-      &__field {
-         
-      }
+      min-height: 100vh;
+      margin-top: 20vh;
       &__dots {
          display: none;
       }
       &__info {
          left: 20px;
          align-items: flex-start;
-         bottom: 10%;
+         bottom: 25%;
       }
       &__title {
          padding: 0;

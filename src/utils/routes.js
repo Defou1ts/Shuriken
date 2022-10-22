@@ -5,11 +5,13 @@ import {
    FAVOURITES_ROUTE,
    FAQ_ROUTE,
    ANIME_ROUTE,
-   LOGIN_ROUTE
+   LOGIN_ROUTE,
+   REGISTER_ROUTE
 } from "../utils/consts";
 
 import Homepage from "../pages/Homepage";
 import Loginpage from "../pages/Loginpage";
+import RegisterPage from "../pages/RegisterPage";
 
 export const generalRoutes = [
    {
@@ -34,6 +36,10 @@ export const publicRoutes = [
    {
       path: LOGIN_ROUTE,
       Component: <Loginpage />
+   },
+   {
+      path: REGISTER_ROUTE,
+      Component: <RegisterPage />
    },
 ]
 

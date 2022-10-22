@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useMobile } from '../../hooks/useMobile';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { setIsMobile, setIsActiveBurger, setShowLoginForm } from '../../slices/globalSlice';
+
 
 import {
    PROFILE_ROUTE,
    FAVOURITES_ROUTE,
    CATALOG_ROUTE,
-   LOGIN_ROUTE
 } from '../../utils/consts';
 
 import './header.scss';
@@ -15,18 +16,27 @@ import favourites from '../../assets/myfavorites.svg';
 import profile from '../../assets/profile.svg';
 
 import SearchInput from '../searchInput/SearchInput';
-import MobileMenu from '../mobileMenu/MobileMenu';
+
 
 
 const Header = () => {
 
-   const [isActiveBurger, setIsActiveBurger] = useState(false);
-   const { isMobile } = useMobile();
-   const user = false;
+   const dispatch = useDispatch();
+   const isActiveBurger = useSelector(state => state.global.isActiveBurger);
+   const showLoginForm = useSelector(state => state.global.showLoginForm);
+   const user = useSelector(state => state.global.user);
+
+   const isMobile = useMemo(() => {
+      return window.innerWidth <= 744 ? true : false
+   }, [window.innerWidth])
 
    useEffect(() => {
-      isActiveBurger ? document.body.style = `overflow:hidden` : document.body.style = ``;
-   }, [isActiveBurger]);
+      dispatch(setIsMobile(isMobile));
+   }, [isMobile])
+
+   useEffect(() => {
+      isActiveBurger || (showLoginForm && !isMobile) ? document.body.style = `overflow:hidden` : document.body.style = ``;
+   }, [isActiveBurger, showLoginForm]);
 
    return (
       <>
@@ -35,7 +45,7 @@ const Header = () => {
                <div className="header__body">
                   <div
                      className={`header__burger ${isActiveBurger ? 'active' : ''}`}
-                     onClick={() => setIsActiveBurger(isActiveBurger => !isActiveBurger)}>
+                     onClick={() => dispatch(setIsActiveBurger(!isActiveBurger))}>
                      <span></span>
                   </div>
                   <Link to='/' className="header__logo">
@@ -48,23 +58,28 @@ const Header = () => {
                         {!isMobile && <SearchInput />}
                         {user ?
                            (
-                              <Link className='header__link' to={FAVOURITES_ROUTE}>
-                                 <img src={favourites} alt='favourites icon' />
-                              </Link>
+                              <>
+                                 <Link className='header__link' to={FAVOURITES_ROUTE}>
+                                    <img src={favourites} alt='favourites icon' />
+                                 </Link>
+                                 <Link to={PROFILE_ROUTE} className='header__link'>
+                                    <img src={profile} alt='profile icon' />
+                                 </Link>
+                              </>
                            )
-                           : null
+                           :
+                           (
+                              <div onClick={() => dispatch(setShowLoginForm(!showLoginForm))} className='header__link'>
+                                 <img src={profile} alt='profile icon' />
+                              </div>
+                           )
                         }
-                        <Link className='header__link' to={PROFILE_ROUTE}>
-                           <img src={profile} alt='profile icon' />
-                        </Link>
                      </div>
                   </nav>
                </div>
                {isMobile && <SearchInput />}
             </div>
-            {isMobile && <MobileMenu setIsActiveBurger={setIsActiveBurger} isActive={isActiveBurger} />}
          </header>
-
       </>
    )
 }

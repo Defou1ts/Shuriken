@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSliderItems } from '../../slices/sliderSlice';
 import { v4 as uuidv4 } from 'uuid';
+import { getDatabase } from 'firebase/database';
 
 import './slider.scss';
 
@@ -14,7 +15,8 @@ import rightArrow from '../../assets/arrowright.svg';
 
 
 const Slider = () => {
-   //TODO: ADD SPINNER AND ERROR MESSAGE
+
+   //TODO: ADD ERROR MESSAGE
    const dispatch = useDispatch();
    const sliderItems = useSelector(state => state.slider.sliderItems);
    const sliderItemsLoadingStatus = useSelector(state => state.slider.sliderItemsLoadingStatus);
