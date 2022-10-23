@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { setIsMobile, setIsActiveBurger, setShowLoginForm } from '../../slices/globalSlice';
 
-
 import {
    PROFILE_ROUTE,
    FAVOURITES_ROUTE,
@@ -17,15 +16,12 @@ import profile from '../../assets/profile.svg';
 
 import SearchInput from '../searchInput/SearchInput';
 
-
-
 const Header = () => {
 
    const dispatch = useDispatch();
    const isActiveBurger = useSelector(state => state.global.isActiveBurger);
    const showLoginForm = useSelector(state => state.global.showLoginForm);
    const user = useSelector(state => state.global.user);
-
    const isMobile = useMemo(() => {
       return window.innerWidth <= 744 ? true : false
    }, [window.innerWidth])

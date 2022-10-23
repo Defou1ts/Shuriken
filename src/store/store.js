@@ -1,4 +1,5 @@
 import { configureStore, } from "@reduxjs/toolkit";
+
 import slider from "../slices/sliderSlice";
 import newEpisodes from "../slices/newEpisodesSlice";
 import newAnime from "../slices/newAnimeSlice";

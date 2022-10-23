@@ -23,8 +23,13 @@ const useKodikService = () => {
       return await res.results;
    }
 
-   const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating, limit }) => {
-      const res = await request(`${_apiBase}list?token=${_apiToken}&sort=created_at&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&genres=${genres}&anime_kind=${type}&translation_id=${voice.length > 0 ? voice : 610}&anime_status=${status}&mpaa_rating=${ageRating}`)
+   const getAnnounces = async () => {
+      const res = await request(`${_apiBase}list?token=${_apiToken}&types=anime-serial&anime_status=anons&sort=shikimori_rating&with_material_data=true`)
+      return await res.results.map(_transformNewAnimes);
+   }
+
+   const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating, sort, limit }) => {
+      const res = await request(`${_apiBase}list?token=${_apiToken}&sort=${sort}&camrip=false&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&genres=${genres}&anime_kind=${type}&translation_id=${voice.length > 0 ? voice : 610}&anime_status=${status}&mpaa_rating=${ageRating}`)
       return await res.results.map(_transformNewAnimes);
    }
 
@@ -68,7 +73,8 @@ const useKodikService = () => {
       getNewEpisodes,
       getGenres,
       getVoiceTranslations,
-      getNewAnimeByOptions
+      getNewAnimeByOptions,
+      getAnnounces
    }
 }
 

@@ -38,6 +38,6 @@ export const {
    setIsMobile,
    setUser,
    setUserData
-} = globalSlice.actions
+} = globalSlice.actions;
 
 export default globalSlice.reducer;

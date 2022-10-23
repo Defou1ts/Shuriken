@@ -6,7 +6,12 @@ const Homepage = () => {
       <>
          <Slider />
          <div className="container">
-            <NewAnimeList />
+            <NewAnimeList
+               title='Аниме'
+               sort='shikimori_rating' />
+            <NewAnimeList
+               title='Скоро на сайте'
+               sort='created_at' />
          </div>
       </>
    )

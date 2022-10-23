@@ -90,3 +90,12 @@
       }
    }
 }
+
+@media(max-width:744px) {
+   .register__form {
+      max-width: 100%;
+   }
+   .register__body {
+      padding: 40px 46px 15px 46px;
+   }
+}

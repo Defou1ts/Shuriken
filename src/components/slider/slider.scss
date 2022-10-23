@@ -49,7 +49,7 @@
    }
    &__container {
       position: relative;
-      
+      height: 100%;
    }
 
    &__field {
@@ -143,15 +143,20 @@
 
 @media(max-width:744px) {
    .slider {
-      min-height: 100vh;
-      margin-top: 20vh;
+      min-height: 60vh;
+      margin-top: 160px;
       &__dots {
          display: none;
       }
+      &__field {
+         min-height: 60vh;
+         max-height: 60vh;
+         overflow: scroll;
+      }
       &__info {
-         left: 20px;
+         left: 25px;
          align-items: flex-start;
-         bottom: 25%;
+         bottom: 25px;
       }
       &__title {
          padding: 0;
@@ -181,7 +186,7 @@
       &__info {
          left: 20px;
          align-items: flex-start;
-         bottom: 10%;
+         bottom: 20px;
       }
       &__title {
          padding: 0;
