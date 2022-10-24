@@ -1,60 +1,67 @@
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { Link, Navigate } from 'react-router-dom';
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { Link, Navigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { fetchUserData, setUser } from '../../slices/globalSlice';
-import { useDispatch } from 'react-redux/es/exports';
+import { fetchUserData, setUser } from "../../slices/globalSlice";
+import { useDispatch } from "react-redux/es/exports";
 import { getDatabase, ref, set } from "firebase/database";
-import { LOGIN_ROUTE } from '../../utils/consts';
+import { LOGIN_ROUTE } from "../../utils/consts";
 
-import './registerForm.scss';
-import FormInput from '../formInput/FormInput';
-
+import "./registerForm.scss";
+import FormInput from "../formInput/FormInput";
 
 const RegisterForm = () => {
-
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
 
    const writeUserData = (username, id) => {
-      const db = getDatabase()
-      set(ref(db, 'users/' + id), {
+      const db = getDatabase();
+      set(ref(db, "users/" + id), {
          username,
       });
-      console.log('writed!')
-   }
+      console.log("writed!");
+   };
 
    const handleRegister = ({ username, email, password }) => {
-      const auth = getAuth()
+      const auth = getAuth();
       createUserWithEmailAndPassword(auth, email, password)
          .then(({ user }) => {
             dispatch(setUser(user));
             writeUserData(username, user.uid);
-            <Navigate to='/' />
+            <Navigate to="/" />;
          })
-         .catch(console.error)
-   }
+         .catch(console.error);
+   };
 
    return (
       <Formik
          initialValues={{
-            username: '',
-            email: '',
-            password: '',
+            username: "",
+            email: "",
+            password: "",
          }}
          validationSchema={Yup.object({
             username: Yup.string()
                .required(<p>обязательное поле</p>)
-               .matches(/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/, 'некорректный Логин'),
+               .matches(
+                  /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/,
+                  "некорректный Логин"
+               ),
             email: Yup.string()
                .required(<p>обязательное поле</p>)
-               .matches(/^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/, 'некорректный Email'),
+               .matches(
+                  /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
+                  "некорректный Email"
+               ),
             password: Yup.string()
                .required(<p>обязательное поле</p>)
-               .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/, 'некорректный пароль')
+               .matches(
+                  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/,
+                  "некорректный пароль"
+               ),
          })}
-         onSubmit={values => handleRegister(values)}
+         onSubmit={(values) => handleRegister(values)}
       >
-         <Form className='register__form'>
+         <Form className="register__form">
             <div className="register__header">
                <h2 className="register__title">Регистрация</h2>
             </div>
@@ -80,7 +87,9 @@ const RegisterForm = () => {
                   />
                </div>
                <div className="register__btns">
-                  <button type='submit' className="register__submit">Зарегистрироваться</button>
+                  <button type="submit" className="register__submit">
+                     Зарегистрироваться
+                  </button>
                   <div className="register__login">
                      <span>Есть аккаунт? </span>
                      <Link to={LOGIN_ROUTE}>Войти</Link>
@@ -89,7 +98,7 @@ const RegisterForm = () => {
             </div>
          </Form>
       </Formik>
-   )
-}
+   );
+};
 
 export default RegisterForm;
