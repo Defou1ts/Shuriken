@@ -51,6 +51,26 @@
    }
 }
 
+@media(max-height:768px) {
+   .search-input {
+      width: 220px;
+      height: 40px;
+      border: 2px solid $white-color;
+      &__icon {
+         width: 25px;
+         height: 25px;
+		}
+      &__field {
+         font-size: 18px;
+         line-height: 17px;
+         &::placeholder {
+            font-size: 18px;
+            line-height: 17px;
+         }
+      }
+   }
+}
+
 @media(max-width:744px) {
    .search-input {
       margin: 20px 0px 0px 0px;

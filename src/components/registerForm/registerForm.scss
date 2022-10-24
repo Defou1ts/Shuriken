@@ -99,3 +99,15 @@
       padding: 40px 46px 15px 46px;
    }
 }
+
+
+@media(max-height:768px) {
+   .register {
+      &__login {
+         margin: 25px 0px 0px 0px;
+      }
+      &__btns {
+         margin: 25px 0px 0px 0px;
+      }
+   }
+}
