@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@500;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import './theme.scss';
 
@@ -95,7 +95,6 @@ a:hover {
 
 .black-form-wrapper {
    position: fixed;
-   display: none;
    opacity: 0;
    z-index: 1;
    left: 0;
@@ -106,7 +105,6 @@ a:hover {
    transition: 0.2s ease;
    overflow: auto;
    &.active {
-      display: block;
       animation-name: fade;
       animation-duration: 0.2s;
       animation-fill-mode: forwards;
@@ -125,4 +123,9 @@ a:hover {
 
 @viewport {
    max-zoom:1;
+}
+
+.anime {
+   background: url('../assets/animebg.svg') repeat;
+   min-height: 100vh;
 }

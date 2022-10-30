@@ -1,53 +1,59 @@
-import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getAuth } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getDatabase, ref, onValue } from "firebase/database";
-import { setUser, setUserData } from "../../slices/globalSlice";
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { setUser, setUserData } from '../../slices/globalSlice';
 
-import AppRouter from "../appRouter/AppRouter";
-import Header from "../header/Header";
-import MobileMenu from "../mobileMenu/MobileMenu";
-import LoginForm from "../loginForm/LoginForm";
-import Spinner from "../spinner/Spinner";
+import AppRouter from '../appRouter/AppRouter';
+import Header from '../header/Header';
+import MobileMenu from '../mobileMenu/MobileMenu';
+import LoginForm from '../loginForm/LoginForm';
+import Spinner from '../spinner/Spinner';
 
 const App = () => {
-   //TODO: ADD ERROR MESSAGE!
+  //TODO: ADD ERROR MESSAGE!
 
-   const dispatch = useDispatch();
-   const isMobile = useSelector((state) => state.global.isMobile);
-   const auth = getAuth();
-   const [user, loading, error] = useAuthState(auth);
+  const dispatch = useDispatch();
+  const isMobile = useSelector((state) => state.global.isMobile);
+  const showLoginForm = useSelector((state) => state.global.showLoginForm);
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
 
-   useEffect(() => {
-      if (user) {
-         dispatch(setUser(user));
+  useEffect(() => {
+    if (user) {
+      dispatch(setUser(user));
 
-         const db = getDatabase();
-         const userRef = ref(db, "users/" + user.uid);
-         onValue(userRef, (snapshot) => {
-            dispatch(setUserData(snapshot.val()));
-         });
-      }
-   }, [user]);
+      const db = getDatabase();
+      const userRef = ref(db, 'users/' + user.uid);
+      onValue(userRef, (snapshot) => {
+        dispatch(setUserData(snapshot.val()));
+      });
+    }
+  }, [user]);
 
-   if (loading) {
-      return <Spinner />;
-   }
+  if (loading) {
+    return <Spinner />;
+  }
 
-   if (error) {
-      return <h1>Error</h1>;
-   }
+  if (error) {
+    return <h1>Error</h1>;
+  }
 
-   return (
-      <BrowserRouter>
-         <Header />
-         {isMobile && <MobileMenu />}
-         <LoginForm />
-         <AppRouter />
-      </BrowserRouter>
-   );
+  return (
+    <BrowserRouter>
+      <Header />
+      {isMobile
+        ? createPortal(<MobileMenu />, document.getElementById('root'))
+        : null}
+      {showLoginForm
+        ? createPortal(<LoginForm />, document.getElementById('root'))
+        : null}
+      <AppRouter />
+    </BrowserRouter>
+  );
 };
 
 export default App;
