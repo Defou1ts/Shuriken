@@ -63,14 +63,25 @@ const useKodikService = () => {
     const res = await request(
       `${_apiBase}search?token=${_apiToken}&shikimori_id=${id}&with_material_data=true`
     );
-    return _transformAnime(res.results[0]);
+    return await _transformAnime(res.results[0]);
+  };
+
+  const searchAnimeByTitle = async (title) => {
+    const mutatedTitle = title.slice(0, title.indexOf(' '));
+    const res = await request(
+      `${_apiBase}search?token=${_apiToken}&title=${mutatedTitle}&with_material_data=true&translation_id=610`
+    );
+    return await res.results.map(_transformAnime);
   };
 
   const _transformAnime = (anime) => {
     return {
       title: anime.title,
       poster: anime.material_data.poster_url,
-      description: anime.material_data.anime_description,
+      id: anime.shikimori_id,
+      description: anime.material_data.anime_description
+        ? anime.material_data.anime_description
+        : anime.material_data.description,
       screenshots: anime.screenshots,
       rating: anime.material_data.shikimori_rating,
       kind: anime.material_data.anime_kind,
@@ -124,6 +135,7 @@ const useKodikService = () => {
   };
 
   return {
+    searchAnimeByTitle,
     getAnimeById,
     getSliderItems,
     getNewEpisodes,

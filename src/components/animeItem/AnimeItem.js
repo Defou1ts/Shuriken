@@ -2,19 +2,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchAnime } from '../../slices/animeSlice';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import Spinner from '../spinner/Spinner';
 
 import './animeItem.scss';
 
-import animePoster from '../../assets/animeposter.svg';
 import playBtn from '../../assets/playicon.svg';
 import addFavIcon from '../../assets/addfavicon.svg';
 import rateIcon from '../../assets/rateicon.svg';
-import screenOne from '../../assets/screen1.svg';
 import mobileAddFavIcon from '../../assets/mobilefavicon.svg';
 import mobileRateIcon from '../../assets/mobilerateicon.svg';
-import { array } from 'yup';
 
 const AnimeItem = () => {
   const dispatch = useDispatch();
@@ -44,7 +42,7 @@ const AnimeItem = () => {
 
   useEffect(() => {
     dispatch(fetchAnime(id));
-  }, []);
+  }, [id]);
 
   if (animeLoadingStatus === 'loading') {
     return <Spinner />;
@@ -68,7 +66,9 @@ const AnimeItem = () => {
   };
 
   const renderScreenshots = (screenshots) =>
-    screenshots.map((screen) => <img src={screen} alt={title} />);
+    screenshots.map((screen) => (
+      <img key={uuidv4()} src={screen} alt={title} />
+    ));
 
   const renderedStatus = renderStatus(status);
 
@@ -77,6 +77,13 @@ const AnimeItem = () => {
   ) : (
     <Spinner />
   );
+
+  const date = new Date(createdAt);
+  const renderedDate = `
+  ${date.getDate()}.
+  ${date.getMonth() + 1}.
+  ${date.getFullYear()}
+  `;
 
   return (
     <div className="anime-item">
@@ -108,16 +115,11 @@ const AnimeItem = () => {
         </div>
         <div className="anime-item__column">
           <h2 className="anime-item__title">{title}</h2>
-          <div className="anime-item__next-episodes">
-            <p className="anime-item__next-ep-title">Cледующий эпизод</p>
-            <p className="anime-item__next-episode-info">
-              24 окт. 2022 пн 18:00 ожидается выход 3 серии
-            </p>
-          </div>
+
           <ul className="anime-item__descr-list">
             <li className="anime-item__descr-item">
               <p>Тип</p>
-              <p>{kind === 'tv' ? 'ТВ Сериал' : 'Неизвестно'}</p>
+              <p>{kind ? kind.toUpperCase() : null}</p>
             </li>
             <li className="anime-item__descr-item">
               <p>Эпизоды</p>
@@ -139,7 +141,7 @@ const AnimeItem = () => {
             </li>
             <li className="anime-item__descr-item">
               <p>Выпуск</p>
-              <p>{createdAt}</p>
+              <p>{renderedDate}</p>
             </li>
             <li className="anime-item__descr-item">
               <p>Студия</p>
@@ -157,6 +159,7 @@ const AnimeItem = () => {
           <p className="anime-item__description">{description}</p>
         </div>
         <div className="anime-item__column">
+          <h3 className="anime-item__screen-title">Кадры из релиза</h3>
           <div className="anime-item__screenshots">{renderedScreenshots}</div>
         </div>
       </div>

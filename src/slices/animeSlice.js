@@ -4,14 +4,22 @@ import useKodikService from '../services/KodikService/KodikService';
 const initialState = {
   anime: {},
   animeLoadingStatus: 'idle',
-  linkedAnime: [],
-  linkedAnimeLoadingStatusL: 'idle',
+  similarAnimeList: [],
+  similarAnimeLoadingStatus: 'idle',
 };
 
 export const fetchAnime = createAsyncThunk('anime/fetchAnime', (id) => {
   const { getAnimeById } = useKodikService();
   return getAnimeById(id);
 });
+
+export const fetchSimilarAnime = createAsyncThunk(
+  'anime/fetchSimilarAnime',
+  (title) => {
+    const { searchAnimeByTitle } = useKodikService();
+    return searchAnimeByTitle(title);
+  }
+);
 
 const animeSlice = createSlice({
   name: 'anime',
@@ -27,6 +35,16 @@ const animeSlice = createSlice({
     });
     builder.addCase(fetchAnime.rejected, (state) => {
       state.animeLoadingStatus = 'error';
+    });
+    builder.addCase(fetchSimilarAnime.pending, (state) => {
+      state.similarAnimeLoadingStatus = 'loading';
+    });
+    builder.addCase(fetchSimilarAnime.fulfilled, (state, action) => {
+      state.similarAnimeLoadingStatus = 'idle';
+      state.similarAnimeList = action.payload;
+    });
+    builder.addCase(fetchSimilarAnime.rejected, (state) => {
+      state.similarAnimeLoadingStatus = 'error';
     });
   },
 });
