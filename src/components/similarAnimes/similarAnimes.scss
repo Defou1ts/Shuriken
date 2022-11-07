@@ -1,7 +1,7 @@
 @import '../../styles/theme.scss';
 
 .similar-anime {
-  margin: 100px 0px 70px 0px;
+  margin: 100px 0px 100px 0px;
   &__title {
     padding: 10px;
     font-weight: 500;
@@ -32,6 +32,7 @@
 
 @media(max-width:768px) {
   .similar-anime {
+    margin: 50px 0px 50px 0px;
     &__title {
       padding: 5px;
       order: 1;

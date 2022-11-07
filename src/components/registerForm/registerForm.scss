@@ -18,6 +18,7 @@
 
 .register {
    height: 100vh;
+   overflow: auto;
    &__form {
       max-width: 640px;
       height: 100%;

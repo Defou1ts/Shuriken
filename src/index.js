@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { initializeFirebase } from './services/KodikService/firebase';
+import { initializeFirebase } from './services/firebase/firebase';
 
-import './styles/index.scss'
+import './styles/index.scss';
 import store from './store/store';
 import App from './components/app/App';
 
@@ -12,8 +12,7 @@ const root = createRoot(container);
 initializeFirebase();
 
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+    <Provider store={store}>
+        <App />
+    </Provider>
 );
-

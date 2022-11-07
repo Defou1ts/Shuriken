@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { setShowLoginForm } from '../slices/globalSlice';
 
 const Loginpage = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  dispatch(setShowLoginForm(true));
+    dispatch(setShowLoginForm(true));
 
-  return <></>;
+    return <></>;
 };
 
 export default Loginpage;

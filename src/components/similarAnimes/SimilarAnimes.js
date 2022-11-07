@@ -8,41 +8,45 @@ import Spinner from '../spinner/Spinner';
 import './similarAnimes.scss';
 
 const SimilarAnimes = () => {
-  const dispatch = useDispatch();
-  const title = useSelector((state) => state.anime.anime.title);
-  const similarAnimeList = useSelector((state) => state.anime.similarAnimeList);
-  const similarAnimeLoadingStatus = useSelector(
-    (state) => state.anime.similarAnimeLoadingStatus
-  );
+    const dispatch = useDispatch();
+    const title = useSelector(state => state.anime.currentAnime.title);
+    const similarAnimeList = useSelector(state => state.anime.similarAnimeList);
+    const similarAnimeLoadingStatus = useSelector(
+        state => state.anime.similarAnimeLoadingStatus
+    );
 
-  useEffect(() => {
-    if (title) {
-      dispatch(fetchSimilarAnime(title));
+    useEffect(() => {
+        if (title) {
+            dispatch(fetchSimilarAnime(title));
+        }
+    }, [title, dispatch]);
+
+    if (similarAnimeLoadingStatus === 'loading') {
+        return <Spinner small />;
     }
-  }, [title]);
 
-  if (similarAnimeLoadingStatus === 'loading') {
-    return <Spinner small />;
-  }
+    if (similarAnimeLoadingStatus === 'error') {
+        return <p>Ошибка</p>;
+    }
 
-  if (similarAnimeLoadingStatus === 'error') {
-    return <p>Ошибка</p>;
-  }
+    const renderSimilarAnime = arr => {
+        return arr.map(({ title, id }) => (
+            <SimilarAnimeItem
+                key={uuidv4()}
+                title={title}
+                id={id}
+            />
+        ));
+    };
 
-  const renderSimilarAnime = (arr) => {
-    return arr.map(({ title, id }) => (
-      <SimilarAnimeItem key={uuidv4()} title={title} id={id} />
-    ));
-  };
+    const renderedSimilarAnime = renderSimilarAnime(similarAnimeList);
 
-  const renderedSimilarAnime = renderSimilarAnime(similarAnimeList);
-
-  return (
-    <div className="similar-anime">
-      <div className="similar-anime__title">Связанное аниме</div>
-      <ul className="similar-anime__list">{renderedSimilarAnime}</ul>
-    </div>
-  );
+    return (
+        <div className='similar-anime'>
+            <div className='similar-anime__title'>Связанное аниме</div>
+            <ul className='similar-anime__list'>{renderedSimilarAnime}</ul>
+        </div>
+    );
 };
 
 export default SimilarAnimes;

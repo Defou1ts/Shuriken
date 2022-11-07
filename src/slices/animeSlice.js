@@ -2,51 +2,78 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import useKodikService from '../services/KodikService/KodikService';
 
 const initialState = {
-  anime: {},
-  animeLoadingStatus: 'idle',
-  similarAnimeList: [],
-  similarAnimeLoadingStatus: 'idle',
+    currentAnime: {},
+    animeLoadingStatus: 'idle',
+    similarAnimeList: [],
+    similarAnimeLoadingStatus: 'idle',
+    selectedTranslation: 610,
+    voiceTranslations: [],
+    voiceTranslationsLoadingStatus: 'idle',
 };
 
-export const fetchAnime = createAsyncThunk('anime/fetchAnime', (id) => {
-  const { getAnimeById } = useKodikService();
-  return getAnimeById(id);
+export const fetchTranslations = createAsyncThunk(
+    'anime/fetchTranslations',
+    id => {
+        const { getTranslationsListById } = useKodikService();
+        return getTranslationsListById(id);
+    }
+);
+
+export const fetchAnime = createAsyncThunk('anime/fetchAnime', options => {
+    const { getCurrentAnimeById } = useKodikService();
+    return getCurrentAnimeById(options);
 });
 
 export const fetchSimilarAnime = createAsyncThunk(
-  'anime/fetchSimilarAnime',
-  (title) => {
-    const { searchAnimeByTitle } = useKodikService();
-    return searchAnimeByTitle(title);
-  }
+    'anime/fetchSimilarAnime',
+    title => {
+        const { searchAnimeByTitle } = useKodikService();
+        return searchAnimeByTitle(title);
+    }
 );
 
 const animeSlice = createSlice({
-  name: 'anime',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchAnime.pending, (state) => {
-      state.animeLoadingStatus = 'loading';
-    });
-    builder.addCase(fetchAnime.fulfilled, (state, action) => {
-      state.animeLoadingStatus = 'idle';
-      state.anime = action.payload;
-    });
-    builder.addCase(fetchAnime.rejected, (state) => {
-      state.animeLoadingStatus = 'error';
-    });
-    builder.addCase(fetchSimilarAnime.pending, (state) => {
-      state.similarAnimeLoadingStatus = 'loading';
-    });
-    builder.addCase(fetchSimilarAnime.fulfilled, (state, action) => {
-      state.similarAnimeLoadingStatus = 'idle';
-      state.similarAnimeList = action.payload;
-    });
-    builder.addCase(fetchSimilarAnime.rejected, (state) => {
-      state.similarAnimeLoadingStatus = 'error';
-    });
-  },
+    name: 'anime',
+    initialState,
+    reducers: {
+        setSelectedTranslation: (state, action) => {
+            state.selectedTranslation = action.payload;
+        },
+    },
+    extraReducers: builder => {
+        builder.addCase(fetchAnime.pending, state => {
+            state.animeLoadingStatus = 'loading';
+        });
+        builder.addCase(fetchAnime.fulfilled, (state, action) => {
+            state.animeLoadingStatus = 'idle';
+            state.currentAnime = action.payload;
+        });
+        builder.addCase(fetchAnime.rejected, state => {
+            state.animeLoadingStatus = 'error';
+        });
+        builder.addCase(fetchSimilarAnime.pending, state => {
+            state.similarAnimeLoadingStatus = 'loading';
+        });
+        builder.addCase(fetchSimilarAnime.fulfilled, (state, action) => {
+            state.similarAnimeLoadingStatus = 'idle';
+            state.similarAnimeList = action.payload;
+        });
+        builder.addCase(fetchSimilarAnime.rejected, state => {
+            state.similarAnimeLoadingStatus = 'error';
+        });
+        builder.addCase(fetchTranslations.pending, state => {
+            state.voiceTranslationsLoadingStatus = 'loading';
+        });
+        builder.addCase(fetchTranslations.fulfilled, (state, action) => {
+            state.voiceTranslations = 'idle';
+            state.voiceTranslations = action.payload;
+        });
+        builder.addCase(fetchTranslations.rejected, state => {
+            state.voiceTranslationsLoadingStatus = 'error';
+        });
+    },
 });
+
+export const { setSelectedTranslation } = animeSlice.actions;
 
 export default animeSlice.reducer;
