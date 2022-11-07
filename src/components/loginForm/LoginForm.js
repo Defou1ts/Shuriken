@@ -1,11 +1,10 @@
 import { Formik, Form } from 'formik';
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTER_ROUTE } from '../../utils/consts';
-import { setShowLoginForm, setUser } from '../../slices/globalSlice';
+import { setShowLoginForm } from '../../slices/globalSlice';
+import { useUserService } from '../../services/firebase/user.service';
 import * as Yup from 'yup';
 
 import './loginForm.scss';
@@ -18,25 +17,12 @@ import Spinner from '../spinner/Spinner';
 const LoginForm = () => {
     const location = useLocation();
     const dispatch = useDispatch();
+    const AuthLoadingStatus = useSelector(
+        state => state.global.authLoadingStatus
+    );
     const showLoginForm = useSelector(state => state.global.showLoginForm);
-    const [isAuthError, setIsAuthError] = useState(false);
-    const [isAuthLoading, setIsAuthLoading] = useState(false);
 
-    const login = ({ email, password }) => {
-        const auth = getAuth();
-        setIsAuthLoading(true);
-        signInWithEmailAndPassword(auth, email, password)
-            .then(userCredential => {
-                dispatch(setShowLoginForm(false));
-                setIsAuthLoading(false);
-                const user = userCredential.user;
-                dispatch(setUser(user));
-                <Navigate to='/' />;
-            })
-            .catch(() => {
-                setIsAuthError(true);
-            });
-    };
+    const { login } = useUserService();
 
     const closeForm = e => {
         if (
@@ -110,16 +96,18 @@ const LoginForm = () => {
                             type='password'
                             placeholder='Пароль'
                         />
-                        {isAuthError ? (
+                        {AuthLoadingStatus === 'error' ? (
                             <p className='login__error'>
                                 неверный логин или пароль
                             </p>
                         ) : null}
                     </div>
                     <div className='login__btns'>
-                        {isAuthLoading ? <Spinner small /> : null}
+                        {AuthLoadingStatus === 'loading' ? (
+                            <Spinner small />
+                        ) : null}
                         <button
-                            disabled={isAuthLoading}
+                            disabled={AuthLoadingStatus === 'loading'}
                             type='submit'
                             className='login__submit'
                         >

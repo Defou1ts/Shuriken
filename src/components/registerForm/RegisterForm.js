@@ -1,36 +1,14 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Link, Navigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { setUser } from '../../slices/globalSlice';
-import { useDispatch } from 'react-redux/es/exports';
-import { getDatabase, ref, set } from 'firebase/database';
+import { Link } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../utils/consts';
+import { useUserService } from '../../services/firebase/user.service';
 
 import './registerForm.scss';
 import FormInput from '../formInput/FormInput';
 
 const RegisterForm = () => {
-    const dispatch = useDispatch();
-
-    const writeUserData = (username, id) => {
-        const db = getDatabase();
-        set(ref(db, 'users/' + id), {
-            username,
-        });
-        console.log('writed!');
-    };
-
-    const handleRegister = ({ username, email, password }) => {
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => {
-                dispatch(setUser(user));
-                writeUserData(username, user.uid);
-                <Navigate to='/' />;
-            })
-            .catch(console.error);
-    };
+    const { register } = useUserService();
 
     return (
         <Formik
@@ -60,7 +38,7 @@ const RegisterForm = () => {
                         'некорректный пароль'
                     ),
             })}
-            onSubmit={values => handleRegister(values)}
+            onSubmit={values => register(values)}
         >
             <Form className='register__form'>
                 <div className='register__header'>

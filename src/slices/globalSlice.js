@@ -8,6 +8,8 @@ const initialState = {
     userData: {
         username: '',
     },
+    authLoadingStatus: 'idle',
+    registerLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -29,6 +31,12 @@ const globalSlice = createSlice({
         setUserData: (state, action) => {
             state.userData = action.payload;
         },
+        setAuthLoadingStatus: (state, action) => {
+            state.authLoadingStatus = action.payload;
+        },
+        setRegisterLoadingStatus: (state, action) => {
+            state.registerLoadingStatus = action.payload;
+        },
     },
 });
 
@@ -38,6 +46,8 @@ export const {
     setIsMobile,
     setUser,
     setUserData,
+    setAuthLoadingStatus,
+    setRegisterLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -3,6 +3,7 @@ import { fetchAnime, fetchTranslations } from '../../slices/animeSlice';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useLog } from '../../services/logService/log.service';
 
 import Spinner from '../spinner/Spinner';
 
@@ -16,6 +17,7 @@ import mobileRateIcon from '../../assets/mobilerateicon.svg';
 import ratingIcon from '../../assets/ratingIcon.svg';
 
 const AnimeItem = () => {
+    const { logDate, logStatus } = useLog();
     const dispatch = useDispatch();
     const { id } = useParams();
 
@@ -66,19 +68,6 @@ const AnimeItem = () => {
         });
     };
 
-    const renderStatus = status => {
-        switch (status) {
-            case 'ongoing':
-                return 'Онгоинг';
-            case 'anons':
-                return 'Анонс';
-            case 'released':
-                return 'Завершён';
-            default:
-                break;
-        }
-    };
-
     const renderScreenshots = screenshots =>
         screenshots.map(screen => (
             <img
@@ -88,8 +77,6 @@ const AnimeItem = () => {
             />
         ));
 
-    const renderedStatus = renderStatus(status);
-
     const renderedScreenshots = screenshots ? (
         renderScreenshots(screenshots)
     ) : (
@@ -97,11 +84,8 @@ const AnimeItem = () => {
     );
 
     const date = new Date(createdAt);
-    const renderedDate = `
-  ${date.getDate()}.
-  ${date.getMonth() + 1}.
-  ${date.getFullYear()}
-  `;
+    const renderedDate = logDate(date);
+    const renderedStatus = logStatus(status);
 
     return (
         <div className='anime-item'>
