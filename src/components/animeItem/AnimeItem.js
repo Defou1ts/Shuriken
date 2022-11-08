@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useLog } from '../../services/logService/log.service';
-
-import Spinner from '../spinner/Spinner';
+import { useUserService } from '../../services/firebase/user.service';
 
 import './animeItem.scss';
+
+import Spinner from '../spinner/Spinner';
 
 import playBtn from '../../assets/playicon.svg';
 import addFavIcon from '../../assets/addfavicon.svg';
@@ -17,11 +18,13 @@ import mobileRateIcon from '../../assets/mobilerateicon.svg';
 import ratingIcon from '../../assets/ratingIcon.svg';
 
 const AnimeItem = () => {
+    const { writeUserNotes } = useUserService();
     const { logDate, logStatus } = useLog();
     const dispatch = useDispatch();
-    const { id } = useParams();
 
+    const { id } = useParams();
     const isMobile = useSelector(state => state.global.isMobile);
+    const currentAnime = useSelector(state => state.anime.currentAnime);
     const {
         title,
         poster,
@@ -38,7 +41,7 @@ const AnimeItem = () => {
         studios,
         mpaa,
         duration,
-    } = useSelector(state => state.anime.currentAnime);
+    } = currentAnime;
     const animeLoadingStatus = useSelector(
         state => state.anime.animeLoadingStatus
     );
@@ -60,6 +63,10 @@ const AnimeItem = () => {
     if (animeLoadingStatus === 'error') {
         return <h1>Ошибка</h1>;
     }
+
+    const addToNotes = (note, anime) => {
+        writeUserNotes(note, anime);
+    };
 
     const scrollToPlayer = () => {
         window.scrollTo({
@@ -116,7 +123,10 @@ const AnimeItem = () => {
                                 alt='play icon'
                             />
                         </div>
-                        <div className='anime-item__adv-btn'>
+                        <div
+                            onClick={() => addToNotes('watch', currentAnime)}
+                            className='anime-item__adv-btn'
+                        >
                             Добавить в закладки
                             <img
                                 src={isMobile ? mobileAddFavIcon : addFavIcon}

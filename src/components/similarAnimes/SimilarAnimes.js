@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchSimilarAnime } from '../../slices/animeSlice';
 import { v4 as uuidv4 } from 'uuid';
 
+import './similarAnimes.scss';
+
 import SimilarAnimeItem from '../similarAnimeItem/SimilarAnimeItem';
 import Spinner from '../spinner/Spinner';
-import './similarAnimes.scss';
 
 const SimilarAnimes = () => {
     const dispatch = useDispatch();

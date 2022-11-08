@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { setSelectedTranslation } from '../../slices/animeSlice';
 
 import './animePlayer.scss';
+
 import Spinner from '../spinner/Spinner';
 
 const AnimePlayer = () => {
@@ -36,7 +37,7 @@ const AnimePlayer = () => {
             key={uuidv4()}
             id={id}
             className={`player__translations-item 
-      ${id === selectedTranslation ? 'active' : ''}`}
+            ${id === selectedTranslation ? 'active' : ''}`}
         >
             {title}
         </li>

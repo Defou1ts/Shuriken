@@ -17,7 +17,7 @@ import Spinner from '../spinner/Spinner';
 const LoginForm = () => {
     const location = useLocation();
     const dispatch = useDispatch();
-    const AuthLoadingStatus = useSelector(
+    const authLoadingStatus = useSelector(
         state => state.global.authLoadingStatus
     );
     const showLoginForm = useSelector(state => state.global.showLoginForm);
@@ -96,18 +96,18 @@ const LoginForm = () => {
                             type='password'
                             placeholder='Пароль'
                         />
-                        {AuthLoadingStatus === 'error' ? (
+                        {authLoadingStatus === 'error' ? (
                             <p className='login__error'>
                                 неверный логин или пароль
                             </p>
                         ) : null}
                     </div>
                     <div className='login__btns'>
-                        {AuthLoadingStatus === 'loading' ? (
+                        {authLoadingStatus === 'loading' ? (
                             <Spinner small />
                         ) : null}
                         <button
-                            disabled={AuthLoadingStatus === 'loading'}
+                            disabled={authLoadingStatus === 'loading'}
                             type='submit'
                             className='login__submit'
                         >

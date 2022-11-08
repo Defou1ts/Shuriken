@@ -20,8 +20,27 @@ export const useLog = () => {
                 return status;
         }
     };
+
+    const logErrorMessage = message => {
+        switch (message) {
+            case 'такой логин уже существует':
+                return {
+                    message,
+                    type: 'username',
+                };
+            case 'Firebase: Error (auth/email-already-in-use).':
+                return {
+                    message: 'такой Email уже существует',
+                    type: 'email',
+                };
+            default:
+                return message;
+        }
+    };
+
     return {
         logDate,
         logStatus,
+        logErrorMessage,
     };
 };

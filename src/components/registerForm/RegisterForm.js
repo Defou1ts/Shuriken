@@ -10,6 +10,10 @@ import FormInput from '../formInput/FormInput';
 const RegisterForm = () => {
     const { register } = useUserService();
 
+    const handleRegister = async values => {
+        register(values);
+    };
+
     return (
         <Formik
             initialValues={{
@@ -38,7 +42,7 @@ const RegisterForm = () => {
                         'некорректный пароль'
                     ),
             })}
-            onSubmit={values => register(values)}
+            onSubmit={values => handleRegister(values)}
         >
             <Form className='register__form'>
                 <div className='register__header'>

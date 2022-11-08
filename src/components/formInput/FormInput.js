@@ -1,6 +1,14 @@
 import { useField } from 'formik';
+import { useSelector } from 'react-redux';
+import { useLog } from '../../services/logService/log.service';
 
 const FormInput = ({ label, ...props }) => {
+    const registerErrorMessage = useSelector(
+        state => state.global.registerErrorMessage
+    );
+    const { logErrorMessage } = useLog();
+    const { message, type } = logErrorMessage(registerErrorMessage);
+
     const [field, meta] = useField(props);
     return (
         <>
@@ -19,6 +27,9 @@ const FormInput = ({ label, ...props }) => {
             />
             {meta.touched && meta.error ? (
                 <div className='login__error'>{meta.error}</div>
+            ) : null}
+            {meta.touched && message && type === props.name ? (
+                <div className='login__error'>{message}</div>
             ) : null}
         </>
     );

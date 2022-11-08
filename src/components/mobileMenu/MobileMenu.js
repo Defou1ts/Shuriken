@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-    setShowLoginForm,
-    setIsActiveBurger,
-    setUser,
-} from '../../slices/globalSlice';
-import { getAuth, signOut } from 'firebase/auth';
+import { setShowLoginForm, setIsActiveBurger } from '../../slices/globalSlice';
+import { useUserService } from '../../services/firebase/user.service';
 
 import {
     PROFILE_ROUTE,
@@ -32,17 +28,7 @@ const MobileMenu = () => {
     const isActiveBurger = useSelector(state => state.global.isActiveBurger);
     const username = useSelector(state => state.global.userData.username);
     const location = useLocation();
-
-    const exit = () => {
-        const auth = getAuth();
-        signOut(auth)
-            .then(() => {
-                dispatch(setUser(null));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
+    const { exit } = useUserService();
 
     useEffect(() => {
         dispatch(setIsActiveBurger(false));

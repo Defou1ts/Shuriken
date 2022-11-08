@@ -99,9 +99,10 @@ const useKodikService = () => {
             poster: anime.material_data.poster_url,
             link: anime.link,
             id: anime.shikimori_id,
-            description: anime.material_data.anime_description
-                ? anime.material_data.anime_description
-                : anime.material_data.description,
+            description:
+                anime.material_data.anime_description ||
+                anime.material_data.anime_description ||
+                '',
             screenshots: anime.screenshots,
             translation: anime.translation,
             rating: anime.material_data.shikimori_rating,
