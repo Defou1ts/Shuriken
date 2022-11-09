@@ -23,7 +23,18 @@ const AnimeItem = () => {
     const dispatch = useDispatch();
 
     const { id } = useParams();
+
     const isMobile = useSelector(state => state.global.isMobile);
+    const animeLoadingStatus = useSelector(
+        state => state.anime.animeLoadingStatus
+    );
+    const writeLoadingStatus = useSelector(
+        state => state.global.writeLoadingStatus
+    );
+    const selectedTranslation = useSelector(
+        state => state.anime.selectedTranslation
+    );
+
     const currentAnime = useSelector(state => state.anime.currentAnime);
     const {
         title,
@@ -42,12 +53,6 @@ const AnimeItem = () => {
         mpaa,
         duration,
     } = currentAnime;
-    const animeLoadingStatus = useSelector(
-        state => state.anime.animeLoadingStatus
-    );
-    const selectedTranslation = useSelector(
-        state => state.anime.selectedTranslation
-    );
     useEffect(() => {
         dispatch(fetchAnime({ id, selectedTranslation }));
     }, [id, selectedTranslation, dispatch]);
@@ -133,6 +138,9 @@ const AnimeItem = () => {
                                 alt='add to favourites btn'
                             />
                         </div>
+                        {writeLoadingStatus === 'loading' ? (
+                            <Spinner small />
+                        ) : null}
                         <div className='anime-item__adv-btn'>
                             Написать отзыв
                             <img

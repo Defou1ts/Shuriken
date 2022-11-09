@@ -10,6 +10,7 @@ import {
     setAuthLoadingStatus,
     setRegisterLoadingStatus,
     setRegisterErrorMessage,
+    setWriteLoadingStatus,
 } from '../../slices/globalSlice';
 import { setShowLoginForm } from '../../slices/globalSlice';
 import { Navigate } from 'react-router-dom';
@@ -100,18 +101,27 @@ export const useUserService = () => {
     };
 
     const writeUserNotes = async (note, anime) => {
+        dispatch(setWriteLoadingStatus('loading'));
         if (userData.notes) {
             const db = getDatabase();
-            set(ref(db, `users/${user.uid}/notes`), {
+            await set(ref(db, `users/${user.uid}/notes`), {
                 ...userData.notes,
-                [anime.id]: note,
+                [anime.id]: {
+                    note: note,
+                    translation: anime.translation.id,
+                },
             });
         } else {
             const db = getDatabase();
-            set(ref(db, `users/${user.uid}/notes`), {
-                [anime.id]: note,
+            await set(ref(db, `users/${user.uid}/notes`), {
+                [anime.id]: {
+                    note: note,
+                    translation: anime.translation.id,
+                },
             });
         }
+
+        dispatch(setWriteLoadingStatus('idle'));
     };
 
     return {

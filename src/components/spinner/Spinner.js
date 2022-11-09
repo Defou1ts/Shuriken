@@ -2,14 +2,24 @@ import spinner from '../../assets/spinner.svg';
 
 const Spinner = ({ small = false }) => {
     return (
-        <div className={!small ? 'spinner-wrapper' : ''}>
+        <div
+            style={
+                small
+                    ? {
+                          display: 'flex',
+                          justifyContent: 'center',
+                      }
+                    : null
+            }
+            className={!small ? 'spinner-wrapper' : ''}
+        >
             <img
                 style={
                     small
                         ? {
-                              width: '80px',
-                              height: '80px',
-                              margin: '15px 0px 15px 0px',
+                              width: '40px',
+                              height: '40px',
+                              margin: '15px auto 15px auto',
                           }
                         : null
                 }

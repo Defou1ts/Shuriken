@@ -11,6 +11,7 @@ const initialState = {
     authLoadingStatus: 'idle',
     registerLoadingStatus: 'idle',
     registerErrorMessage: '',
+    writeLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -41,6 +42,9 @@ const globalSlice = createSlice({
         setRegisterErrorMessage: (state, action) => {
             state.registerErrorMessage = action.payload;
         },
+        setWriteLoadingStatus:(state,action)=> {
+            state.writeLoadingStatus = action.payload;
+        }
     },
 });
 
@@ -53,6 +57,7 @@ export const {
     setAuthLoadingStatus,
     setRegisterLoadingStatus,
     setRegisterErrorMessage,
+    setWriteLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;
