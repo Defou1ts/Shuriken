@@ -27,11 +27,13 @@ export const useLog = () => {
                 return {
                     message,
                     type: 'username',
+                    formType: 'register',
                 };
             case 'Firebase: Error (auth/email-already-in-use).':
                 return {
                     message: 'такой Email уже существует',
                     type: 'email',
+                    formType: 'register',
                 };
             default:
                 return message;

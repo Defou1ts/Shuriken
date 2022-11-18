@@ -89,12 +89,14 @@ const LoginForm = () => {
                             name='email'
                             type='text'
                             placeholder='Email'
+                            form='login'
                         />
                         <FormInput
                             id='password'
                             name='password'
                             type='password'
                             placeholder='Пароль'
+                            form='login'
                         />
                         {authLoadingStatus === 'error' ? (
                             <p className='login__error'>

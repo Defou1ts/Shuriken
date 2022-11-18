@@ -120,8 +120,7 @@ const AnimeItem = () => {
                     <div className='anime-item__btns'>
                         <div
                             onClick={() => scrollToPlayer()}
-                            className='anime-item__play-btn'
-                        >
+                            className='anime-item__play-btn'>
                             Cмотреть онлайн
                             <img
                                 src={playBtn}
@@ -130,14 +129,16 @@ const AnimeItem = () => {
                         </div>
                         <div
                             onClick={() => addToNotes('watch', currentAnime)}
-                            className='anime-item__adv-btn'
-                        >
+                            className='anime-item__adv-btn'>
                             Добавить в закладки
                             <img
                                 src={isMobile ? mobileAddFavIcon : addFavIcon}
                                 alt='add to favourites btn'
                             />
                         </div>
+                        {writeLoadingStatus === 'error' ? (
+                            <p className='login__error center'>Вы не авторизованы</p>
+                        ) : null}
                         {writeLoadingStatus === 'loading' ? (
                             <Spinner small />
                         ) : null}

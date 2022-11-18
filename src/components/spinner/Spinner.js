@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux/es/exports';
+
 import spinner from '../../assets/spinner.svg';
 
 const Spinner = ({ small = false }) => {
+
+    const isMobile = useSelector(state=>state.global.isMobile);
+
     return (
         <div
             style={
@@ -19,7 +24,7 @@ const Spinner = ({ small = false }) => {
                         ? {
                               width: '40px',
                               height: '40px',
-                              margin: '15px auto 15px auto',
+                              margin: isMobile ? '0px 0px 0px 0px' : '15px auto 15px auto',
                           }
                         : null
                 }

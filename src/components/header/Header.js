@@ -50,6 +50,36 @@ const Header = () => {
         // eslint-disable-next-line
     }, [location]);
 
+    const headerItems = user ? (
+        <>
+            <Link
+                className='header__link'
+                to={FAVOURITES_ROUTE}>
+                <img
+                    src={favourites}
+                    alt='favourites icon'
+                />
+            </Link>
+            <Link
+                to={PROFILE_ROUTE}
+                className='header__link'>
+                <img
+                    src={profile}
+                    alt='profile icon'
+                />
+            </Link>
+        </>
+    ) : (
+        <div
+            onClick={() => dispatch(setShowLoginForm(true))}
+            className='header__link'>
+            <img
+                src={profile}
+                alt='profile icon'
+            />
+        </div>
+    );
+
     return (
         <>
             <header className='header'>
@@ -61,14 +91,12 @@ const Header = () => {
                             }`}
                             onClick={() =>
                                 dispatch(setIsActiveBurger(!isActiveBurger))
-                            }
-                        >
+                            }>
                             <span></span>
                         </div>
                         <Link
                             to='/'
-                            className='header__logo'
-                        >
+                            className='header__logo'>
                             <img
                                 src={logo}
                                 alt='Shuriken logo'
@@ -79,45 +107,11 @@ const Header = () => {
                             <div className='header__list'>
                                 <Link
                                     className='header__link'
-                                    to={CATALOG_ROUTE}
-                                >
+                                    to={CATALOG_ROUTE}>
                                     Каталог
                                 </Link>
                                 {!isMobile && <SearchInput />}
-                                {user ? (
-                                    <>
-                                        <Link
-                                            className='header__link'
-                                            to={FAVOURITES_ROUTE}
-                                        >
-                                            <img
-                                                src={favourites}
-                                                alt='favourites icon'
-                                            />
-                                        </Link>
-                                        <Link
-                                            to={PROFILE_ROUTE}
-                                            className='header__link'
-                                        >
-                                            <img
-                                                src={profile}
-                                                alt='profile icon'
-                                            />
-                                        </Link>
-                                    </>
-                                ) : (
-                                    <div
-                                        onClick={() =>
-                                            dispatch(setShowLoginForm(true))
-                                        }
-                                        className='header__link'
-                                    >
-                                        <img
-                                            src={profile}
-                                            alt='profile icon'
-                                        />
-                                    </div>
-                                )}
+                                {headerItems}
                             </div>
                         </nav>
                     </div>

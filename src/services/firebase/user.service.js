@@ -101,6 +101,10 @@ export const useUserService = () => {
     };
 
     const writeUserNotes = async (note, anime) => {
+        if (!user) {
+            dispatch(setWriteLoadingStatus('error'));
+            return
+        }
         dispatch(setWriteLoadingStatus('loading'));
         if (userData.notes) {
             const db = getDatabase();
@@ -108,7 +112,7 @@ export const useUserService = () => {
                 ...userData.notes,
                 [anime.id]: {
                     note: note,
-                    translation: anime.translation.id,
+                    anime,
                 },
             });
         } else {
@@ -116,7 +120,7 @@ export const useUserService = () => {
             await set(ref(db, `users/${user.uid}/notes`), {
                 [anime.id]: {
                     note: note,
-                    translation: anime.translation.id,
+                    anime,
                 },
             });
         }

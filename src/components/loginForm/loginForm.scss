@@ -77,6 +77,10 @@
       color: $red-color;
       font-size: 18px;
       font-weight: 300px;
+      &.center {
+         margin: 0px;
+         text-align: center;
+      }
    }
    &__btns {
       margin: 32px 0px 0px 0px;

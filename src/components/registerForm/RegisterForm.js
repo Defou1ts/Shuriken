@@ -55,18 +55,21 @@ const RegisterForm = () => {
                             name='username'
                             type='text'
                             placeholder='Логин'
+                            form='register'
                         />
                         <FormInput
                             id='email'
                             name='email'
                             type='text'
                             placeholder='Email'
+                            form='register'
                         />
                         <FormInput
                             id='password'
                             name='password'
                             type='password'
                             placeholder='Пароль'
+                            form='register'
                         />
                     </div>
                     <div className='register__btns'>
