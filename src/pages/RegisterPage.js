@@ -1,7 +1,7 @@
 import registerBg from '../assets/registerbg.mp4';
 import registerBgPoster from '../assets/registerbg.png';
 
-import RegisterForm from '../components/registerForm/RegisterForm';
+import RegisterForm from '../components/registerPage/registerForm/RegisterForm';
 
 const RegisterPage = () => {
     return (

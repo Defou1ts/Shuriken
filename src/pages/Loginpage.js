@@ -1,12 +1,7 @@
-import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { setShowLoginForm } from '../slices/globalSlice';
+import LoginForm from '../components/loginPage/loginForm/LoginForm';
 
 const Loginpage = () => {
-    const dispatch = useDispatch();
-
-    dispatch(setShowLoginForm(true));
-
-    return <></>;
+    return <LoginForm />;
 };
 
 export default Loginpage;

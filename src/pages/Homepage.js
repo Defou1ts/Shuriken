@@ -1,5 +1,5 @@
-import Slider from '../components/slider/Slider';
-import NewAnimeList from '../components/newAnimeList/NewAnimeList';
+import Slider from '../components/homePage/slider/Slider';
+import NewAnimeList from '../components/homePage/newAnimeList/NewAnimeList';
 
 const Homepage = () => {
     return (

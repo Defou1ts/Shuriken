@@ -13,6 +13,7 @@ import Homepage from '../pages/Homepage';
 import Loginpage from '../pages/Loginpage';
 import RegisterPage from '../pages/RegisterPage';
 import AnimePage from '../pages/AnimePage';
+import ProfilePage from '../pages/ProfilePage';
 
 export const generalRoutes = [
     {
@@ -51,6 +52,6 @@ export const privateRoutes = [
     },
     {
         path: PROFILE_ROUTE,
-        Component: <p>Profile</p>,
+        Component: <ProfilePage />,
     },
 ];

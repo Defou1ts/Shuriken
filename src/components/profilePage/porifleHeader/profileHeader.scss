@@ -1,0 +1,123 @@
+@import '../../../styles/theme.scss';
+
+.profile {
+    margin: 180px 0px 0px 0px;
+    &__header {
+        
+    }
+
+    &__row {
+        display: flex;
+        gap: 40px;
+    }
+
+    &__icon {
+        max-width: 230px;
+        width: 100%;
+        min-height: 100%;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+        }
+    }
+
+    &__info {
+        flex: 1 1 auto;
+    }
+
+    &__username {
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 40px;
+        color: #FFFFFF;
+    }
+
+    &__exist-time {
+        margin: 21px 0px 0px 0px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #FFFFFF;
+    }
+
+    &__email {
+        margin: 63px 0px 0px 0px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #FFFFFF;
+    }
+
+    &__email-verify {
+        margin: 40px 0px 0px 0px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #FFFFFF;
+    }
+
+    &__email-verify-btn {
+        cursor: pointer;
+        text-decoration-line: underline;
+    }
+
+    &__settings {
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        & img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+@media(max-width:1440px) {
+    
+}
+@media(max-width:768px) {
+    .profile {
+        margin: 75px 0px 0px 0px;
+        border-top: 1px solid $red-color;
+        &__header {
+            padding: 20px 0px;
+        }
+        &__row {
+            gap: 20px;
+        }
+        &__icon {
+            max-width: 80px;
+        }
+        &__username {
+            font-size: 15px;
+            line-height: 19px;
+        }
+        &__exist-time {
+            margin: 10px 0px 0px 0px;
+            font-size: 12px;
+            line-height: 15px;
+        }
+        &__email {
+            margin: 15px 0px 0px 0px;
+            font-size: 12px;
+            line-height: 15px;
+        }
+        &__email-verify {
+            margin: 15px 0px 0px 0px;
+            font-size: 12px;
+            line-height: 15px;
+        }
+        &__settings {
+            width: 20px;
+            height: 20px;
+            & img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

@@ -7,11 +7,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { setUser, setUserData } from '../../slices/globalSlice';
 
-import AppRouter from '../appRouter/AppRouter';
-import Header from '../header/Header';
-import MobileMenu from '../mobileMenu/MobileMenu';
-import LoginForm from '../loginForm/LoginForm';
-import Spinner from '../spinner/Spinner';
+import AppRouter from '../common/appRouter/AppRouter';
+import Header from '../common/header/Header';
+import MobileMenu from '../common/mobileMenu/MobileMenu';
+import LoginForm from '../loginPage/loginForm/LoginForm';
+import Spinner from '../common/spinner/Spinner';
 
 const App = () => {
     //TODO: ADD ERROR MESSAGE!

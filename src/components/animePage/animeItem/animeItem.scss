@@ -1,0 +1,409 @@
+@import '../../../styles/theme.scss';
+
+.anime-item {
+  padding: 180px 0px 0px 0px;
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0px 40px;
+  }
+  &__column {
+    display: flex;
+    flex-direction: column;
+    &:first-child {
+      flex: 0 0 25%;
+    }
+    &:nth-child(3) {
+      display: flex;
+      flex-direction: column;
+      gap: 30px 0px;
+    }
+  }
+
+  &__poster {
+    max-width: 450px;
+    max-height: 600px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__rating {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0px 19px;
+    background-color: $bg-color;
+    padding: 10.5px;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 40px;
+    color: $red-color;
+    img {
+      max-width: 35px;
+      max-height: 32px;
+    }
+  }
+
+  &__btns {
+    margin: 20px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0px;
+  }
+
+  &__play-btn {
+    cursor: pointer;
+    padding: 12px 10px;
+    color: #DEDEDE;
+    border-radius: 10px;;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FF0000;
+    transition: 0.2s ease;
+    &:hover,&:active {
+      transition: 0.2s ease;
+      background-color: #ff3434;
+    }
+  }
+
+  &__adv-btn {
+    cursor: pointer;
+    padding: 6.5px 16px 6.5px 7.5px;
+    background: #DEDEDE;
+    border-radius: 10px;;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s ease;
+    &:hover,&:active {
+      transition: 0.2s ease;
+      background-color: $white-color;
+    }
+  }
+
+  &__title {
+    margin: 0px 0px 25px 0px;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    color: #FFFFFF;
+  }
+
+  &__next-episodes {
+    margin: 25px 0px 30px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 20px;
+    gap: 15px;
+    border-top: 1px solid #F2F2F2;
+    border-bottom: 1px solid #F2F2F2;
+  }
+
+  &__next-ep-title {
+    flex:  0 0 50%;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FFFFFF;
+  }
+
+  &__next-episode-info {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FFFFFF;
+  }
+
+  &__descr-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0px;
+  }
+
+  &__descr-item {
+    display: flex;
+    gap: 0px 15px;
+    flex-direction: row;
+    align-items: flex-start;
+    p {
+      flex: 0 0 50%;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      color: #FFFFFF
+    }
+  }
+
+  &__description {
+    margin: 75px 0px 0px 0px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FFFFFF;
+  }
+  &__screen-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    color: #FFFFFF;
+  }
+  &__screenshots {
+    height: 100%;
+    position: relative;
+    padding: 0px 0px 0px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px 0px;
+    border: radial-gradient(50% 50% at 75% 50%, #FF0000 0%, rgba(255, 0, 0, 0) 100%);
+    max-height: 750px;
+    overflow: hidden;
+    img {
+      width: 300px;
+      height: 160px;
+      object-fit: cover;
+    }
+    &:before {
+      content: '';
+      background: radial-gradient(50% 50% at 75% 50%, #FF0000 0%, rgba(255, 0, 0, 0) 100%);
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+
+@media(max-width:1440px) {
+  .anime-item {
+    padding: 170px 0px 0px 0px;
+    &__poster {
+      min-width: none;
+    }
+    &__rating {
+      font-size: 24px;
+      gap: 0px 10px;
+      img {
+        max-width: 24px;
+      }
+    }
+    &__row {
+      flex-wrap: wrap;
+      justify-content: baseline;
+      gap: 40px 15px;
+    }
+    &__column {
+      flex:  1 1 auto;
+      &:first-child {
+        flex: 0 0 40%;
+      }
+      &:nth-child(2) {
+        flex: 0 55%;
+      }
+      &:nth-child(3) {
+        max-width: 100%;
+      }
+    }
+    &__poster {
+      max-width: 100%;
+      max-height: none;
+      height: auto;
+      img {
+        width: 100%;
+      }
+    }
+    &__screen-title {
+      text-align:left;
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 50px;
+      color: #FFFFFF;
+    }
+    &__screenshots {
+      height: 100%;
+      position: relative;
+      padding: 0px;
+      max-width: 100%;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      flex-direction: row;
+      gap: 0px 15px;
+      border: radial-gradient(50% 50% at 75% 50%, #FF0000 0%, rgba(255, 0, 0, 0) 100%);
+      max-height: 950px;
+      background-color: $bg-color;
+      img {
+        scroll-snap-align: center;
+        border-radius: 10px;  
+        width: 70vw;
+        height: auto;
+        object-fit: cover;
+      }
+      &:before {
+        content: none;
+        background: radial-gradient(50% 50% at 75% 50%, #FF0000 0%, rgba(255, 0, 0, 0) 100%);
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+}
+
+@media(max-width:768px) {
+  .anime-item {
+    &__row {
+      flex-direction: column;
+      gap: 30px 0px;
+      flex-wrap: nowrap;
+    }
+    &__rating {
+      font-size: 16px;
+      gap: 0px 5px;
+      img {
+        max-width: 16px;
+      }
+    }
+    &__column {
+      flex:  1 1 auto;
+      &:first-child {
+        flex:  1 1 auto;
+      }
+      &:nth-child(2) {
+        flex:  1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 30px 0px;
+      }
+      &:nth-child(3) {
+        flex: 0 0 100%;
+        gap: 20px;
+      }
+    }
+    &__poster {
+      max-height: none;
+      height:none;
+      max-width: 100%;
+      width: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__btns {
+      flex-direction: row;
+      gap: 0px 15px;
+    }
+    &__play-btn {
+      height: 42px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #DEDEDE;
+      flex: 1 1 auto;
+      img {
+        display: none;
+      }
+    }
+    &__adv-btn {
+      padding: 0;
+      font-size: 0;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $bg-color;
+      border: 1px solid $red-color;
+      box-shadow: 1px 1px 9px rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      transition: 0.2s ease;
+      &:hover,&:active {
+        background-color: $bg-color;
+        transition: 0.2s ease;
+        box-shadow: 1px 1px 9px rgba(255, 255, 255, 0.733);
+      }
+    }
+    &__title {
+
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 25px;
+      color: #FFFFFF;
+      margin: 15px 0px;
+    }
+    &__screen-title {
+      text-align:left;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 25px;
+      color: #FFFFFF;
+    }
+    &__next-episodes {
+      margin: 25px 0px 30px 0px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 10px 0px 25px 0px;
+      gap: 15px;
+      border-top: 1px solid $red-color;
+      border-bottom: 1px solid $red-color;
+    }
+  
+    &__next-ep-title {
+      flex:  1 1 50%;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFFFFF;
+    }
+  
+    &__next-episode-info {
+      flex: 1 1 50%;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFFFFF;
+    }
+    &__descr-list {
+      order: 2;
+    }
+    &__descr-item {
+      display: flex;
+      gap: 0px 15px;
+      flex-direction: row;
+      p {
+        flex: 0 0 50%;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #FFFFFF;
+      }
+    }
+    &__description {
+      order: 3;
+      margin: 0px 0px 0px 0px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #FFFFFF;
+    }
+    &__next-episodes {
+      order: 3;
+    }
+  }
+}

@@ -4,10 +4,13 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/firebaserc
+/firebase.json
+/.firebase
+/.github
+/.firebaserc
 # testing
 /coverage
-
 # production
 /build
 

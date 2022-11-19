@@ -7,6 +7,7 @@ import genres from '../slices/genresSlice';
 import voiceTranslations from '../slices/voiceTranslationsSlice';
 import global from '../slices/globalSlice';
 import anime from '../slices/animeSlice';
+import profile from '../slices/profileSlice';
 
 const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
         genres,
         voiceTranslations,
         anime,
+        profile,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

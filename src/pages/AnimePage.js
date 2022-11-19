@@ -1,6 +1,6 @@
-import AnimeItem from '../components/animeItem/AnimeItem';
-import SimilarAnimes from '../components/similarAnimes/SimilarAnimes';
-import AnimePlayer from '../components/animePlayer/AnimePlayer';
+import AnimeItem from '../components/animePage/animeItem/AnimeItem';
+import SimilarAnimes from '../components/animePage/similarAnimes/SimilarAnimes';
+import AnimePlayer from '../components/animePage/animePlayer/AnimePlayer';
 
 const AnimePage = () => {
     return (

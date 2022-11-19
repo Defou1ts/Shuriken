@@ -8,6 +8,15 @@ export const useLog = () => {
         };
         return date.toLocaleString('ru', options);
     };
+
+    const logRegisterTime = date => {
+        const time = Date.now() - date;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return {
+            days: Math.round(time / oneDay),
+        };
+    };
+
     const logStatus = status => {
         switch (status) {
             case 'ongoing':
@@ -44,5 +53,6 @@ export const useLog = () => {
         logDate,
         logStatus,
         logErrorMessage,
+        logRegisterTime,
     };
 };
