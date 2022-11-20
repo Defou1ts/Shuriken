@@ -7,22 +7,27 @@ const initialState = {
         {
             name: 'planning',
             text: 'В планах',
+            color:'blue'
         },
         {
             name: 'watch',
             text: 'Смотрю',
+            color: 'yellow',
         },
         {
             name: 'watched',
             text: 'Просмотрено',
+            color: 'green',
         },
         {
             name: 'thrown',
             text: 'Брошено',
+            color: 'pink',
         },
         {
             name: 'liked',
             text: 'Любимые',
+            color: 'red',
         },
     ],
     activeNotesFilter: 'all',

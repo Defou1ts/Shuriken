@@ -96,6 +96,7 @@ const useKodikService = () => {
     const _transformAnime = anime => {
         return {
             title: anime.title,
+            titleEn: anime.title_orig,
             poster: anime.material_data.poster_url,
             link: anime.link,
             id: anime.shikimori_id,

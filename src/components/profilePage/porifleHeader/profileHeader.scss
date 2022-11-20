@@ -1,7 +1,10 @@
 @import '../../../styles/theme.scss';
 
 .profile {
-    margin: 180px 0px 0px 0px;
+    background-image: url('../../../assets/profilebg.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    padding: 180px 0px 0px 0px;
     &__header {
         
     }
@@ -81,7 +84,7 @@
 }
 @media(max-width:768px) {
     .profile {
-        margin: 75px 0px 0px 0px;
+        padding: 75px 0px 0px 0px;
         border-top: 1px solid $red-color;
         &__header {
             padding: 20px 0px;
