@@ -5,3 +5,9 @@
     flex-direction: column;
     gap: 50px;
 }
+
+@media(max-width:768px) {
+    .profile__list {
+        gap: 20px;
+    };
+}

@@ -27,7 +27,7 @@ const ProfileNotes = () => {
                         activeNotesFilter === name ? 'active' : ''
                     }`}>
                     {text}
-                    <div className='profile__note-count'>{count}</div>
+                    <span className='profile__note-count'>{count}</span>
                 </li>
             );
         });

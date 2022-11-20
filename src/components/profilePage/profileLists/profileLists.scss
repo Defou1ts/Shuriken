@@ -16,3 +16,21 @@
         flex: 1 1 auto;
     }
 }
+
+@media(max-width:768px) {
+    .profile {
+        &__lists {
+            margin: 0;
+            flex-direction: column;
+            gap: 30px;
+        }
+        &__sidebar {
+            flex: 1 1 auto
+        }
+    
+        &__list {
+            flex: 1 1 auto;
+        }
+    }
+
+}

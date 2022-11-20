@@ -78,3 +78,13 @@
         }
     }
 }
+
+
+@media(max-width:768px) {
+    .profile {
+
+        &__menu {
+            display: none;
+        }
+    }
+}

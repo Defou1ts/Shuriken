@@ -86,3 +86,50 @@
         top: 0;
     }
 }
+
+@media(max-width:768px) {
+    .profile {
+        &__list-item {
+            gap: 20px;
+        }
+        &__list-item-image {
+            flex: 0 0 56px;
+        }
+        &__list-item-note {
+            height: 21px;
+            font-size: 10px;
+            line-height: 13px;
+        }
+        &__list-item-content {
+            display: flex;
+            flex-direction: column;
+            max-height: 76px;
+        }
+        &__list-item-title {
+            // white-space: nowrap;
+            font-size: 10px;
+            line-height: 13px;
+        }
+        &__list-item-year {
+            margin: 10px 0px 0px 0px;
+            font-size: 10px;
+            line-height: 13px;
+        }
+        &__list-item-last-episode {
+            margin: 10px 0px 0px 0px;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 13px;
+            color: #DEDEDE;
+        }
+        &__list-item-settings {
+            flex: 0 0 15px;
+            font-size: 10px;
+            color: white;
+            white-space: nowrap;
+            // position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+}

@@ -30,3 +30,37 @@
         }
     }
 }
+
+@media(max-width:768px) {
+    .profile {
+        &__notes {
+            margin: 10px 0px 0px 0px;
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            max-width: 100%;
+            overflow-x: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        &__note {
+            white-space: nowrap;
+            font-size: 12px;
+            line-height: 15px;
+            color: #FFFFFF;
+            gap: 5px;
+            &.active {
+                border-bottom: none;
+                padding: 3px 10px;
+                background: #5A5A5A;
+                border-radius: 5px;
+            }
+        }
+        &__note-count {
+            padding: 0;
+            background: transparent;
+            border-radius: 0;
+        }
+    }
+}
