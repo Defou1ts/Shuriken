@@ -83,10 +83,12 @@ a:hover {
 }
 
 .spinner-wrapper {
+   left: 0;
+   top: 0;
    display: flex;
    justify-content: center;
    align-items: center;
-   position: absolute;
+   position: fixed;
    z-index: 99999;
    width: 100vw;
    height: 100vh;

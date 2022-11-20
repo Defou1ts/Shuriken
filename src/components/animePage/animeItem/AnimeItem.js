@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAnime, fetchTranslations } from '../../../slices/animeSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useLog } from '../../../services/logService/log.service';
@@ -18,6 +18,7 @@ import mobileRateIcon from '../../../assets/mobilerateicon.svg';
 import ratingIcon from '../../../assets/ratingIcon.svg';
 
 const AnimeItem = () => {
+    const [showNotesMenu, setShowNotesMenu] = useState(false);
     const { writeUserNotes } = useUserService();
     const { logDate, logStatus } = useLog();
     const dispatch = useDispatch();
@@ -34,7 +35,8 @@ const AnimeItem = () => {
     const selectedTranslation = useSelector(
         state => state.anime.selectedTranslation
     );
-
+    const notesTypes = useSelector(state => state.profile.notesTypes);
+    const notes = useSelector(state => state.global.userData.notes);
     const currentAnime = useSelector(state => state.anime.currentAnime);
     const {
         title,
@@ -70,6 +72,7 @@ const AnimeItem = () => {
     }
 
     const addToNotes = (note, anime) => {
+        setShowNotesMenu(false);
         writeUserNotes(note, anime);
     };
 
@@ -78,6 +81,17 @@ const AnimeItem = () => {
             top: document.getElementById('kodik-player').offsetTop - 200,
             behavior: 'smooth',
         });
+    };
+
+    const openNotesModal = e => {
+        if (
+            e.target.classList.contains('anime-item__adv-btn') ||
+            e.target.localName === 'img'
+        ) {
+            setShowNotesMenu(true);
+        } else {
+            setShowNotesMenu(false);
+        }
     };
 
     const renderScreenshots = screenshots =>
@@ -89,18 +103,45 @@ const AnimeItem = () => {
             />
         ));
 
+    const renderNotes = notesTypes =>
+        notesTypes.map(({ name, text }) => {
+            let className = 'anime-item__note';
+            if (notes) {
+                for (let noteId of Object.keys(notes)) {
+                    if (noteId === id && notes[noteId].note === name) {
+                        className += ' active';
+                    }
+                }
+            }
+            return (
+                <p
+                    onClick={() => {
+                        addToNotes(name, currentAnime);
+                    }}
+                    key={uuidv4()}
+                    data-value={name}
+                    className={className}>
+                    {text}
+                </p>
+            );
+        });
+
     const renderedScreenshots = screenshots ? (
         renderScreenshots(screenshots)
     ) : (
         <Spinner />
     );
-
     const date = new Date(createdAt);
     const renderedDate = logDate(date);
     const renderedStatus = logStatus(status);
+    const renderedNotesTypes = (
+        <div className='anime-item__notes'>{renderNotes(notesTypes)}</div>
+    );
 
     return (
-        <div className='anime-item'>
+        <div
+            className='anime-item'
+            onClick={e => openNotesModal(e)}>
             <div className='anime-item__row'>
                 <div className='anime-item__column'>
                     {isMobile && <h2 className='anime-item__title'>{title}</h2>}
@@ -128,13 +169,14 @@ const AnimeItem = () => {
                             />
                         </div>
                         <div
-                            onClick={() => addToNotes('watch', currentAnime)}
+                            onClick={e => openNotesModal(e)}
                             className='anime-item__adv-btn'>
                             Добавить в закладки
                             <img
                                 src={isMobile ? mobileAddFavIcon : addFavIcon}
                                 alt='add to favourites btn'
                             />
+                            {showNotesMenu && renderedNotesTypes}
                         </div>
                         {writeLoadingStatus === 'error' ? (
                             <p className='login__error center'>

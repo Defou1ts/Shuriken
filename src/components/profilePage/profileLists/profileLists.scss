@@ -1,0 +1,18 @@
+@import '../../../styles/theme.scss';
+
+.profile {
+
+    &__lists {
+        margin: 50px 0px 0px 0px;
+        display: flex;
+        gap: 80px;
+    }
+
+    &__sidebar {
+        flex: 0 0 15%;
+    }
+
+    &__list {
+        flex: 1 1 auto;
+    }
+}

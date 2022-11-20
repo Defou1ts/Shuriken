@@ -1,0 +1,32 @@
+@import '../../../styles/theme.scss';
+
+.profile {
+    &__notes {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__note-count {
+        padding: 10px;
+        background: #322F2F;
+        border-radius: 10px;
+    }
+
+    &__note {
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 30px;
+        color: #DEDEDE;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &.active {
+            border-bottom: 1px solid $red-color;
+        }
+        &:hover {
+            color: $white-color;
+        }
+    }
+}
