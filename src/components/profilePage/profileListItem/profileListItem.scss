@@ -81,7 +81,6 @@
         font-size: 36px;
         color: white;
         white-space: nowrap;
-        // position: absolute;
         right: 0;
         top: 0;
     }
@@ -93,12 +92,14 @@
             gap: 20px;
         }
         &__list-item-image {
-            flex: 0 0 56px;
+            flex: 0 0 91px;
         }
         &__list-item-note {
+            padding: 0px 5px;
             height: 21px;
             font-size: 10px;
             line-height: 13px;
+            white-space: nowrap;
         }
         &__list-item-content {
             display: flex;
@@ -106,7 +107,6 @@
             max-height: 76px;
         }
         &__list-item-title {
-            // white-space: nowrap;
             font-size: 10px;
             line-height: 13px;
         }
@@ -127,7 +127,6 @@
             font-size: 10px;
             color: white;
             white-space: nowrap;
-            // position: absolute;
             right: 0;
             top: 0;
         }

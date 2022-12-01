@@ -24,9 +24,6 @@ const ProfileListItem = ({ anime, color, text }) => {
                     <div className='profile__list-item-last-episode'>
                         Последняя серия: {anime.episodesAired}
                     </div>
-                    {/* <div className='profile__list-item-descr'>
-                        {anime.description}
-                    </div> */}
                 </div>
                 <div className='profile__list-item-settings'>. . .</div>
             </div>

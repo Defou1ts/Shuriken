@@ -2,32 +2,32 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     selectedOption: 'Списки',
-    options: ['Списки', 'Друзья', 'Комментарии'],
+    options: ['Списки'],
     notesTypes: [
         {
             name: 'planning',
             text: 'В планах',
-            color:'blue'
+            color:'#D1D35F'
         },
         {
             name: 'watch',
             text: 'Смотрю',
-            color: 'yellow',
+            color: '#6FBB6D',
         },
         {
             name: 'watched',
             text: 'Просмотрено',
-            color: 'green',
+            color: '#5069C4',
         },
         {
             name: 'thrown',
             text: 'Брошено',
-            color: 'pink',
+            color: '#232923',
         },
         {
             name: 'liked',
             text: 'Любимые',
-            color: 'red',
+            color: '#C857A1',
         },
     ],
     activeNotesFilter: 'all',

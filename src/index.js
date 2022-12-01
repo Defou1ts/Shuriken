@@ -1,13 +1,14 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { initializeFirebase } from './services/firebase/firebase';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { initializeFirebase } from "./services/firebase/firebase";
 
-import './styles/index.scss';
-import store from './store/store';
-import App from './components/app/App';
+import "./styles/index.scss";
 
-const container = document.getElementById('root');
+import store from "./store/store";
+import App from "./components/app/App";
+
+const container = document.getElementById("root");
 const root = createRoot(container);
 initializeFirebase();
 

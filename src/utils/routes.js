@@ -7,6 +7,7 @@ import {
     ANIME_ROUTE,
     LOGIN_ROUTE,
     REGISTER_ROUTE,
+    NOT_FOUND_ROUTE,
 } from '../utils/consts';
 
 import Homepage from '../pages/Homepage';
@@ -14,6 +15,7 @@ import Loginpage from '../pages/Loginpage';
 import RegisterPage from '../pages/RegisterPage';
 import AnimePage from '../pages/AnimePage';
 import ProfilePage from '../pages/ProfilePage';
+import NotFound from '../pages/NotFound';
 
 export const generalRoutes = [
     {
@@ -31,6 +33,10 @@ export const generalRoutes = [
     {
         path: ANIME_ROUTE,
         Component: <AnimePage />,
+    },
+    {
+        path: NOT_FOUND_ROUTE,
+        Component: <NotFound />,
     },
 ];
 

@@ -6,3 +6,4 @@ export const FAQ_ROUTE = '/faq';
 export const ANIME_ROUTE = '/anime/:id';
 export const LOGIN_ROUTE = '/login';
 export const REGISTER_ROUTE = '/register';
+export const NOT_FOUND_ROUTE = '/404';

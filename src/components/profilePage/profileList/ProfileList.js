@@ -1,29 +1,28 @@
-import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import './profileList.scss';
+import "./profileList.scss";
 
-import Spinner from '../../common/spinner/Spinner';
-import ProfileListItem from '../profileListItem/ProfileListItem';
+import ProfileListItem from "../profileListItem/ProfileListItem";
 
 const ProfileList = () => {
-    const notesTypes = useSelector(state => state.profile.notesTypes);
-    const notes = useSelector(state => state.global.userData.notes);
+    const notesTypes = useSelector((state) => state.profile.notesTypes);
+    const notes = useSelector((state) => state.global.userData.notes);
     const activeNotesFilter = useSelector(
-        state => state.profile.activeNotesFilter
+        (state) => state.profile.activeNotesFilter
     );
 
-    const filterNotes = notes => {
-        if (activeNotesFilter === 'all') return Object.values(notes);
+    const filterNotes = (notes) => {
+        if (activeNotesFilter === "all") return Object.values(notes);
         return Object.values(notes).filter(
-            item => item.note === activeNotesFilter
+            (item) => item.note === activeNotesFilter
         );
     };
 
-    const renderNotes = notes => {
+    const renderNotes = (notes) => {
         return notes.map(({ anime, note }) => {
-            let color = '';
-            let text = '';
+            let color = "";
+            let text = "";
             for (let noteType of notesTypes) {
                 if (noteType.name === note) {
                     color = noteType.color;
@@ -41,11 +40,16 @@ const ProfileList = () => {
         });
     };
 
-    if (!notes) return <Spinner />;
+    if (!notes)
+        return (
+            <p className="profile__notes-not-found">
+                У вас пока ничего нет в закладках
+            </p>
+        );
 
     const filteredNotes = filterNotes(notes);
     const renderedNotes = renderNotes(filteredNotes);
 
-    return <div className='profile__list'>{renderedNotes}</div>;
+    return <div className="profile__list">{renderedNotes}</div>;
 };
 export default ProfileList;

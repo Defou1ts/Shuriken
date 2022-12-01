@@ -12,6 +12,7 @@ import {
     HOMEPAGE_ROUTE,
     LOGIN_ROUTE,
     PROFILE_ROUTE,
+    NOT_FOUND_ROUTE,
 } from '../../../utils/consts';
 
 import Spinner from '../spinner/Spinner';
@@ -49,7 +50,7 @@ function AppRouter() {
                 path='*'
                 element={
                     <Navigate
-                        to={HOMEPAGE_ROUTE}
+                        to={NOT_FOUND_ROUTE}
                         replace
                     />
                 }
@@ -72,7 +73,7 @@ function AppRouter() {
                 path='*'
                 element={
                     <Navigate
-                        to={HOMEPAGE_ROUTE}
+                        to={NOT_FOUND_ROUTE}
                         replace
                     />
                 }
