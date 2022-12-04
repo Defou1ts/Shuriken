@@ -1,12 +1,10 @@
 export const useHttp = () => {
-    const request = async (url, method = 'GET', body = null) => {
+    const request = async (url, method = "GET", body = null, headers = {}) => {
         try {
             const response = await fetch(url, {
                 method,
                 body,
-                headers: {
-                    'Content-Type': 'text/plain;charset=UTF-8',
-                },
+                headers,
             });
 
             if (!response.ok) {
