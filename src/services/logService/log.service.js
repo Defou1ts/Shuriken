@@ -1,5 +1,5 @@
 export const useLog = () => {
-    const logDate = date => {
+    const logDate = (date) => {
         const options = {
             year: 'numeric',
             month: 'long',
@@ -9,7 +9,7 @@ export const useLog = () => {
         return date.toLocaleString('ru', options);
     };
 
-    const logRegisterTime = date => {
+    const logRegisterTime = (date) => {
         const time = Date.now() - date;
         const oneDay = 1000 * 60 * 60 * 24;
         return {
@@ -17,7 +17,7 @@ export const useLog = () => {
         };
     };
 
-    const logStatus = status => {
+    const logStatus = (status) => {
         switch (status) {
             case 'ongoing':
                 return 'Онгоинг';
@@ -30,17 +30,17 @@ export const useLog = () => {
         }
     };
 
-    const logErrorMessage = message => {
+    const logErrorMessage = (message) => {
         switch (message) {
-            case 'такой логин уже существует':
+            case 'Такой логин уже существует':
                 return {
                     message,
                     type: 'username',
                     formType: 'register',
                 };
-            case 'Firebase: Error (auth/email-already-in-use).':
+            case 'Такой Email уже зарегистрирован':
                 return {
-                    message: 'такой Email уже существует',
+                    message: 'Такой Email уже зарегистрирован',
                     type: 'email',
                     formType: 'register',
                 };

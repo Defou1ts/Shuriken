@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTER_ROUTE } from '../../../utils/consts';
 import { setShowLoginForm } from '../../../slices/globalSlice';
-import { useUserService } from '../../../services/firebase/user.service';
+import { useUserService } from '../../../services/auth/user.service';
 import * as Yup from 'yup';
 
 import './loginForm.scss';
@@ -18,13 +18,13 @@ const LoginForm = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const authLoadingStatus = useSelector(
-        state => state.global.authLoadingStatus
+        (state) => state.global.authLoadingStatus
     );
-    const showLoginForm = useSelector(state => state.global.showLoginForm);
+    const showLoginForm = useSelector((state) => state.global.showLoginForm);
 
     const { login } = useUserService();
 
-    const closeForm = e => {
+    const closeForm = (e) => {
         if (
             e.target.classList.contains('black-form-wrapper') &&
             location.pathname !== LOGIN_ROUTE
@@ -35,12 +35,13 @@ const LoginForm = () => {
 
     return (
         <div
-            onClick={e => closeForm(e)}
+            onClick={(e) => closeForm(e)}
             className={`black-form-wrapper ${
                 showLoginForm || location.pathname === LOGIN_ROUTE
                     ? 'active'
                     : ''
-            }`}>
+            }`}
+        >
             <Formik
                 initialValues={{
                     email: '',
@@ -60,64 +61,64 @@ const LoginForm = () => {
                             'некорректный пароль'
                         ),
                 })}
-                onSubmit={values => login(values)}>
-                <Form className='login'>
-                    <div className='login__header'>
-                        <h1 className='login__title'>Авторизация</h1>
+                onSubmit={(values) => login(values)}
+            >
+                <Form className="login">
+                    <div className="login__header">
+                        <h1 className="login__title">Авторизация</h1>
                     </div>
-                    <div className='login__social-networks'>
-                        <div className='login__social-network'>
+                    <div className="login__social-networks">
+                        <div className="login__social-network">
                             <img
                                 src={vkIcon}
-                                alt='login with vk'
-                                className='login__social-network-logo'
+                                alt="login with vk"
+                                className="login__social-network-logo"
                             />
                         </div>
-                        <div className='login__social-network login__facebook'>
+                        <div className="login__social-network login__facebook">
                             <img
                                 src={facebookIcon}
-                                alt='login with facebook'
-                                className='login__social-network-logo'
+                                alt="login with facebook"
+                                className="login__social-network-logo"
                             />
                         </div>
                     </div>
-                    <div className='login__fields'>
+                    <div className="login__fields">
                         <FormInput
-                            id='email'
-                            name='email'
-                            type='text'
-                            placeholder='Email'
-                            form='login'
+                            id="email"
+                            name="email"
+                            type="text"
+                            placeholder="Email"
+                            form="login"
                         />
                         <FormInput
-                            id='password'
-                            name='password'
-                            type='password'
-                            placeholder='Пароль'
-                            form='login'
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Пароль"
+                            form="login"
                         />
                         {authLoadingStatus === 'error' ? (
-                            <p className='login__error'>
+                            <p className="login__error">
                                 неверный логин или пароль
                             </p>
                         ) : null}
                     </div>
-                    <div className='login__btns'>
+                    <div className="login__btns">
                         {authLoadingStatus === 'loading' ? (
                             <Spinner small />
                         ) : null}
                         <button
                             disabled={authLoadingStatus === 'loading'}
-                            type='submit'
-                            className='login__submit'>
+                            type="submit"
+                            className="login__submit"
+                        >
                             Войти
                         </button>
-                        <Link
-                            to={REGISTER_ROUTE}
-                            className='login__register'>
+                        <Link to={REGISTER_ROUTE} className="login__register">
                             Зарегистрироваться
                         </Link>
-                        <Link className='login__forgot'>Забыли пароль?</Link>
+                        <Link className="login__forgot">Забыли пароль?</Link>
                     </div>
                 </Form>
             </Formik>

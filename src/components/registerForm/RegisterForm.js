@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../utils/consts';
-import { useUserService } from '../../../services/firebase/user.service';
+import { useUserService } from '../../../services/auth/user.service';
 
 import './registerForm.scss';
 import FormInput from '../../common/formInput/FormInput';
@@ -10,7 +10,7 @@ import FormInput from '../../common/formInput/FormInput';
 const RegisterForm = () => {
     const { register } = useUserService();
 
-    const handleRegister = async values => {
+    const handleRegister = async (values) => {
         register(values);
     };
 
@@ -42,42 +42,41 @@ const RegisterForm = () => {
                         'некорректный пароль'
                     ),
             })}
-            onSubmit={values => handleRegister(values)}>
-            <Form className='register__form'>
-                <div className='register__header'>
-                    <h2 className='register__title'>Регистрация</h2>
+            onSubmit={(values) => handleRegister(values)}
+        >
+            <Form className="register__form">
+                <div className="register__header">
+                    <h2 className="register__title">Регистрация</h2>
                 </div>
-                <div className='register__body'>
-                    <div className='register__fields'>
+                <div className="register__body">
+                    <div className="register__fields">
                         <FormInput
-                            id='username'
-                            name='username'
-                            type='text'
-                            placeholder='Логин'
-                            form='register'
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="Логин"
+                            form="register"
                         />
                         <FormInput
-                            id='email'
-                            name='email'
-                            type='text'
-                            placeholder='Email'
-                            form='register'
+                            id="email"
+                            name="email"
+                            type="text"
+                            placeholder="Email"
+                            form="register"
                         />
                         <FormInput
-                            id='password'
-                            name='password'
-                            type='password'
-                            placeholder='Пароль'
-                            form='register'
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Пароль"
+                            form="register"
                         />
                     </div>
-                    <div className='register__btns'>
-                        <button
-                            type='submit'
-                            className='register__submit'>
+                    <div className="register__btns">
+                        <button type="submit" className="register__submit">
                             Зарегистрироваться
                         </button>
-                        <div className='register__login'>
+                        <div className="register__login">
                             <span>Есть аккаунт? </span>
                             <Link to={LOGIN_ROUTE}>Войти</Link>
                         </div>

@@ -13,9 +13,9 @@ import {
     FAVOURITES_ROUTE,
     FAQ_ROUTE,
     CATALOG_ROUTE,
+    API_IMAGES,
 } from '../../../utils/consts';
 
-import userIcon from '../../../assets/blankpic.svg';
 import notificationsIcon from '../../../assets/notifications.svg';
 import profileIcon from '../../../assets/profileIcon.svg';
 import catalogIcon from '../../../assets/catalogIcon.svg';
@@ -27,9 +27,8 @@ import './mobileMenu.scss';
 
 const MobileMenu = () => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.global.user);
-    const isActiveBurger = useSelector(state => state.global.isActiveBurger);
-    const username = useSelector(state => state.global.userData.username);
+    const user = useSelector((state) => state.global.user);
+    const isActiveBurger = useSelector((state) => state.global.isActiveBurger);
     const location = useLocation();
     const { exit } = useUserService();
 
@@ -42,96 +41,80 @@ const MobileMenu = () => {
         <>
             <div
                 className={`black-wrapper ${isActiveBurger ? 'active' : ''}`}
-                onClick={() => dispatch(setIsActiveBurger(false))}></div>
+                onClick={() => dispatch(setIsActiveBurger(false))}
+            ></div>
             <div className={`mobile-menu ${isActiveBurger ? 'active' : ''}`}>
-                <div className='mobile-menu__header'>
+                <div className="mobile-menu__header">
                     {user ? (
                         <>
                             <Link to={PROFILE_ROUTE}>
                                 <img
-                                    className='mobile-menu__user-icon'
-                                    src={userIcon}
-                                    alt='user icon'
+                                    className="mobile-menu__user-icon"
+                                    src={`${API_IMAGES}/${user.image}`}
+                                    alt="user icon"
                                 />
                             </Link>
                             <Link
-                                className='mobile-menu__user-name'
-                                to={PROFILE_ROUTE}>
-                                {username}
+                                className="mobile-menu__user-name"
+                                to={PROFILE_ROUTE}
+                            >
+                                {user.username}
                             </Link>
                             <img
-                                className='mobile-menu__notifications'
+                                className="mobile-menu__notifications"
                                 src={notificationsIcon}
-                                alt='Notifications'
+                                alt="Notifications"
                             />
                         </>
                     ) : (
                         <Link
-                            className='mobile-menu__login-btn'
+                            className="mobile-menu__login-btn"
                             onClick={() => dispatch(setShowLoginForm(true))}
-                            to={LOGIN_ROUTE}>
+                            to={LOGIN_ROUTE}
+                        >
                             Войти
                         </Link>
                     )}
                 </div>
-                <div className='mobile-menu__list'>
+                <div className="mobile-menu__list">
                     {user ? (
                         <>
                             <Link
                                 to={PROFILE_ROUTE}
-                                className='mobile-menu__link'>
-                                <div className='mobile-menu__image'>
-                                    <img
-                                        src={profileIcon}
-                                        alt='Profile'
-                                    />
+                                className="mobile-menu__link"
+                            >
+                                <div className="mobile-menu__image">
+                                    <img src={profileIcon} alt="Profile" />
                                 </div>
                                 Мой профиль
                             </Link>
                             <Link
                                 to={FAVOURITES_ROUTE}
-                                className='mobile-menu__link'>
-                                <div className='mobile-menu__image'>
-                                    <img
-                                        src={favIcon}
-                                        alt='Favourite'
-                                    />
+                                className="mobile-menu__link"
+                            >
+                                <div className="mobile-menu__image">
+                                    <img src={favIcon} alt="Favourite" />
                                 </div>
                                 Мои закладки
                             </Link>
                         </>
                     ) : null}
-                    <Link
-                        to={CATALOG_ROUTE}
-                        className='mobile-menu__link'>
-                        <div className='mobile-menu__image'>
-                            <img
-                                src={catalogIcon}
-                                alt='Catalog'
-                            />
+                    <Link to={CATALOG_ROUTE} className="mobile-menu__link">
+                        <div className="mobile-menu__image">
+                            <img src={catalogIcon} alt="Catalog" />
                         </div>
                         Каталог
                     </Link>
-                    <Link
-                        to={FAQ_ROUTE}
-                        className='mobile-menu__link'>
-                        <div className='mobile-menu__image'>
-                            <img
-                                src={faqIcon}
-                                alt='FAQ'
-                            />
+                    <Link to={FAQ_ROUTE} className="mobile-menu__link">
+                        <div className="mobile-menu__image">
+                            <img src={faqIcon} alt="FAQ" />
                         </div>
                         FAQ
                     </Link>
                 </div>
                 {user ? (
-                    <button
-                        className='mobile-menu__quit'
-                        onClick={exit}>
-                        <img
-                            src={quitIcon}
-                            alt='Quit'
-                        />
+                    <button className="mobile-menu__quit" onClick={exit}>
+                        <img src={quitIcon} alt="Quit" />
                         Выход
                     </button>
                 ) : null}

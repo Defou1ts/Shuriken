@@ -5,14 +5,12 @@ const initialState = {
     showLoginForm: false,
     isMobile: false,
     user: null,
-    userData: {
-        username: '',
-    },
     authLoadingStatus: 'idle',
     registerLoadingStatus: 'idle',
     registerErrorMessage: '',
     writeLoadingStatus: 'idle',
     fileLoadingStatus: 'idle',
+    createReviewLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -31,9 +29,6 @@ const globalSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
-        setUserData: (state, action) => {
-            state.userData = action.payload;
-        },
         setAuthLoadingStatus: (state, action) => {
             state.authLoadingStatus = action.payload;
         },
@@ -49,6 +44,9 @@ const globalSlice = createSlice({
         setFileLoadingStatus: (state, action) => {
             state.fileLoadingStatus = action.payload;
         },
+        setCreateReviewLoadingStatus: (state, action) => {
+            state.fileLoadingStatus = action.payload;
+        },
     },
 });
 
@@ -57,12 +55,12 @@ export const {
     setShowLoginForm,
     setIsMobile,
     setUser,
-    setUserData,
     setAuthLoadingStatus,
     setRegisterLoadingStatus,
     setRegisterErrorMessage,
     setWriteLoadingStatus,
     setFileLoadingStatus,
+    setCreateReviewLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

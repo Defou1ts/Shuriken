@@ -1,8 +1,6 @@
-import './profileFriends.scss'
+import './profileFriends.scss';
 
 const ProfileFriends = () => {
-  return (
-    <div>ProfileFriends</div>
-  )
-}
-export default ProfileFriends
+    return <div>ProfileFriends</div>;
+};
+export default ProfileFriends;

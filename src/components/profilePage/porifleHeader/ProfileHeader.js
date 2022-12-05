@@ -9,42 +9,36 @@ import settingsIcon from '../../../assets/settings.svg';
 import userIcon from '../../../assets/blankpic.svg';
 
 const ProfileHeader = () => {
-    const { username } = useSelector(state => state.global.userData);
-    const { metadata, emailVerified, email } = useSelector(
-        state => state.global.user
+    const { username, email, isVerifiedEmail, createdAt } = useSelector(
+        (state) => state.global.user
     );
+
     const { logRegisterTime } = useLog();
 
     if (!username) return <Spinner />;
 
-    const { days } = logRegisterTime(+metadata.createdAt);
+    const { days } = logRegisterTime(createdAt);
     return (
-        <div className='profile__header'>
-            <div className='profile__row'>
-                <div className='profile__icon'>
-                    <img
-                        src={userIcon}
-                        alt='profile'
-                    />
+        <div className="profile__header">
+            <div className="profile__row">
+                <div className="profile__icon">
+                    <img src={userIcon} alt="profile" />
                 </div>
-                <div className='profile__info'>
-                    <h2 className='profile__username'>{username}</h2>
-                    <p className='profile__exist-time'>На сайте {days} дней</p>
-                    <p className='profile__email'>{email}</p>
-                    {emailVerified ? null : (
-                        <div className='profile__email-verify'>
-                            <span className='profile__email-verify-btn'>
+                <div className="profile__info">
+                    <h2 className="profile__username">{username}</h2>
+                    <p className="profile__exist-time">На сайте {days} дней</p>
+                    <p className="profile__email">{email}</p>
+                    {isVerifiedEmail ? null : (
+                        <div className="profile__email-verify">
+                            <span className="profile__email-verify-btn">
                                 Подтвердите
                             </span>{' '}
                             свою почту для безопастности аккаунта
                         </div>
                     )}
                 </div>
-                <div className='profile__settings'>
-                    <img
-                        src={settingsIcon}
-                        alt='settings'
-                    />
+                <div className="profile__settings">
+                    <img src={settingsIcon} alt="settings" />
                 </div>
             </div>
         </div>

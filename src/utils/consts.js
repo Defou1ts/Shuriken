@@ -12,3 +12,5 @@ export const IDLE = 'idle';
 export const LOADING = 'loading';
 export const ERROR = 'error';
 export const SUCCESS = 'success';
+export const API_BASE = 'http://localhost:8000';
+export const API_IMAGES = `${API_BASE}/static`;
