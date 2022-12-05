@@ -12,6 +12,7 @@ const initialState = {
     registerLoadingStatus: 'idle',
     registerErrorMessage: '',
     writeLoadingStatus: 'idle',
+    fileLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -42,9 +43,12 @@ const globalSlice = createSlice({
         setRegisterErrorMessage: (state, action) => {
             state.registerErrorMessage = action.payload;
         },
-        setWriteLoadingStatus:(state,action)=> {
+        setWriteLoadingStatus: (state, action) => {
             state.writeLoadingStatus = action.payload;
-        }
+        },
+        setFileLoadingStatus: (state, action) => {
+            state.fileLoadingStatus = action.payload;
+        },
     },
 });
 
@@ -58,6 +62,7 @@ export const {
     setRegisterLoadingStatus,
     setRegisterErrorMessage,
     setWriteLoadingStatus,
+    setFileLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

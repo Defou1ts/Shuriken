@@ -1,25 +1,25 @@
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAnime, fetchTranslations } from "../../../slices/animeSlice";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { useLog } from "../../../services/logService/log.service";
-import { useUserService } from "../../../services/firebase/user.service";
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAnime, fetchTranslations } from '../../../slices/animeSlice';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import { useLog } from '../../../services/logService/log.service';
+import { useUserService } from '../../../services/auth/user.service';
 
-import "./animeItem.scss";
+import './animeItem.scss';
 
-import Spinner from "../../common/spinner/Spinner";
+import Spinner from '../../common/spinner/Spinner';
 
-import playBtn from "../../../assets/playicon.svg";
-import addFavIcon from "../../../assets/addfavicon.svg";
-import rateIcon from "../../../assets/rateicon.svg";
-import mobileAddFavIcon from "../../../assets/mobilefavicon.svg";
-import mobileRateIcon from "../../../assets/mobilerateicon.svg";
-import ratingIcon from "../../../assets/ratingIcon.svg";
+import playBtn from '../../../assets/playicon.svg';
+import addFavIcon from '../../../assets/addfavicon.svg';
+import rateIcon from '../../../assets/rateicon.svg';
+import mobileAddFavIcon from '../../../assets/mobilefavicon.svg';
+import mobileRateIcon from '../../../assets/mobilerateicon.svg';
+import ratingIcon from '../../../assets/ratingIcon.svg';
 
 const AnimeItem = () => {
     const [showNotesMenu, setShowNotesMenu] = useState(false);
-    const { writeUserNotes } = useUserService();
+    const { addToUserNotes } = useUserService();
     const { logDate, logStatus } = useLog();
     const dispatch = useDispatch();
 
@@ -63,30 +63,30 @@ const AnimeItem = () => {
         dispatch(fetchTranslations(id));
     }, [id, dispatch]);
 
-    if (animeLoadingStatus === "loading") {
+    if (animeLoadingStatus === 'loading') {
         return <Spinner />;
     }
 
-    if (animeLoadingStatus === "error") {
+    if (animeLoadingStatus === 'error') {
         return <h1>Ошибка</h1>;
     }
 
     const addToNotes = (note, anime) => {
         setShowNotesMenu(false);
-        writeUserNotes(note, anime);
+        addToUserNotes(note, anime);
     };
 
     const scrollToPlayer = () => {
         window.scrollTo({
-            top: document.getElementById("kodik-player").offsetTop - 200,
-            behavior: "smooth",
+            top: document.getElementById('kodik-player').offsetTop - 200,
+            behavior: 'smooth',
         });
     };
 
     const openNotesModal = (e) => {
         if (
-            e.target.classList.contains("anime-item__adv-btn") ||
-            e.target.localName === "img"
+            e.target.classList.contains('anime-item__adv-btn') ||
+            e.target.localName === 'img'
         ) {
             setShowNotesMenu(true);
         } else {
@@ -101,11 +101,11 @@ const AnimeItem = () => {
 
     const renderNotes = (notesTypes) =>
         notesTypes.map(({ name, text }) => {
-            let className = "anime-item__note";
+            let className = 'anime-item__note';
             if (notes) {
                 for (let noteId of Object.keys(notes)) {
                     if (noteId === id && notes[noteId].note === name) {
-                        className += " active";
+                        className += ' active';
                     }
                 }
             }
@@ -166,12 +166,12 @@ const AnimeItem = () => {
                             />
                             {showNotesMenu && renderedNotesTypes}
                         </div>
-                        {writeLoadingStatus === "error" ? (
+                        {writeLoadingStatus === 'error' ? (
                             <p className="login__error center">
                                 Вы не авторизованы
                             </p>
                         ) : null}
-                        {writeLoadingStatus === "loading" ? (
+                        {writeLoadingStatus === 'loading' ? (
                             <Spinner small />
                         ) : null}
                         <div className="anime-item__adv-btn">
@@ -196,8 +196,8 @@ const AnimeItem = () => {
                         <li className="anime-item__descr-item">
                             <p>Эпизоды</p>
                             <p>
-                                {episodesAired} /{" "}
-                                {episodesTotal === 0 ? "?" : episodesTotal}
+                                {episodesAired} /{' '}
+                                {episodesTotal === 0 ? '?' : episodesTotal}
                             </p>
                         </li>
                         <li className="anime-item__descr-item">
@@ -206,7 +206,7 @@ const AnimeItem = () => {
                         </li>
                         <li className="anime-item__descr-item">
                             <p>Жанр</p>
-                            <p>{genres ? genres.join(", ") : null}</p>
+                            <p>{genres ? genres.join(', ') : null}</p>
                         </li>
                         <li className="anime-item__descr-item">
                             <p>Сезон</p>
@@ -218,7 +218,7 @@ const AnimeItem = () => {
                         </li>
                         <li className="anime-item__descr-item">
                             <p>Студия</p>
-                            <p>{studios ? studios.join(", ") : null}</p>
+                            <p>{studios ? studios.join(', ') : null}</p>
                         </li>
                         <li className="anime-item__descr-item">
                             <p>Рейтинг MPAA </p>
