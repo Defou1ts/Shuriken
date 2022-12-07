@@ -9,9 +9,7 @@ import settingsIcon from '../../../assets/settings.svg';
 import userIcon from '../../../assets/blankpic.svg';
 
 const ProfileHeader = () => {
-    const { username, email, isVerifiedEmail, createdAt } = useSelector(
-        (state) => state.global.user
-    );
+    const { username, email, isVerifiedEmail, createdAt } = useSelector((state) => state.global.user);
 
     const { logRegisterTime } = useLog();
 
@@ -30,10 +28,8 @@ const ProfileHeader = () => {
                     <p className="profile__email">{email}</p>
                     {isVerifiedEmail ? null : (
                         <div className="profile__email-verify">
-                            <span className="profile__email-verify-btn">
-                                Подтвердите
-                            </span>{' '}
-                            свою почту для безопастности аккаунта
+                            <span className="profile__email-verify-btn">Подтвердите</span> свою почту для безопастности
+                            аккаунта
                         </div>
                     )}
                 </div>

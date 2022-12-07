@@ -10,7 +10,7 @@ const initialState = {
     registerErrorMessage: '',
     writeLoadingStatus: 'idle',
     fileLoadingStatus: 'idle',
-    createReviewLoadingStatus: 'idle',
+    updateReviewLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -44,8 +44,8 @@ const globalSlice = createSlice({
         setFileLoadingStatus: (state, action) => {
             state.fileLoadingStatus = action.payload;
         },
-        setCreateReviewLoadingStatus: (state, action) => {
-            state.fileLoadingStatus = action.payload;
+        setUpdateReviewLoadingStatus: (state, action) => {
+            state.updateReviewLoadingStatus = action.payload;
         },
     },
 });
@@ -60,7 +60,7 @@ export const {
     setRegisterErrorMessage,
     setWriteLoadingStatus,
     setFileLoadingStatus,
-    setCreateReviewLoadingStatus,
+    setUpdateReviewLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -10,7 +10,7 @@ import {
     setUser,
     setWriteLoadingStatus,
     setFileLoadingStatus,
-    setCreateReviewLoadingStatus,
+    setUpdateReviewLoadingStatus,
 } from '../../slices/globalSlice';
 
 export const useUserService = () => {
@@ -98,11 +98,11 @@ export const useUserService = () => {
         }
     };
 
-    const createReview = async (animeId, description ) => {
-        dispatch(setCreateReviewLoadingStatus(LOADING));
+    const createReview = async (animeId, description) => {
+        dispatch(setUpdateReviewLoadingStatus(LOADING));
         const access_token = localStorage.getItem('access_token');
         if (!access_token) {
-            dispatch(setCreateReviewLoadingStatus(ERROR));
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
         const res = await request(
@@ -117,11 +117,10 @@ export const useUserService = () => {
             }
         );
         if (res.error) {
-            dispatch(setCreateReviewLoadingStatus(ERROR));
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
-        //ADD DISPATCH SET REVIEWS
-        dispatch(setCreateReviewLoadingStatus(IDLE));
+        dispatch(setUpdateReviewLoadingStatus(IDLE));
     };
 
     // const findReviewsByAnime = async (animeId) => {
@@ -130,51 +129,41 @@ export const useUserService = () => {
     // };
 
     const likeReview = async (reviewId) => {
-        //SET LOADING
+        dispatch(setUpdateReviewLoadingStatus(LOADING));
         const access_token = localStorage.getItem('access_token');
         if (!access_token) {
-            //SET ERROR
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
-        const res = await request(
-            `${API_BASE}/reviews/like/${reviewId}`,
-            'POST',
-            null,
-            {
-                Authorization: `Bearer ${access_token}`,
-            }
-        );
+        const res = await request(`${API_BASE}/reviews/like/${reviewId}`, 'POST', null, {
+            Authorization: `Bearer ${access_token}`,
+        });
         if (res.error) {
-            //SET ERROR
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
         const user = await getUser();
         dispatch(setUser(user));
-        //SET IDDLE
+        dispatch(setUpdateReviewLoadingStatus(IDLE));
     };
 
     const disLikeReview = async (reviewId) => {
-        //SET LOADING
+        dispatch(setUpdateReviewLoadingStatus(LOADING));
         const access_token = localStorage.getItem('access_token');
         if (!access_token) {
-            //SET ERROR
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
-        const res = await request(
-            `${API_BASE}/reviews/disLike/${reviewId}`,
-            'POST',
-            null,
-            {
-                Authorization: `Bearer ${access_token}`,
-            }
-        );
+        const res = await request(`${API_BASE}/reviews/disLike/${reviewId}`, 'POST', null, {
+            Authorization: `Bearer ${access_token}`,
+        });
         if (res.error) {
-            //SET ERROR
+            dispatch(setUpdateReviewLoadingStatus(ERROR));
             return;
         }
         const user = await getUser();
         dispatch(setUser(user));
-        //SET IDDLE
+        dispatch(setUpdateReviewLoadingStatus(IDLE));
     };
 
     const uploadUserImage = async (multipartFormFile) => {

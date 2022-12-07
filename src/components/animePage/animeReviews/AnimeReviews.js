@@ -17,13 +17,17 @@ const AnimeReviews = () => {
 
     const reviews = useSelector((state) => state.anime.reviews);
     const reviewsLoadingStatus = useSelector((state) => state.anime.reviewsLoadingStatus);
+    const updateReviewLoadingStatus = useSelector((state) => state.global.updateReviewLoadingStatus);
 
     const { createReview } = useUserService();
 
     useEffect(() => {
         dispatch(fetchReviews(id));
-    }, [id, dispatch]);
+    }, [id, dispatch, updateReviewLoadingStatus]);
 
+    if (updateReviewLoadingStatus === LOADING) {
+        return <Spinner small />;
+    }
     if (reviewsLoadingStatus === LOADING) {
         return <Spinner small />;
     }

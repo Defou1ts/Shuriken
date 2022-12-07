@@ -1,10 +1,11 @@
 export const useLog = () => {
-    const logDate = (date) => {
+    const logDate = (date, timeOptions = {}) => {
         const options = {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
             timezone: 'UTC',
+            ...timeOptions,
         };
         return date.toLocaleString('ru', options);
     };
