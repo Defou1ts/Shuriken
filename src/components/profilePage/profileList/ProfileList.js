@@ -1,28 +1,26 @@
-import { useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
-import "./profileList.scss";
+import './profileList.scss';
 
-import ProfileListItem from "../profileListItem/ProfileListItem";
+import ProfileListItem from '../profileListItem/ProfileListItem';
 
 const ProfileList = () => {
     const notesTypes = useSelector((state) => state.profile.notesTypes);
-    const notes = useSelector((state) => state.global.userData.notes);
+    const notes = useSelector((state) => state.global.user?.notes);
     const activeNotesFilter = useSelector(
         (state) => state.profile.activeNotesFilter
     );
 
     const filterNotes = (notes) => {
-        if (activeNotesFilter === "all") return Object.values(notes);
-        return Object.values(notes).filter(
-            (item) => item.note === activeNotesFilter
-        );
+        if (activeNotesFilter === 'all') return notes;
+        return notes.filter((item) => item.note === activeNotesFilter);
     };
 
     const renderNotes = (notes) => {
         return notes.map(({ anime, note }) => {
-            let color = "";
-            let text = "";
+            let color = '';
+            let text = '';
             for (let noteType of notesTypes) {
                 if (noteType.name === note) {
                     color = noteType.color;
@@ -40,10 +38,10 @@ const ProfileList = () => {
         });
     };
 
-    if (!notes)
+    if (notes.length === 0)
         return (
             <p className="profile__notes-not-found">
-                У вас пока ничего нет в закладках
+                У вас пока ничего нет в закладках. Вы можете что-нибудь подобрать себе в каталоге
             </p>
         );
 

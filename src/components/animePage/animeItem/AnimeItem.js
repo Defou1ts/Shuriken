@@ -1,5 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAnime, fetchTranslations } from '../../../slices/animeSlice';
+import {
+    fetchAnime,
+    fetchTranslations,
+} from '../../../slices/animeSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,10 +21,10 @@ import mobileRateIcon from '../../../assets/mobilerateicon.svg';
 import ratingIcon from '../../../assets/ratingIcon.svg';
 
 const AnimeItem = () => {
+    const dispatch = useDispatch();
     const [showNotesMenu, setShowNotesMenu] = useState(false);
     const { addToUserNotes } = useUserService();
     const { logDate, logStatus } = useLog();
-    const dispatch = useDispatch();
 
     const { id } = useParams();
 
@@ -36,7 +39,7 @@ const AnimeItem = () => {
         (state) => state.anime.selectedTranslation
     );
     const notesTypes = useSelector((state) => state.profile.notesTypes);
-    const notes = useSelector((state) => state.global.userData.notes);
+    const notes = useSelector((state) => state.global.user?.notes);
     const currentAnime = useSelector((state) => state.anime.currentAnime);
     const {
         title,
@@ -55,6 +58,7 @@ const AnimeItem = () => {
         mpaa,
         duration,
     } = currentAnime;
+
     useEffect(() => {
         dispatch(fetchAnime({ id, selectedTranslation }));
     }, [id, selectedTranslation, dispatch]);
@@ -103,11 +107,11 @@ const AnimeItem = () => {
         notesTypes.map(({ name, text }) => {
             let className = 'anime-item__note';
             if (notes) {
-                for (let noteId of Object.keys(notes)) {
-                    if (noteId === id && notes[noteId].note === name) {
+                notes.forEach((note) => {
+                    if (note.note === name && note.animeId === +id) {
                         className += ' active';
                     }
-                }
+                });
             }
             return (
                 <p
@@ -157,7 +161,7 @@ const AnimeItem = () => {
                         </div>
                         <div
                             onClick={(e) => openNotesModal(e)}
-                            className="anime-item__adv-btn"
+                            className="anime-item__adv-btn notes"
                         >
                             Добавить в закладки
                             <img
@@ -174,7 +178,7 @@ const AnimeItem = () => {
                         {writeLoadingStatus === 'loading' ? (
                             <Spinner small />
                         ) : null}
-                        <div className="anime-item__adv-btn">
+                        <div className="anime-item__adv-btn review">
                             Написать отзыв
                             <img
                                 src={isMobile ? mobileRateIcon : rateIcon}

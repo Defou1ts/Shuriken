@@ -5,7 +5,7 @@ import {
     setShowLoginForm,
     setIsActiveBurger,
 } from '../../../slices/globalSlice';
-import { useUserService } from '../../../services/firebase/user.service';
+import { useUserService } from '../../../services/auth/user.service';
 
 import {
     PROFILE_ROUTE,
@@ -30,6 +30,7 @@ const MobileMenu = () => {
     const user = useSelector((state) => state.global.user);
     const isActiveBurger = useSelector((state) => state.global.isActiveBurger);
     const location = useLocation();
+	
     const { exit } = useUserService();
 
     useEffect(() => {

@@ -71,6 +71,9 @@ export const useUserService = () => {
         const access_token = localStorage.getItem('access_token');
         if (!access_token) {
             dispatch(setWriteLoadingStatus(ERROR));
+            setTimeout(() => {
+                dispatch(setWriteLoadingStatus(IDLE));
+            }, 2000);
             return;
         }
         const res = await request(
@@ -95,7 +98,7 @@ export const useUserService = () => {
         }
     };
 
-    const createReview = async ({ animeId, description }) => {
+    const createReview = async (animeId, description ) => {
         dispatch(setCreateReviewLoadingStatus(LOADING));
         const access_token = localStorage.getItem('access_token');
         if (!access_token) {
@@ -120,6 +123,11 @@ export const useUserService = () => {
         //ADD DISPATCH SET REVIEWS
         dispatch(setCreateReviewLoadingStatus(IDLE));
     };
+
+    // const findReviewsByAnime = async (animeId) => {
+    //     const res = await request(`${API_BASE}/reviews/byAnime/${animeId}`);
+    //     return res;
+    // };
 
     const likeReview = async (reviewId) => {
         //SET LOADING
@@ -210,5 +218,6 @@ export const useUserService = () => {
         createReview,
         likeReview,
         disLikeReview,
+        // findReviewsByAnime,
     };
 };

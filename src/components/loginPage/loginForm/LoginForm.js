@@ -56,10 +56,7 @@ const LoginForm = () => {
                         ),
                     password: Yup.string()
                         .required(<p>обязательное поле</p>)
-                        .matches(
-                            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/,
-                            'некорректный пароль'
-                        ),
+                        .min(5, 'некорректный пароль'),
                 })}
                 onSubmit={(values) => login(values)}
             >

@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 const ProfileNotes = () => {
     const dispatch = useDispatch();
     const notesTypes = useSelector((state) => state.profile.notesTypes);
-    const notes = useSelector((state) => state.global.userData.notes);
+    const notes = useSelector((state) => state.global.user?.notes);
     const activeNotesFilter = useSelector(
         (state) => state.profile.activeNotesFilter
     );
@@ -14,8 +14,8 @@ const ProfileNotes = () => {
     const renderNotes = (notesTypes) => {
         return notesTypes.map(({ name, text }) => {
             const className = "profile__note";
-            const count = Object.values(notes).filter(
-                (item) => item.note === name
+            const count = notes.filter(
+                (note) => note.note === name
             ).length;
             return (
                 <li

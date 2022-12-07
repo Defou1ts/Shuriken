@@ -1,4 +1,5 @@
 import { useHttp } from '../../hooks/http.hook';
+import { API_BASE } from '../../utils/consts';
 
 const useKodikService = () => {
     const { request } = useHttp();
@@ -12,6 +13,11 @@ const useKodikService = () => {
             `${_apiBase}list?token=${_apiToken}&limit=${sliderItemsLimit}&sort=shikimori_rating&year=2022&translation_id=610&types=anime-serial`
         );
         return await res.results.map(_transformSliderItems);
+    };
+
+    const findReviewsByAnime = async (animeId) => {
+        const res = await request(`${API_BASE}/reviews/byAnime/${animeId}`);
+        return res;
     };
 
     const getNewEpisodes = async () => {
@@ -66,7 +72,7 @@ const useKodikService = () => {
         return _transformAnime(res.results[0]);
     };
 
-    const getTranslationsListById = async id => {
+    const getTranslationsListById = async (id) => {
         const prioritizeTranslations = [609, 610, 643, 654, 739, 767];
         const res = await request(
             `${_apiBase}search?token=${_apiToken}&shikimori_id=${id}&with_material_data=true&prioritize_translations=${prioritizeTranslations.join(
@@ -76,7 +82,7 @@ const useKodikService = () => {
         return await res.results.map(_transformTranslations);
     };
 
-    const searchAnimeByTitle = async title => {
+    const searchAnimeByTitle = async (title) => {
         const mutatedTitle = title.slice(0, title.indexOf(' '));
         const res = await request(
             `${_apiBase}search?token=${_apiToken}&title=${mutatedTitle}&with_material_data=true&translation_id=610`
@@ -84,7 +90,7 @@ const useKodikService = () => {
         return await res.results.map(_transformAnime);
     };
 
-    const _transformTranslations = anime => {
+    const _transformTranslations = (anime) => {
         return {
             title: anime.translation.title,
             id: anime.translation.id,
@@ -93,7 +99,7 @@ const useKodikService = () => {
         };
     };
 
-    const _transformAnime = anime => {
+    const _transformAnime = (anime) => {
         return {
             title: anime.title,
             titleEn: anime.title_orig,
@@ -120,7 +126,7 @@ const useKodikService = () => {
         };
     };
 
-    const _transformSliderItems = item => {
+    const _transformSliderItems = (item) => {
         return {
             title: item.material_data.title,
             poster: item.material_data.screenshots[1],
@@ -128,7 +134,7 @@ const useKodikService = () => {
         };
     };
 
-    const _transformNewEpisodes = anime => {
+    const _transformNewEpisodes = (anime) => {
         return {
             title: anime.material_data
                 ? anime.material_data.title
@@ -144,7 +150,7 @@ const useKodikService = () => {
         };
     };
 
-    const _transformNewAnimes = anime => {
+    const _transformNewAnimes = (anime) => {
         return {
             title:
                 anime.material_data.title.length > 13
@@ -169,6 +175,7 @@ const useKodikService = () => {
         getNewAnimeByOptions,
         getAnnounces,
         getTranslationsListById,
+        findReviewsByAnime,
     };
 };
 

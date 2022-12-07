@@ -17,7 +17,7 @@ const ProfileHeader = () => {
 
     if (!username) return <Spinner />;
 
-    const { days } = logRegisterTime(createdAt);
+    const { days } = logRegisterTime(new Date(createdAt));
     return (
         <div className="profile__header">
             <div className="profile__row">

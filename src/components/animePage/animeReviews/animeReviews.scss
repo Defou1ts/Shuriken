@@ -1,0 +1,43 @@
+@import '../../../styles/theme.scss';
+
+.reviews {
+    margin: 100px 0px 0px 0px;
+    &__title {
+        display: block;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 45px;
+        color: #dedede;
+        border-bottom: 1px solid $red-color;
+        padding: 0px 0px 10px 0px;
+    }
+    &__submit {
+        margin: 25px 0px 0px 0px;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        color: #ffffff;
+        padding: 10px;
+        background-color: $red-color;
+        border-radius: 10px;
+    }
+
+    &__text-area {
+        display: block;
+        width: 100%;
+        margin: 55px 0px 0px 0px;
+        background: #5a5a5a;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        color: $white-color;
+        padding: 10px;
+    }
+
+    &__list {
+        margin: 127px 0px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+}

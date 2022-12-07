@@ -1,0 +1,83 @@
+@import '../../../styles/theme.scss';
+
+.reviews {
+    &__item {
+        display: flex;
+        max-width: 50%;
+        gap: 20px;
+    }
+
+    &__image {
+        img {
+            max-width: 90px;
+            max-height: 90px;
+            border-radius: 50%;
+        }
+    }
+
+    &__content {
+    }
+
+    &__username {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        color: $red-color;
+    }
+
+    &__description {
+        margin: 15px 0px 0px 0px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 25px;
+        color: #dedede;
+    }
+
+    &__btns {
+        margin: 20px 0px 0px 0px;
+        display: flex;
+        gap: 26px;
+        button {
+            background: transparent;
+        }
+    }
+
+    &__answer {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        color: #dedede;
+    }
+
+    &__like {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        span {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 30px;
+            color: #54ff65;
+        }
+        img {
+            max-width: 34px;
+            max-height: 34px;
+        }
+    }
+
+    &__dislike {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        span {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 30px;
+            color: $red-color;
+        }
+        img {
+            max-width: 34px;
+            max-height: 34px;
+        }
+    }
+}
