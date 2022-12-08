@@ -41,3 +41,27 @@
         gap: 60px;
     }
 }
+
+@media (max-width: 768px) {
+    .reviews {
+        &__title {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 25px;
+            color: #ffffff;
+        }
+        &__text-area {
+            margin: 25px 0px 0px 0px;
+            font-size: 16px;
+            line-height: 26px;
+        }
+        &__submit {
+            margin: 25px 0px 0px 0px;
+            font-size: 16px;
+        }
+        &__list {
+            margin: 60px 0px 0px 0px;
+            gap: 40px;
+        }
+    }
+}

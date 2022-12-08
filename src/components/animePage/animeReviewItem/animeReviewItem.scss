@@ -15,9 +15,6 @@
         }
     }
 
-    &__content {
-    }
-
     &__username {
         font-weight: 500;
         font-size: 24px;
@@ -85,6 +82,77 @@
         img {
             max-width: 34px;
             max-height: 34px;
+        }
+    }
+}
+
+@media (max-width: 1440px) {
+    .reviews__item {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews {
+        &__item {
+            max-width: 100%;
+        }
+
+        &__image {
+            img {
+                max-width: 60px;
+                max-height: 60px;
+            }
+        }
+
+        &__username {
+            font-size: 15px;
+            line-height: 24px;
+        }
+
+        &__date {
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        &__description {
+            margin: 10px 0px 0px 0px;
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        &__btns {
+            margin: 10px 0px 0px 0px;
+            gap: 12px;
+        }
+
+        &__answer {
+            font-size: 15px;
+            line-height: 24px;
+        }
+
+        &__like {
+            gap: 8px;
+            span {
+                font-size: 12px;
+                line-height: 15px;
+            }
+            img {
+                max-width: 17px;
+                max-height: 17px;
+            }
+        }
+
+        &__dislike {
+            gap: 8px;
+            span {
+                font-size: 12px;
+                line-height: 15px;
+            }
+            img {
+                max-width: 17px;
+                max-height: 17px;
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ const AnimeReviews = () => {
     if (reviewsLoadingStatus === LOADING) {
         return <Spinner small />;
     }
+
     if (!reviews) {
         return <h3>Произошла ошибка</h3>;
     }
