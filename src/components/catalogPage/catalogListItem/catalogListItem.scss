@@ -1,0 +1,52 @@
+@import '../../../styles/theme.scss';
+
+.catalog {
+    &__item {
+        width: 100%;
+        transition: 0.2s ease;
+
+        &:hover .catalog__item-title {
+            color: $red-color;
+            transition: 0.2s ease;
+        }
+    }
+
+    &__item-image {
+        position: relative;
+        width: 100%;
+        img {
+            border-radius: 10px;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__item-note {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2.5px 10px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #ffffff;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    &__item-title {
+        margin: 12px 0px 0px 0px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 30px;
+        color: #dedede;
+    }
+
+    &__item-info {
+        margin: 5px 0px 0px 0px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #5a5a5a;
+    }
+}

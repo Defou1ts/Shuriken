@@ -1,0 +1,10 @@
+.catalog {
+    &__list {
+        margin: 50px 0px 0px 0px;
+        display: grid;
+        gap: 54px 54px;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+		max-width: 100%;
+    }
+}

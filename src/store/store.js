@@ -8,6 +8,7 @@ import voiceTranslations from '../slices/voiceTranslationsSlice';
 import global from '../slices/globalSlice';
 import anime from '../slices/animeSlice';
 import profile from '../slices/profileSlice';
+import catalog from '../slices/catalogSlice';
 
 const store = configureStore({
     reducer: {
@@ -19,8 +20,9 @@ const store = configureStore({
         voiceTranslations,
         anime,
         profile,
+        catalog,
     },
-    middleware: getDefaultMiddleware =>
+    middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,
         }),

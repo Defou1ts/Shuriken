@@ -16,6 +16,7 @@ import RegisterPage from '../pages/RegisterPage';
 import AnimePage from '../pages/AnimePage';
 import ProfilePage from '../pages/ProfilePage';
 import NotFound from '../pages/NotFound';
+import CatalogPage from '../pages/CatalogPage';
 
 export const generalRoutes = [
     {
@@ -24,7 +25,7 @@ export const generalRoutes = [
     },
     {
         path: CATALOG_ROUTE,
-        Component: <p>Catalog</p>,
+        Component: <CatalogPage />,
     },
     {
         path: FAQ_ROUTE,
