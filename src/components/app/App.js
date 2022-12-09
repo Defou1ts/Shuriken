@@ -11,35 +11,31 @@ import LoginForm from '../loginPage/loginForm/LoginForm';
 import { useUserService } from '../../services/auth/user.service';
 
 const App = () => {
-    //TODO: ADD ERROR MESSAGE!
+	//TODO: ADD ERROR MESSAGE!
 
-    const dispatch = useDispatch();
-    const isMobile = useSelector((state) => state.global.isMobile);
-    const showLoginForm = useSelector((state) => state.global.showLoginForm);
+	const dispatch = useDispatch();
+	const isMobile = useSelector((state) => state.global.isMobile);
+	const showLoginForm = useSelector((state) => state.global.showLoginForm);
 
-    const { getUser } = useUserService();
+	const { getUser } = useUserService();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const user = await getUser();
-            dispatch(setUser(user));
-        };
+	useEffect(() => {
+		const fetchUser = async () => {
+			const user = await getUser();
+			dispatch(setUser(user));
+		};
 
-        fetchUser();
-    });
+		fetchUser();
+	});
 
-    return (
-        <BrowserRouter>
-            <Header />
-            {isMobile
-                ? createPortal(<MobileMenu />, document.getElementById('root'))
-                : null}
-            {showLoginForm
-                ? createPortal(<LoginForm />, document.getElementById('root'))
-                : null}
-            <AppRouter />
-        </BrowserRouter>
-    );
+	return (
+		<BrowserRouter>
+			<Header />
+			{isMobile ? createPortal(<MobileMenu />, document.getElementById('root')) : null}
+			{showLoginForm ? createPortal(<LoginForm />, document.getElementById('root')) : null}
+			<AppRouter />
+		</BrowserRouter>
+	);
 };
 
 export default App;

@@ -1,6 +1,6 @@
 import './profileComments.scss';
 
 const ProfileComments = () => {
-    return <div>ProfileComments</div>;
+	return <div>ProfileComments</div>;
 };
 export default ProfileComments;
