@@ -10,58 +10,66 @@ import AnimeReviewItem from '../animeReviewItem/AnimeReviewItem';
 import './animeReviews.scss';
 
 const AnimeReviews = () => {
-    const { id } = useParams();
-    const [text, setText] = useState('');
+	const { id } = useParams();
+	const [text, setText] = useState('');
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const reviews = useSelector((state) => state.anime.reviews);
-    const reviewsLoadingStatus = useSelector((state) => state.anime.reviewsLoadingStatus);
-    const updateReviewLoadingStatus = useSelector((state) => state.global.updateReviewLoadingStatus);
+	const user = useSelector((state) => state.global.user);
+	const reviews = useSelector((state) => state.anime.reviews);
+	const reviewsLoadingStatus = useSelector((state) => state.anime.reviewsLoadingStatus);
+	const updateReviewLoadingStatus = useSelector((state) => state.global.updateReviewLoadingStatus);
 
-    const { createReview } = useUserService();
+	const { createReview } = useUserService();
 
-    useEffect(() => {
-        dispatch(fetchReviews(id));
-    }, [id, dispatch, updateReviewLoadingStatus]);
+	useEffect(() => {
+		dispatch(fetchReviews(id));
+	}, [id, dispatch, updateReviewLoadingStatus]);
 
-    if (updateReviewLoadingStatus === LOADING) {
-        return <Spinner small />;
-    }
-    if (reviewsLoadingStatus === LOADING) {
-        return <Spinner small />;
-    }
+	if (updateReviewLoadingStatus === LOADING) {
+		return <Spinner small />;
+	}
+	if (reviewsLoadingStatus === LOADING) {
+		return <Spinner small />;
+	}
 
-    if (!reviews) {
-        return <h3>Произошла ошибка</h3>;
-    }
+	if (!reviews) {
+		return <h3>Произошла ошибка</h3>;
+	}
 
-    const handleSubmit = () => {
-        createReview(id, text);
-        setText('');
-    };
+	const handleSubmit = () => {
+		createReview(id, text);
+		setText('');
+	};
 
-    const renderReviews = (reviews) => {
-        return reviews.map(({ _id, ...props }) => <AnimeReviewItem key={_id} _id={_id} {...props} />);
-    };
+	const renderReviews = (reviews) => {
+		return reviews.map(({ _id, ...props }) => <AnimeReviewItem key={_id} _id={_id} {...props} />);
+	};
 
-    const renderedReviews = renderReviews(reviews);
-
-    return (
-        <div className="reviews">
-            <h2 className="reviews__title">Комментарии</h2>
-            <textarea
-                onChange={(e) => setText(e.target.value)}
-                className="reviews__text-area"
-                name="review"
-                id="review"
-                placeholder="Оставьте комментарий...."
-            ></textarea>
-            <button onClick={handleSubmit} className="reviews__submit">
-                Оставить
-            </button>
-            <div className="reviews__list">{renderedReviews}</div>
-        </div>
-    );
+	const renderedReviews = renderReviews(reviews);
+	return (
+		<div className="reviews">
+			<h2 className="reviews__title">Комментарии</h2>
+			{user && <TextAreaLayout handleSubmit={handleSubmit} setText={setText} />}
+			<div className="reviews__list">{renderedReviews}</div>
+		</div>
+	);
 };
 export default AnimeReviews;
+
+const TextAreaLayout = ({ handleSubmit, setText }) => {
+	return (
+		<>
+			<textarea
+				onChange={(e) => setText(e.target.value)}
+				className="reviews__text-area"
+				name="review"
+				id="review"
+				placeholder="Оставьте комментарий...."
+			></textarea>
+			<button onClick={handleSubmit} className="reviews__submit">
+				Оставить
+			</button>
+		</>
+	);
+};

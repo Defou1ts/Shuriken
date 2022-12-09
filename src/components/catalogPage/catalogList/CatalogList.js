@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCatalogAnimeByOptions } from '../../../slices/catalogSlice';
 import { LOADING } from '../../../utils/consts';
@@ -9,43 +9,33 @@ import CatalogListItem from '../catalogListItem/CatalogListItem';
 import './catalogList.scss';
 
 const CatalogList = () => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const [genres, setGenres] = useState([]);
-    const [type, setType] = useState('tv');
-    const [statuses, setStatuses] = useState(['ongoing']);
-    const [ageRating, setAgeRating] = useState(['']);
+	const catalogAnime = useSelector((state) => state.catalog.catalogAnime);
+	const catalogAnimeLoadingStatus = useSelector((state) => state.catalog.catalogAnimeLoadingStatus);
+	const options = useSelector((state) => state.catalog.options);
 
-    const catalogAnime = useSelector((state) => state.catalog.catalogAnime);
-    const catalogAnimeLoadingStatus = useSelector((state) => state.catalog.catalogAnimeLoadingStatus);
+	useEffect(() => {
+		const fetchOptions = {
+			...options,
+			genres: options.genres.join(','),
+			type: options.type.join(','),
+			status: options.status.join(','),
+			ageRating: options.ageRating.join(','),
+		};
+		dispatch(fetchCatalogAnimeByOptions(fetchOptions));
+	}, [dispatch, options]);
 
-    const options = useMemo(
-        () => ({
-            genres: genres.join(','),
-            type: 'tv',
-            voice: '610',
-            status: statuses.join(','),
-            ageRating: '',
-            sort: 'shikimori_rating',
-            limit: 10,
-        }),
-        [genres, type, statuses, ageRating]
-    );
+	const renderAnimes = (animes) => {
+		return animes.map((anime) => <CatalogListItem key={anime.id} {...anime} />);
+	};
 
-    useEffect(() => {
-        dispatch(fetchCatalogAnimeByOptions(options));
-    }, [dispatch, options]);
+	if (catalogAnimeLoadingStatus === LOADING) {
+		return <Spinner small />;
+	}
 
-    const renderAnimes = (animes) => {
-        return animes.map((anime) => <CatalogListItem key={anime.id} {...anime} />);
-    };
+	const renderedAnimes = renderAnimes(catalogAnime);
 
-    if (catalogAnimeLoadingStatus === LOADING) {
-        return <Spinner small />;
-    }
-
-    const renderedAnimes = renderAnimes(catalogAnime);
-
-    return <div className="catalog__list">{renderedAnimes}</div>;
+	return <div className="catalog__list">{renderedAnimes}</div>;
 };
 export default CatalogList;
