@@ -1,0 +1,97 @@
+@import '../../../../styles/theme.scss';
+
+.settings {
+	background: #292525;
+	border-radius: 10px;
+	width: 70%;
+	height: 70%;
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 40px;
+		border-bottom: 1px solid $red-color;
+	}
+
+	&__title {
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 40px;
+		color: #dedede;
+	}
+
+	&__close {
+		cursor: pointer;
+		position: relative;
+		width: 23px;
+		height: 23px;
+		&::before {
+			content: '';
+			position: absolute;
+			background: #dedede;
+			width: 32px;
+			height: 3px;
+			transform: rotate(45deg);
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			background: #dedede;
+			width: 32px;
+			height: 3px;
+			transform: rotate(-45deg);
+		}
+	}
+
+	&__content {
+		padding: 40px;
+	}
+
+	&__change-field {
+		font-weight: 400;
+		font-size: 28px;
+		line-height: 35px;
+		text-decoration-line: underline;
+		color: #dedede;
+	}
+
+	&__change-image-field {
+		font-weight: 400;
+		font-size: 24px;
+		line-height: 30px;
+		color: #dedede;
+		label {
+			position: relative;
+			cursor: pointer;
+			text-decoration-line: underline;
+		}
+	}
+
+	&__uploaded-image {
+		max-width: 230px;
+		max-height: 250px;
+		overflow: hidden;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__photo-input {
+		left: 0;
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+	}
+}

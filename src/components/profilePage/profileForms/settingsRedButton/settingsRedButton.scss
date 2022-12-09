@@ -1,0 +1,18 @@
+@import '../../../../styles/theme.scss';
+
+.settings__red-button {
+	padding: 10px;
+	background-color: $red-color;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 40px;
+	color: #dedede;
+	border-radius: 10px;
+	display: inline-block;
+	cursor: pointer;
+	transition: 0.2s ease;
+	&:hover {
+		transition: 0.2s ease;
+		background-color: #e43f3f;
+	}
+}
