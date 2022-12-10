@@ -14,6 +14,7 @@ const initialState = {
 	verifyToken: null,
 	verifyTokenSendLoadingStatus: 'idle',
 	verifyLoadingStatus: 'idle',
+	changePasswordLoadingStatus: 'idle',
 };
 
 const globalSlice = createSlice({
@@ -59,6 +60,9 @@ const globalSlice = createSlice({
 		setVerifyLoadingStatus: (state, action) => {
 			state.verifyLoadingStatus = action.payload;
 		},
+		setChangePasswordLoadingStatus: (state, action) => {
+			state.changePasswordLoadingStatus = action.payload;
+		},
 	},
 });
 
@@ -76,6 +80,7 @@ export const {
 	setVerifyToken,
 	setVerifyTokenSendLoadingStatus,
 	setVerifyLoadingStatus,
+	setChangePasswordLoadingStatus,
 } = globalSlice.actions;
 
 export default globalSlice.reducer;

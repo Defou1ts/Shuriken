@@ -10,26 +10,17 @@ import SettingsRedButton from '../settingsRedButton/SettingsRedButton';
 import './profileSettings.scss';
 import { Navigate } from 'react-router-dom';
 
-const PasswordInput = ({ label, ...props }) => {
-	const [field, meta] = useField(props);
-	return (
-		<>
-			<label htmlFor={props.name}>{label}</label>
-			<input {...props} {...field} />
-			{meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
-		</>
-	);
-};
-
 const ProfileSettings = () => {
 	const dispatch = useDispatch();
-	const { exit, uploadUserImage, getUser } = useUserService();
+	const { exit, uploadUserImage, getUser, validatePassword, changeUserPassword } = useUserService();
 
 	const [image, setImage] = useState(null);
 	const [src, setSrc] = useState(null);
 	const [oldPassword, setOldPassword] = useState('');
 	const [newPassword, setNewPassword] = useState('');
 	const [confirmNewPassword, setConfirmNewPassword] = useState('');
+	const [oldPasswordValidationMessage, setOldPasswordValidationMessage] = useState('');
+	const [validationMessage, setValidationMessage] = useState('');
 
 	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
 
@@ -55,12 +46,24 @@ const ProfileSettings = () => {
 			const formData = new FormData();
 			formData.append('file', image, image.name);
 			await uploadUserImage(formData);
-
-
-
-
 			dispatch(setShowProfileSettings(false));
-			<Navigate to="/" />;
+		}
+
+		if (oldPassword && newPassword && confirmNewPassword) {
+			const res = await validatePassword(oldPassword);
+			if (res.error) {
+				setOldPasswordValidationMessage(res.message);
+				return;
+			}
+			if (newPassword !== confirmNewPassword) {
+				setOldPasswordValidationMessage('');
+				setValidationMessage('Пароли должны совпадать');
+				return;
+			}
+			setOldPasswordValidationMessage('');
+			setValidationMessage('');
+			dispatch(setShowProfileSettings(false));
+			await changeUserPassword(newPassword);
 		}
 	};
 
@@ -93,6 +96,43 @@ const ProfileSettings = () => {
 						для загрузки новой фотографии
 					</p>
 					<p className="settings__change-field">Смена пароля</p>
+					<div className="settings__change-password-fields">
+						<label htmlFor="old-password-change" className="settings__change-label">
+							Старый пароль
+						</label>
+						<input
+							onChange={(e) => setOldPassword(e.target.value)}
+							value={oldPassword}
+							type="password"
+							id="old-password-change"
+							className="login__input"
+							placeholder="Старый пароль"
+						/>
+						<div className="login__error">{oldPasswordValidationMessage}</div>
+						<label htmlFor="new-password-change" className="settings__change-label">
+							Новый пароль
+						</label>
+						<input
+							onChange={(e) => setNewPassword(e.target.value)}
+							value={newPassword}
+							type="password"
+							id="new-password-change"
+							className="login__input"
+							placeholder="Новый пароль"
+						/>
+						<label htmlFor="new-password-repeat-change" className="settings__change-label">
+							Подтверждение пароля
+						</label>
+						<input
+							onChange={(e) => setConfirmNewPassword(e.target.value)}
+							value={confirmNewPassword}
+							type="password"
+							id="new-password-repeat-change"
+							className="login__input"
+							placeholder="Повторите свой пароль"
+						/>
+						<div className="login__error">{validationMessage}</div>
+					</div>
 				</div>
 				<div className="settings__btns">
 					<SettingsRedButton handleSave={handleSave}>Сохранить</SettingsRedButton>

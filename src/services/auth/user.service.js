@@ -15,6 +15,7 @@ import {
 	setVerifyTokenSendLoadingStatus,
 	setVerifyToken,
 	setVerifyLoadingStatus,
+	setChangePasswordLoadingStatus,
 } from '../../slices/globalSlice';
 import { setProfileMessange, setShowProfileMessange } from '../../slices/profileSlice';
 
@@ -189,7 +190,7 @@ export const useUserService = () => {
 			dispatch(setUser(data));
 			dispatch(setFileLoadingStatus(SUCCESS));
 			dispatch(setShowProfileMessange(true));
-			dispatch(setProfileMessange('Файл успешно загружен!'));
+			dispatch(setProfileMessange('Настройки успешно сохранены'));
 		}
 		setTimeout(() => {
 			dispatch(setFileLoadingStatus(IDLE));
@@ -247,6 +248,43 @@ export const useUserService = () => {
 		}, 3000);
 	};
 
+	const validatePassword = async (password) => {
+		const access_token = localStorage.getItem('access_token');
+		if (access_token) {
+			const res = await request(`${API_BASE}/auth/validatePassword/${password}`, 'POST', null, {
+				Authorization: `Bearer ${access_token}`,
+			});
+			return res;
+		}
+	};
+
+	const changeUserPassword = async (password) => {
+		dispatch(setChangePasswordLoadingStatus(LOADING));
+		const access_token = localStorage.getItem('access_token');
+		if (!access_token) {
+			dispatch(setChangePasswordLoadingStatus(ERROR));
+			return;
+		}
+		const res = await request(`${API_BASE}/auth/changePassword/${password}`, 'POST', null, {
+			Authorization: `Bearer ${access_token}`,
+		});
+		if (!res.username) {
+			dispatch(setChangePasswordLoadingStatus(ERROR));
+			return;
+		}
+		if (res.username) {
+			dispatch(setUser(res));
+			dispatch(setChangePasswordLoadingStatus(SUCCESS));
+			dispatch(setShowProfileMessange(true));
+			dispatch(setProfileMessange('Настройки успешно сохранены'));
+		}
+		setTimeout(() => {
+			dispatch(setChangePasswordLoadingStatus(IDLE));
+			dispatch(setShowProfileMessange(false));
+			dispatch(setProfileMessange(''));
+		}, 3000);
+	};
+
 	return {
 		login,
 		getUser,
@@ -259,6 +297,8 @@ export const useUserService = () => {
 		disLikeReview,
 		sendVerifyEmailToken,
 		verifyUserEmail,
+		validatePassword,
+		changeUserPassword,
 		// findReviewsByAnime,
 	};
 };

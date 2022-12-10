@@ -101,6 +101,22 @@
 		z-index: 2;
 	}
 
+	&__change-label {
+		margin: 50px 0px 0px 0px;
+		&:first-child {
+			margin: 0px;
+		}
+		display: block;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 25px;
+		color: #ffffff;
+	}
+
+	&__change-password-fields {
+		margin: 25px 0px 0px 0px;
+	}
+
 	&__btns {
 		display: flex;
 		align-items: center;
