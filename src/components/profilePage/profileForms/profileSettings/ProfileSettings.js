@@ -1,18 +1,15 @@
 import { useState } from 'react';
-import { useField } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowProfileSettings } from '../../../../slices/profileSlice';
 import { useUserService } from '../../../../services/auth/user.service';
-import { setUser } from '../../../../slices/globalSlice';
 
 import SettingsRedButton from '../settingsRedButton/SettingsRedButton';
 
 import './profileSettings.scss';
-import { Navigate } from 'react-router-dom';
 
 const ProfileSettings = () => {
 	const dispatch = useDispatch();
-	const { exit, uploadUserImage, getUser, validatePassword, changeUserPassword } = useUserService();
+	const { exit, uploadUserImage, validatePassword, changeUserPassword } = useUserService();
 
 	const [image, setImage] = useState(null);
 	const [src, setSrc] = useState(null);
@@ -23,8 +20,6 @@ const ProfileSettings = () => {
 	const [validationMessage, setValidationMessage] = useState('');
 
 	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
-
-	const fileLoadingStatus = useSelector((state) => state.global.fileLoadingStatus);
 
 	if (image) {
 		const fr = new FileReader();

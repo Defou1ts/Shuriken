@@ -8,7 +8,10 @@
     }
 
     &__image {
+		flex: 0 0 90px;
         img {
+			height: 100%;
+			width: 100%;
             max-width: 90px;
             max-height: 90px;
             border-radius: 50%;
@@ -98,12 +101,16 @@
             max-width: 100%;
         }
 
-        &__image {
-            img {
-                max-width: 60px;
-                max-height: 60px;
-            }
+    &__image {
+		flex: 0 0 60px;
+        img {
+			height: 100%;
+			width: 100%;
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 50%;
         }
+    }
 
         &__username {
             font-size: 15px;

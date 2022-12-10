@@ -10,7 +10,7 @@ const AnimeReviewItem = (review) => {
 	const { logDate } = useLog();
 	const { likeReview, disLikeReview } = useUserService();
 
-	const { username, image } = review.from;
+	const { username, image } = review.from[0];
 	const { description, likes, dislikes, _id, createdAt } = review;
 
 	const timeRenderOptions = {
