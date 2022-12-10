@@ -32,6 +32,8 @@ const initialState = {
 	],
 	activeNotesFilter: 'all',
 	showProfileSettings: false,
+	showProfileMessange: false,
+	profileMessage: '',
 };
 
 const profileSlice = createSlice({
@@ -47,9 +49,21 @@ const profileSlice = createSlice({
 		setShowProfileSettings: (state, action) => {
 			state.showProfileSettings = action.payload;
 		},
+		setShowProfileMessange: (state, action) => {
+			state.showProfileMessange = action.payload;
+		},
+		setProfileMessange: (state, action) => {
+			state.profileMessage = action.payload;
+		},
 	},
 });
 
-export const { setSelectedOption, setActiveNotesFilter, setShowProfileSettings } = profileSlice.actions;
+export const {
+	setSelectedOption,
+	setActiveNotesFilter,
+	setShowProfileSettings,
+	setShowProfileMessange,
+	setProfileMessange,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;

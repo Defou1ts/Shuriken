@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useField } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { setShowProfileSettings } from '../../../../slices/profileSlice';
+import { useUserService } from '../../../../services/auth/user.service';
+import { setUser } from '../../../../slices/globalSlice';
 
 import SettingsRedButton from '../settingsRedButton/SettingsRedButton';
 
 import './profileSettings.scss';
+import { Navigate } from 'react-router-dom';
 
 const PasswordInput = ({ label, ...props }) => {
 	const [field, meta] = useField(props);
@@ -19,8 +22,18 @@ const PasswordInput = ({ label, ...props }) => {
 };
 
 const ProfileSettings = () => {
+	const dispatch = useDispatch();
+	const { exit, uploadUserImage, getUser } = useUserService();
+
 	const [image, setImage] = useState(null);
 	const [src, setSrc] = useState(null);
+	const [oldPassword, setOldPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
+
+	const fileLoadingStatus = useSelector((state) => state.global.fileLoadingStatus);
 
 	if (image) {
 		const fr = new FileReader();
@@ -30,19 +43,26 @@ const ProfileSettings = () => {
 		};
 
 		fr.readAsDataURL(image);
-
-		// const formData = new FormData();
-		// formData.append('file', image);
-		// console.log(formData);
 	}
 
-	const dispatch = useDispatch();
+	const handleExit = () => {
+		dispatch(setShowProfileSettings(false));
+		exit();
+	};
 
-	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
+	const handleSave = async () => {
+		if (image) {
+			const formData = new FormData();
+			formData.append('file', image, image.name);
+			await uploadUserImage(formData);
 
-	const [oldPassword, setOldPassword] = useState('');
-	const [newPassword, setNewPassword] = useState('');
-	const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+
+
+			dispatch(setShowProfileSettings(false));
+			<Navigate to="/" />;
+		}
+	};
 
 	return (
 		<>
@@ -62,20 +82,23 @@ const ProfileSettings = () => {
 					<div className="settings__uploaded-image">{src && <img src={src} alt="change profile" />}</div>
 					<p className="settings__change-image-field">
 						<label htmlFor="settings__input">
-							Нажмите сюда{' '}
+							Нажмите сюда
 							<input
 								type="file"
 								id="settings__input"
 								className="settings__photo-input"
 								onChange={(e) => setImage(e.target.files[0])}
 							/>
-						</label>
+						</label>{' '}
 						для загрузки новой фотографии
 					</p>
 					<p className="settings__change-field">Смена пароля</p>
-					<div className="settings__btns">
-						<SettingsRedButton>Сохранить</SettingsRedButton>
-					</div>
+				</div>
+				<div className="settings__btns">
+					<SettingsRedButton handleSave={handleSave}>Сохранить</SettingsRedButton>
+					<button onClick={handleExit} className="settings__quit">
+						Выход
+					</button>
 				</div>
 			</div>
 		</>

@@ -2,34 +2,49 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setShowProfileSettings } from '../../../slices/profileSlice';
 import { createPortal } from 'react-dom';
 import { useLog } from '../../../services/logService/log.service';
+import { API_IMAGES, LOADING } from '../../../utils/consts';
 
 import './profileHeader.scss';
 
+import ProfileMessage from '../profileForms/profileMessage/ProfileMessage';
 import ProfileSettings from '../profileForms/profileSettings/ProfileSettings';
 import Spinner from '../../common/spinner/Spinner';
 
 import settingsIcon from '../../../assets/settings.svg';
-import userIcon from '../../../assets/blankpic.svg';
 
 const ProfileHeader = () => {
 	const dispatch = useDispatch();
 	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
-	const { username, email, isVerifiedEmail, createdAt } = useSelector((state) => state.global.user);
+	const showProfileMessange = useSelector((state) => state.profile.showProfileMessange);
+	const profileMessage = useSelector((state) => state.profile.profileMessage);
+	const fileLoadingStatus = useSelector((state) => state.global.fileLoadingStatus);
+	const { username, email, isVerifiedEmail, createdAt, image } = useSelector((state) => state.global.user);
+
+	console.log(fileLoadingStatus);
 
 	const { logRegisterTime } = useLog();
 
 	if (!username) return <Spinner />;
 
 	const { days } = logRegisterTime(new Date(createdAt));
+
+	const imageContent =
+		fileLoadingStatus === LOADING ? (
+			<Spinner small />
+		) : (
+			<img src={`${API_IMAGES}/${image}?` + Date.now()} alt="profile" />
+		);
+
 	return (
 		<>
 			{showProfileSettings ? createPortal(<ProfileSettings />, document.getElementById('root')) : null}
+			{showProfileMessange
+				? createPortal(<ProfileMessage>{profileMessage}</ProfileMessage>, document.getElementById('root'))
+				: null}
 
 			<div className="profile__header">
 				<div className="profile__row">
-					<div className="profile__icon">
-						<img src={userIcon} alt="profile" />
-					</div>
+					<div className="profile__icon">{imageContent}</div>
 					<div className="profile__info">
 						<h2 className="profile__username">{username}</h2>
 						<p className="profile__exist-time">На сайте {days} дней</p>

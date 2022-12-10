@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
 import { ERROR, IDLE, LOADING, SUCCESS, API_BASE } from '../../utils/consts';
+import axios from 'axios';
 import {
 	setAuthLoadingStatus,
 	setShowLoginForm,
@@ -15,6 +16,7 @@ import {
 	setVerifyToken,
 	setVerifyLoadingStatus,
 } from '../../slices/globalSlice';
+import { setProfileMessange, setShowProfileMessange } from '../../slices/profileSlice';
 
 export const useUserService = () => {
 	const { request } = useHttp();
@@ -176,28 +178,24 @@ export const useUserService = () => {
 			dispatch(setFileLoadingStatus(ERROR));
 			return;
 		}
-		const res = await request(
-			`${API_BASE}/files/uploadUserImage`,
-			'POST',
-			{
-				body: multipartFormFile,
-			},
-			{
-				Authorization: `Bearer ${access_token}`,
-				'Content-Type': 'multipart/form-data',
-			}
-		);
-		if (res.error) {
+		const { data } = await axios.post(`${API_BASE}/files/uploadUserImage`, multipartFormFile, {
+			headers: { Authorization: `Bearer ${access_token}` },
+		});
+		if (!data) {
 			dispatch(setFileLoadingStatus(ERROR));
 			return;
 		}
-		if (res.username) {
-			dispatch(setUser(res));
+		if (data) {
+			dispatch(setUser(data));
 			dispatch(setFileLoadingStatus(SUCCESS));
+			dispatch(setShowProfileMessange(true));
+			dispatch(setProfileMessange('Файл успешно загружен!'));
 		}
 		setTimeout(() => {
 			dispatch(setFileLoadingStatus(IDLE));
-		}, 1000);
+			dispatch(setShowProfileMessange(false));
+			dispatch(setProfileMessange(''));
+		}, 3000);
 	};
 
 	const sendVerifyEmailToken = async () => {
@@ -237,12 +235,16 @@ export const useUserService = () => {
 		}
 		if (res.username) {
 			dispatch(setUser(res));
+			dispatch(setShowProfileMessange(true));
+			dispatch(setProfileMessange('Ваша почта успешно подтверждена!'));
 		}
 		dispatch(setVerifyLoadingStatus(SUCCESS));
 		dispatch(setVerifyToken(null));
 		setTimeout(() => {
 			dispatch(setVerifyLoadingStatus(IDLE));
-		}, 2000);
+			dispatch(setShowProfileMessange(false));
+			dispatch(setProfileMessange(''));
+		}, 3000);
 	};
 
 	return {
