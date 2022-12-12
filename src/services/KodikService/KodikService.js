@@ -29,7 +29,7 @@ const useKodikService = () => {
 
 	const getGenres = async () => {
 		const res = await request(
-			`${_apiBase}genres?token=${_apiToken}&genres_type=all&types=anime-serial&translation_id=610&sort=count&all_status`
+			`${_apiBase}genres?token=${_apiToken}&genres_type=shikimori&types=anime-serial,anime&translation_id=610&sort=count&all_status`
 		);
 		return await res.results;
 	};
@@ -42,8 +42,9 @@ const useKodikService = () => {
 	};
 
 	const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating, sort, limit }) => {
+		console.log(type);
 		const res = await request(
-			`${_apiBase}list?token=${_apiToken}&sort=${sort}&camrip=false&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&genres=${genres}&anime_kind=${type}&translation_id=${
+			`${_apiBase}list?token=${_apiToken}&sort=${sort}&camrip=false&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&all_genres=${genres}&anime_kind=${type}&translation_id=${
 				voice.length > 0 ? voice : 610
 			}&anime_status=${status}&mpaa_rating=${ageRating}`
 		);

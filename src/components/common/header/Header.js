@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useLocation } from 'react-router-dom';
 import { setIsMobile, setIsActiveBurger, setShowLoginForm } from '../../../slices/globalSlice';
 
-import { PROFILE_ROUTE, FAVOURITES_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE } from '../../../utils/consts';
+import { PROFILE_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE } from '../../../utils/consts';
 
 import './header.scss';
 import logo from '../../../assets/logo.svg';
-import favourites from '../../../assets/myfavorites.svg';
 import profile from '../../../assets/profile.svg';
 
 import SearchInput from '../searchInput/SearchInput';
@@ -43,9 +42,6 @@ const Header = () => {
 
 	const headerItems = user ? (
 		<>
-			<Link className="header__link" to={FAVOURITES_ROUTE}>
-				<img src={favourites} alt="favourites icon" />
-			</Link>
 			<Link to={PROFILE_ROUTE} className="header__link">
 				<img src={profile} alt="profile icon" />
 			</Link>

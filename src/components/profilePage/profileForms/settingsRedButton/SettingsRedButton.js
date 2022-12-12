@@ -1,8 +1,8 @@
 import './settingsRedButton.scss';
 
-const SettingsRedButton = ({ children, handleSave }) => {
+const SettingsRedButton = ({ children, onClick }) => {
 	return (
-		<button onClick={handleSave} className="settings__red-button">
+		<button onClick={onClick} className="settings__red-button">
 			{children}
 		</button>
 	);

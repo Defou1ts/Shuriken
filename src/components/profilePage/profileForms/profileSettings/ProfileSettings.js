@@ -130,7 +130,7 @@ const ProfileSettings = () => {
 					</div>
 				</div>
 				<div className="settings__btns">
-					<SettingsRedButton handleSave={handleSave}>Сохранить</SettingsRedButton>
+					<SettingsRedButton onClick={handleSave}>Сохранить</SettingsRedButton>
 					<button onClick={handleExit} className="settings__quit">
 						Выход
 					</button>

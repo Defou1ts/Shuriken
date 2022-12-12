@@ -1,0 +1,55 @@
+@import '../../../../styles/theme.scss';
+
+.verify-email {
+	background: #292525;
+	border-radius: 10px;
+	padding: 42px 35px;
+	background: #292525;
+	width: 40%;
+	height: auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	&__message {
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 40px;
+		color: #ffffff;
+	}
+
+	&__input {
+		margin: 75px 0px 0px 0px;
+		background: #5a5a5a;
+		border: 1px solid #5a5a5a;
+		border-radius: 10px;
+		padding: 10px;
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 40px;
+		color: #ffffff;
+	}
+
+	&__btns {
+		margin: 75px 0px 0px 0px;
+		display: flex;
+		gap: 0px 60px;
+	}
+
+	&__verify-repeat {
+		font-weight: 400;
+		font-size: 32px;
+		line-height: 40px;
+		color: #ffffff;
+		background-color: transparent;
+		padding: 10px;
+		transition: 0.2s ease;
+
+		&:hover {
+			transition: 0.2s ease;
+			background: $red-color;
+			border-radius: 10px;
+		}
+	}
+}

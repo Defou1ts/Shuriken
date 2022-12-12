@@ -4,20 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setShowLoginForm, setIsActiveBurger } from '../../../slices/globalSlice';
 import { useUserService } from '../../../services/auth/user.service';
 
-import {
-	PROFILE_ROUTE,
-	LOGIN_ROUTE,
-	FAVOURITES_ROUTE,
-	FAQ_ROUTE,
-	CATALOG_ROUTE,
-	API_IMAGES,
-} from '../../../utils/consts';
+import { PROFILE_ROUTE, LOGIN_ROUTE, CATALOG_ROUTE, API_IMAGES } from '../../../utils/consts';
 
 import notificationsIcon from '../../../assets/notifications.svg';
 import profileIcon from '../../../assets/profileIcon.svg';
 import catalogIcon from '../../../assets/catalogIcon.svg';
-import faqIcon from '../../../assets/faqIcon.svg';
-import favIcon from '../../../assets/favIcon.svg';
 import quitIcon from '../../../assets/quit.svg';
 
 import './mobileMenu.scss';
@@ -76,12 +67,6 @@ const MobileMenu = () => {
 								</div>
 								Мой профиль
 							</Link>
-							<Link to={FAVOURITES_ROUTE} className="mobile-menu__link">
-								<div className="mobile-menu__image">
-									<img src={favIcon} alt="Favourite" />
-								</div>
-								Мои закладки
-							</Link>
 						</>
 					) : null}
 					<Link to={CATALOG_ROUTE} className="mobile-menu__link">
@@ -89,12 +74,6 @@ const MobileMenu = () => {
 							<img src={catalogIcon} alt="Catalog" />
 						</div>
 						Каталог
-					</Link>
-					<Link to={FAQ_ROUTE} className="mobile-menu__link">
-						<div className="mobile-menu__image">
-							<img src={faqIcon} alt="FAQ" />
-						</div>
-						FAQ
 					</Link>
 				</div>
 				{user ? (

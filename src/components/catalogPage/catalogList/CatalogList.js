@@ -18,7 +18,6 @@ const CatalogList = () => {
 	useEffect(() => {
 		const fetchOptions = {
 			...options,
-			genres: options.genres.join(','),
 			type: options.type.join(','),
 			status: options.status.join(','),
 			ageRating: options.ageRating.join(','),

@@ -2,8 +2,6 @@ import {
 	HOMEPAGE_ROUTE,
 	CATALOG_ROUTE,
 	PROFILE_ROUTE,
-	FAVOURITES_ROUTE,
-	FAQ_ROUTE,
 	ANIME_ROUTE,
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
@@ -27,10 +25,7 @@ export const generalRoutes = [
 		path: CATALOG_ROUTE,
 		Component: <CatalogPage />,
 	},
-	{
-		path: FAQ_ROUTE,
-		Component: <p>FAQ</p>,
-	},
+
 	{
 		path: ANIME_ROUTE,
 		Component: <AnimePage />,
@@ -53,10 +48,6 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
-	{
-		path: FAVOURITES_ROUTE,
-		Component: <p>Favourite</p>,
-	},
 	{
 		path: PROFILE_ROUTE,
 		Component: <ProfilePage />,

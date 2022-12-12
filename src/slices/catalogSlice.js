@@ -6,14 +6,51 @@ const initialState = {
 	catalogAnime: [],
 	catalogAnimeLoadingStatus: 'idle',
 	options: {
-		genres: [],
+		genres: '',
 		type: ['tv'],
 		voice: '610',
-		status: ['ongoing'],
+		status: [],
 		ageRating: [],
 		sort: 'shikimori_rating',
 		limit: 10,
 	},
+	ageRatings: ['G', 'PG', 'PG-13', 'NC-17', 'R'],
+	types: [
+		{
+			name: 'ТВ-сериал',
+			type: 'tv',
+		},
+		{
+			name: 'OVA',
+			type: 'ova',
+		},
+		{
+			name: 'Фильм',
+			type: 'movie',
+		},
+		{
+			name: 'Спешл',
+			type: 'special',
+		},
+	],
+	sortsTypes: [
+		{
+			label: 'По дате обновления',
+			value: 'updated_at',
+		},
+		{
+			label: 'Год выпуска',
+			value: 'year',
+		},
+		{
+			label: 'По дате выпуска',
+			value: 'created_at',
+		},
+		{
+			label: 'По рейтингу',
+			value: 'shikimori_rating',
+		},
+	],
 };
 
 export const fetchCatalogAnimeByOptions = createAsyncThunk('catalog/fetchCatalogAnimeByOptions', (options) => {
@@ -25,11 +62,8 @@ const catalogSlice = createSlice({
 	name: 'catalog',
 	initialState,
 	reducers: {
-		addGenre: (state, action) => {
-			state.options.genres.push(action.payload);
-		},
-		removeGenre: (state, action) => {
-			state.options.genres = state.options.genres.filter((item) => item !== action.payload);
+		setGenres: (state, action) => {
+			state.options.genres = action.payload;
 		},
 		addType: (state, action) => {
 			state.options.type.push(action.payload);
@@ -42,6 +76,10 @@ const catalogSlice = createSlice({
 		},
 		removeAgeRating: (state, action) => {
 			state.options.ageRating = state.options.ageRating.filter((item) => item !== action.payload);
+		},
+		setSort: (state, action) => {
+			console.log(action.payload);
+			state.options.sort = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -60,6 +98,6 @@ const catalogSlice = createSlice({
 	},
 });
 
-export const { addGenre, removeGenre, addType, removeType, addAgeRating, removeAgeRating } = catalogSlice.actions;
+export const { setGenres, addType, removeType, addAgeRating, removeAgeRating, setSort } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

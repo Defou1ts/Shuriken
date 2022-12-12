@@ -21,8 +21,8 @@ const Spinner = ({ small = false }) => {
 				style={
 					small
 						? {
-								width: '40px',
-								height: '40px',
+								width: '90px',
+								height: '90px',
 								margin: isMobile ? '0px 0px 0px 0px' : '15px auto 15px auto',
 						  }
 						: null

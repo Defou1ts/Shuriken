@@ -34,6 +34,7 @@ const initialState = {
 	showProfileSettings: false,
 	showProfileMessange: false,
 	profileMessage: '',
+	showVerifyEmail: false,
 };
 
 const profileSlice = createSlice({
@@ -55,6 +56,9 @@ const profileSlice = createSlice({
 		setProfileMessange: (state, action) => {
 			state.profileMessage = action.payload;
 		},
+		setShowVerifyEmail: (state, action) => {
+			state.showVerifyEmail = action.payload;
+		},
 	},
 });
 
@@ -64,6 +68,7 @@ export const {
 	setShowProfileSettings,
 	setShowProfileMessange,
 	setProfileMessange,
+	setShowVerifyEmail,
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

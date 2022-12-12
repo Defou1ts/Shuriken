@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS } from '../../../../utils/consts';
+import { LOADING } from '../../../../utils/consts';
 import './profileMessage.scss';
 
 import Spinner from '../../../common/spinner/Spinner';

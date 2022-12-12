@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setShowProfileSettings } from '../../../slices/profileSlice';
+import { setShowProfileSettings, setShowVerifyEmail } from '../../../slices/profileSlice';
 import { createPortal } from 'react-dom';
 import { useLog } from '../../../services/logService/log.service';
 import { API_IMAGES, LOADING } from '../../../utils/consts';
@@ -8,6 +8,7 @@ import './profileHeader.scss';
 
 import ProfileMessage from '../profileForms/profileMessage/ProfileMessage';
 import ProfileSettings from '../profileForms/profileSettings/ProfileSettings';
+import ProfileVerifyEmail from '../profileForms/profileVerifyEmail/ProfileVerifyEmail';
 import Spinner from '../../common/spinner/Spinner';
 
 import settingsIcon from '../../../assets/settings.svg';
@@ -16,6 +17,7 @@ const ProfileHeader = () => {
 	const dispatch = useDispatch();
 	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
 	const showProfileMessange = useSelector((state) => state.profile.showProfileMessange);
+	const showVerifyEmail = useSelector((state) => state.profile.showVerifyEmail);
 	const profileMessage = useSelector((state) => state.profile.profileMessage);
 	const fileLoadingStatus = useSelector((state) => state.global.fileLoadingStatus);
 	const { username, email, isVerifiedEmail, createdAt, image } = useSelector((state) => state.global.user);
@@ -41,6 +43,9 @@ const ProfileHeader = () => {
 			{showProfileMessange
 				? createPortal(<ProfileMessage>{profileMessage}</ProfileMessage>, document.getElementById('root'))
 				: null}
+			{showVerifyEmail
+				? createPortal(<ProfileVerifyEmail email={email} />, document.getElementById('root'))
+				: null}
 
 			<div className="profile__header">
 				<div className="profile__row">
@@ -51,8 +56,13 @@ const ProfileHeader = () => {
 						<p className="profile__email">{email}</p>
 						{isVerifiedEmail ? null : (
 							<div className="profile__email-verify">
-								<span className="profile__email-verify-btn">Подтвердите</span> свою почту для
-								безопастности аккаунта
+								<span
+									onClick={() => dispatch(setShowVerifyEmail(true))}
+									className="profile__email-verify-btn"
+								>
+									Подтвердите
+								</span>{' '}
+								свою почту для безопастности аккаунта
 							</div>
 						)}
 					</div>
