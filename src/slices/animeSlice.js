@@ -29,8 +29,9 @@ export const fetchAnime = createAsyncThunk('anime/fetchAnime', (options) => {
 export const fetchSimilarAnime = createAsyncThunk(
     'anime/fetchSimilarAnime',
     (title) => {
-        const { searchAnimeByTitle } = useKodikService();
-        return searchAnimeByTitle(title);
+		const { searchAnimeByTitle } = useKodikService();
+		const mutatedTitle = title.slice(0, title.indexOf(' '));
+        return searchAnimeByTitle(mutatedTitle);
     }
 );
 

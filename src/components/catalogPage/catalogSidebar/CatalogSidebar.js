@@ -1,4 +1,11 @@
-import { setGenres, addType, removeType, addAgeRating, removeAgeRating } from '../../../slices/catalogSlice';
+import {
+	setGenres,
+	addType,
+	removeType,
+	addAgeRating,
+	removeAgeRating,
+	setIsActiveFiltersMenu,
+} from '../../../slices/catalogSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { LOADING } from '../../../utils/consts';
 import { fetchGenres } from '../../../slices/genresSlice';
@@ -20,6 +27,8 @@ const CatalogSidebar = () => {
 	const ageRating = useSelector((state) => state.catalog.options.ageRating);
 	const typesTypes = useSelector((state) => state.catalog.types);
 	const types = useSelector((state) => state.catalog.options.type);
+	const isActiveFiltersMenu = useSelector((state) => state.catalog.isActiveFiltersMenu);
+	const isMobile = useSelector((state) => state.global.isMobile);
 
 	useEffect(() => {
 		dispatch(fetchGenres());
@@ -97,15 +106,25 @@ const CatalogSidebar = () => {
 	const renderedGenres = renderGenres(genres);
 	const renderedRatings = renderRatings(ageRatingsTypes);
 	const renderedTypes = renderTypes(typesTypes);
+	const activeClass = isActiveFiltersMenu ? 'active' : '';
 
 	if (genresLoadingStatus === LOADING) {
 		return <Spinner small />;
 	}
 
 	return (
-		<div className="catalog__sidebar">
+		<div className={`catalog__sidebar ${activeClass}`}>
+			{isMobile ? (
+				<div className="catalog__sidebar-mobile-header">
+					<h3 className="catalog__sidebar-mobile-title">Фильтры</h3>
+					<div
+						onClick={() => dispatch(setIsActiveFiltersMenu(false))}	
+						className="catalog__sidebar-mobile-close"
+					></div>
+				</div>
+			) : null}
 			<h3 className="catalog__sidebar-subtitle">Жанры</h3>
-			<MultiSelect onChange={onChangeGenre} options={renderedGenres} />
+			<MultiSelect onChange={onChangeGenre} options={renderedGenres} placeholder={'Выберите жанр'} />
 			<h3 className="catalog__sidebar-subtitle">Возрастной рейтинг</h3>
 			<div className="catalog__sidebar-age-list">{renderedRatings}</div>
 			<h3 className="catalog__sidebar-subtitle">Тип</h3>

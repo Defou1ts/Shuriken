@@ -5,6 +5,9 @@ import { ERROR, IDLE, LOADING } from '../utils/consts';
 const initialState = {
 	catalogAnime: [],
 	catalogAnimeLoadingStatus: 'idle',
+	isActiveFiltersMenu: false,
+	isActiveSortMenu: false,
+	search: '',
 	options: {
 		genres: '',
 		type: ['tv'],
@@ -58,10 +61,24 @@ export const fetchCatalogAnimeByOptions = createAsyncThunk('catalog/fetchCatalog
 	return getNewAnimeByOptions(options);
 });
 
+export const fetchSearchAnimeByTitle = createAsyncThunk('anime/fetchSearchAnimeByTitle', (title) => {
+	const { searchAnimeByTitle } = useKodikService();
+	return searchAnimeByTitle(title);
+});
+
 const catalogSlice = createSlice({
 	name: 'catalog',
 	initialState,
 	reducers: {
+		setIsActiveFiltersMenu: (state, action) => {
+			state.isActiveFiltersMenu = action.payload;
+		},
+		setIsActiveSortMenu: (state, action) => {
+			state.isActiveSortMenu = action.payload;
+		},
+		setSearch: (state, action) => {
+			state.search = action.payload;
+		},
 		setGenres: (state, action) => {
 			state.options.genres = action.payload;
 		},
@@ -93,11 +110,31 @@ const catalogSlice = createSlice({
 		builder.addCase(fetchCatalogAnimeByOptions.rejected, (state) => {
 			state.catalogAnimeLoadingStatus = ERROR;
 		});
+		builder.addCase(fetchSearchAnimeByTitle.pending, (state) => {
+			state.catalogAnimeLoadingStatus = LOADING;
+		});
+		builder.addCase(fetchSearchAnimeByTitle.fulfilled, (state, action) => {
+			state.catalogAnimeLoadingStatus = IDLE;
+			state.catalogAnime = action.payload;
+		});
+		builder.addCase(fetchSearchAnimeByTitle.rejected, (state) => {
+			state.catalogAnimeLoadingStatus = ERROR;
+		});
 
 		builder.addDefaultCase(() => {});
 	},
 });
 
-export const { setGenres, addType, removeType, addAgeRating, removeAgeRating, setSort } = catalogSlice.actions;
+export const {
+	setGenres,
+	addType,
+	removeType,
+	addAgeRating,
+	removeAgeRating,
+	setSort,
+	setSearch,
+	setIsActiveFiltersMenu,
+	setIsActiveSortMenu,
+} = catalogSlice.actions;
 
 export default catalogSlice.reducer;

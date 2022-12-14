@@ -37,6 +37,96 @@
 		flex-direction: column;
 		gap: 10px 0px;
 	}
+
+	&-mobile {
+		position: fixed;
+		width: 100%;
+		height: 225px;
+		left: 0;
+		bottom: -100%;
+		transition: 0.2s ease;
+		padding: 15px;
+		background: #292525;
+		z-index: 1;
+		border-radius: 10px 10px 0px 0px;
+		&.active {
+			transition: 0.2s ease;
+			bottom: 0;
+		}
+	}
+
+	&-mobile-header {
+		padding: 15px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #5a5a5a;
+		margin: -15px -15px 0px -15px;
+	}
+
+	&-mobile-title {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 20px;
+		color: #dedede;
+	}
+
+	&-mobile-close {
+		position: relative;
+		width: 18px;
+		height: 18px;
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 7px;
+			width: 100%;
+			height: 2px;
+			transform: rotate(45deg);
+			background: #dedede;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 7px;
+			width: 100%;
+			height: 2px;
+			transform: rotate(-45deg);
+			background: #dedede;
+		}
+	}
+
+	&-mobile-list {
+		margin: 20px 0px 0px 0px;
+		display: flex;
+		flex-direction: column;
+		gap: 15px 0px;
+	}
+
+	&-mobile-item {
+		left: 20px;
+		position: relative;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 18px;
+		color: #dedede;
+		&::after {
+			content: '';
+			position: absolute;
+			left: -25px;
+			top: 0px;
+			min-width: 15px;
+			min-height: 15px;
+			background: rgba(217, 217, 217, 0.1);
+			border-radius: 50%;
+		}
+		&.active {
+			&::after {
+				background: $red-color;
+			}
+		}
+	}
 }
 
 .Dropdown-option {
@@ -53,4 +143,30 @@
 .Dropdown-arrow-wrapper {
 	display: flex;
 	align-items: center;
+}
+
+@media (max-width: 1440px) {
+	.catalog__sort {
+		&-control {
+			gap: 0px 10px;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 25px;
+			color: #ffffff;
+		}
+	}
+
+	.Dropdown-option {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 25px;
+		color: #dbdbdb;
+		cursor: pointer;
+		&:hover {
+			color: #ffffff;
+		}
+	}
+}
+
+@media (max-width: 768px) {
 }

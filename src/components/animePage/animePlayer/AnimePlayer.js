@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { setSelectedTranslation } from '../../../slices/animeSlice';
 
@@ -14,7 +13,6 @@ const AnimePlayer = () => {
 	const title = useSelector((state) => state.anime.currentAnime.title);
 	const selectedTranslation = useSelector((state) => state.anime.selectedTranslation);
 	const animeLoadingStatus = useSelector((state) => state.anime.animeLoadingStatus);
-	const [selectedSettings, setSelectedSettings] = useState('Озвучка');
 	const translationsList = useSelector((state) => state.anime.voiceTranslations);
 
 	const selectTranslation = (e) => {
@@ -56,22 +54,8 @@ const AnimePlayer = () => {
 				<div className="player__settings">
 					<div className="player__header">
 						<div className="player__body">
-							<div className={`player__translation ${selectedSettings === 'Озвучка' ? 'active' : ''}`}>
-								<div
-									onClick={(e) => setSelectedSettings(e.target.textContent)}
-									className="player__header-title"
-								>
-									Озвучка
-								</div>
-								<ul className="player__translations-list">{renderedTranslations}</ul>
-							</div>
-							<div className={`player__player ${selectedSettings === 'Плеер' ? 'active' : ''}`}>
-								<div
-									onClick={(e) => setSelectedSettings(e.target.textContent)}
-									className="player__header-title"
-								>
-									Плеер
-								</div>
+							<div className="player__translation active">
+								<div className="player__header-title">Озвучка</div>
 								<ul className="player__translations-list">{renderedTranslations}</ul>
 							</div>
 						</div>

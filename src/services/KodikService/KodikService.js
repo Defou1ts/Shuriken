@@ -48,7 +48,7 @@ const useKodikService = () => {
 				voice.length > 0 ? voice : 610
 			}&anime_status=${status}&mpaa_rating=${ageRating}`
 		);
-		return await res.results.map(_transformNewAnimes);
+		return await res.results.map(_transformAnime);
 	};
 
 	const getVoiceTranslations = async () => {
@@ -76,9 +76,8 @@ const useKodikService = () => {
 	};
 
 	const searchAnimeByTitle = async (title) => {
-		const mutatedTitle = title.slice(0, title.indexOf(' '));
 		const res = await request(
-			`${_apiBase}search?token=${_apiToken}&title=${mutatedTitle}&with_material_data=true&translation_id=610`
+			`${_apiBase}search?token=${_apiToken}&title=${title}&with_material_data=true&translation_id=610`
 		);
 		return await res.results.map(_transformAnime);
 	};

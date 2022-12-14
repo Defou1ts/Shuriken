@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 
 import './catalogListItem.scss';
 
-const CatalogListItem = ({ title, poster, id, year, kind }) => {
+import catalogStar from '../../../assets/catalogstar.svg';
+
+const CatalogListItem = ({ title, poster, id, year, kind, description, rating, titleEn, episodesTotal }) => {
 	const notes = useSelector((state) => state.global.user?.notes);
 	const notesTypes = useSelector((state) => state.profile.notesTypes);
+	const isMobile = useSelector((state) => state.global.isMobile);
 
 	const renderNote = () => {
 		if (!notes) {
@@ -39,10 +42,28 @@ const CatalogListItem = ({ title, poster, id, year, kind }) => {
 				<img src={poster} alt={title} />
 				{renderedNote}
 			</div>
-			<div className="catalog__item-title">{title}</div>
-			<div className="catalog__item-info">
-				{renderedKind}, {year}
-			</div>
+			{!isMobile && (
+				<>
+					<div className="catalog__item-title">{title}</div>
+					<div className="catalog__item-info">
+						{renderedKind}, {year}
+					</div>
+				</>
+			)}
+			{isMobile && (
+				<div className="catalog__item-content">
+					<div className="catalog__item-title">{title}</div>
+					<div className="catalog__item-titleEn">{titleEn}</div>
+					<div className="catalog__item-info">
+						<span>{episodesTotal} эп.</span>
+						<span>{year}</span>
+						<span>
+							{rating} <img src={catalogStar} alt="Рейтинг" />
+						</span>
+					</div>
+					<div className="catalog__item-descr">{description}</div>
+				</div>
+			)}
 		</Link>
 	);
 };
