@@ -120,6 +120,8 @@ const useKodikService = () => {
 			title: item.material_data.title,
 			poster: item.material_data.screenshots[1],
 			id: item.shikimori_id,
+			kind: item.material_data.anime_kind,
+			year: item.material_data.year,
 		};
 	};
 
