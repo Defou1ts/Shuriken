@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
 import { ERROR, IDLE, LOADING, SUCCESS, API_BASE } from '../../utils/consts';
+import { setProfileMessange, setShowProfileMessange } from '../../slices/profileSlice';
 import axios from 'axios';
 import {
 	setAuthLoadingStatus,
@@ -17,7 +18,6 @@ import {
 	setVerifyLoadingStatus,
 	setChangePasswordLoadingStatus,
 } from '../../slices/globalSlice';
-import { setProfileMessange, setShowProfileMessange } from '../../slices/profileSlice';
 
 export const useUserService = () => {
 	const { request } = useHttp();

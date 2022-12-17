@@ -65,7 +65,7 @@ const CatalogSidebar = () => {
 				<div key={uuid()} className="catalog__siderbar-age-item">
 					<label className={checked ? 'checked' : ''}>
 						<input
-							checked={checked}
+							defaultChecked={checked}
 							type="checkbox"
 							value={ratingType}
 							onClick={(e) => dispatch(handleActive(e.target.value))}
@@ -91,7 +91,7 @@ const CatalogSidebar = () => {
 				<div key={uuid()} className="catalog__siderbar-age-item">
 					<label className={checked ? 'checked' : ''}>
 						<input
-							checked={checked}
+							defaultChecked={checked}
 							type="checkbox"
 							value={typeType.type}
 							onClick={(e) => dispatch(handleActive(e.target.value))}
@@ -118,7 +118,7 @@ const CatalogSidebar = () => {
 				<div className="catalog__sidebar-mobile-header">
 					<h3 className="catalog__sidebar-mobile-title">Фильтры</h3>
 					<div
-						onClick={() => dispatch(setIsActiveFiltersMenu(false))}	
+						onClick={() => dispatch(setIsActiveFiltersMenu(false))}
 						className="catalog__sidebar-mobile-close"
 					></div>
 				</div>

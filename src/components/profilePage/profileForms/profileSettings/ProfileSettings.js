@@ -6,8 +6,11 @@ import { useUserService } from '../../../../services/auth/user.service';
 import SettingsRedButton from '../settingsRedButton/SettingsRedButton';
 
 import './profileSettings.scss';
+import { useNavigate } from 'react-router-dom';
+import { HOMEPAGE_ROUTE } from '../../../../utils/consts';
 
 const ProfileSettings = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const { exit, uploadUserImage, validatePassword, changeUserPassword } = useUserService();
 
@@ -34,6 +37,7 @@ const ProfileSettings = () => {
 	const handleExit = () => {
 		dispatch(setShowProfileSettings(false));
 		exit();
+		navigate(HOMEPAGE_ROUTE);
 	};
 
 	const handleSave = async () => {
@@ -68,7 +72,7 @@ const ProfileSettings = () => {
 				className={`black-wrapper ${showProfileSettings ? 'active' : ''}`}
 				onClick={() => dispatch(setShowProfileSettings(false))}
 			></div>
-			<div className="settings">
+			<div className={`settings ${showProfileSettings ? 'active' : ''}`}>
 				<div className="settings__header">
 					<h3 className="settings__title">Основное</h3>
 					<div onClick={() => dispatch(setShowProfileSettings(false))} className="settings__close">

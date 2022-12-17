@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { setSort, setIsActiveSortMenu } from '../../../slices/catalogSlice';
+import { v4 } from 'uuid';
 
 import Dropdown from 'react-dropdown';
 
@@ -34,7 +35,7 @@ const CatalogSort = () => {
 			let className = 'catalog__sort-mobile-item';
 			if (activeSort === value) className += ' active';
 			return (
-				<li onClick={(e) => onChange(e)} className={className} data-value={value}>
+				<li key={v4()} onClick={(e) => onChange(e)} className={className} data-value={value}>
 					{label}
 				</li>
 			);
