@@ -65,7 +65,6 @@ const AnimeReviewItem = (review) => {
 				</p>
 				<p className="reviews__description">{description}</p>
 				<div className="reviews__btns">
-					<button className="reviews__answer">Ответить </button>
 					<button className="reviews__like">
 						<img src={likeSrc} alt="Likes" onClick={() => likeReview(_id)} />
 						<span>{likes}</span>

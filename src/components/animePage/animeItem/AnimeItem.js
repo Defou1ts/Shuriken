@@ -78,8 +78,15 @@ const AnimeItem = () => {
 		});
 	};
 
+	const scrollToReviews = () => {
+		window.scrollTo({
+			top: document.querySelector('.reviews').offsetTop - 200,
+			behavior: 'smooth',
+		});
+	};
+
 	const openNotesModal = (e) => {
-		if (e.target.classList.contains('anime-item__adv-btn') || e.target.localName === 'img') {
+		if (e.target.classList.contains('notes') || e.target.localName === 'img') {
 			setShowNotesMenu(true);
 		} else {
 			setShowNotesMenu(false);
@@ -145,7 +152,7 @@ const AnimeItem = () => {
 							<p className="login__error center">Вы не авторизованы</p>
 						) : null}
 						{writeLoadingStatus === 'loading' ? <Spinner small /> : null}
-						<div className="anime-item__adv-btn review">
+						<div onClick={() => scrollToReviews()} className="anime-item__adv-btn review">
 							Написать отзыв
 							<img src={isMobile ? mobileRateIcon : rateIcon} alt="write rate" />
 						</div>
