@@ -24,7 +24,7 @@ const NewAnimeList = ({ title, sort }) => {
 		status: 'ongoing',
 		ageRating: '',
 		sort,
-		limit: 7,
+		limit: 14,
 	};
 
 	useEffect(() => {

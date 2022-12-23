@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../slices/globalSlice';
+import { Helmet } from 'react-helmet';
 
 import AppRouter from '../common/appRouter/AppRouter';
 import Header from '../common/header/Header';
@@ -30,6 +31,10 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
+			<Helmet>
+				<meta name="description" content="Аниме портал для онлайн просмотра аниме. Главная страница" />
+				<title>丂huriken</title>
+			</Helmet>
 			<Header />
 			{isMobile ? createPortal(<MobileMenu />, document.getElementById('root')) : null}
 			{showLoginForm ? createPortal(<LoginForm />, document.getElementById('root')) : null}
