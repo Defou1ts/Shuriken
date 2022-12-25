@@ -4,16 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../slices/globalSlice';
 import { Helmet } from 'react-helmet';
+import { useUserService } from '../../services/auth/user.service';
 
 import AppRouter from '../common/appRouter/AppRouter';
 import Header from '../common/header/Header';
 import MobileMenu from '../common/mobileMenu/MobileMenu';
 import LoginForm from '../loginPage/loginForm/LoginForm';
-import { useUserService } from '../../services/auth/user.service';
+import ErrorBoundary from '../../pages/ServerError';
 
 const App = () => {
-	//TODO: ADD ERROR MESSAGE!
-
 	const dispatch = useDispatch();
 	const isMobile = useSelector((state) => state.global.isMobile);
 	const showLoginForm = useSelector((state) => state.global.showLoginForm);
@@ -38,7 +37,9 @@ const App = () => {
 			<Header />
 			{isMobile ? createPortal(<MobileMenu />, document.getElementById('root')) : null}
 			{showLoginForm ? createPortal(<LoginForm />, document.getElementById('root')) : null}
-			<AppRouter />
+			<ErrorBoundary>
+				<AppRouter />
+			</ErrorBoundary>
 		</BrowserRouter>
 	);
 };

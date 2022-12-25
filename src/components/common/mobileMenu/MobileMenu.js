@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowLoginForm, setIsActiveBurger } from '../../../slices/globalSlice';
 import { useUserService } from '../../../services/auth/user.service';
-
 import { PROFILE_ROUTE, LOGIN_ROUTE, CATALOG_ROUTE, API_IMAGES } from '../../../utils/consts';
 
 import notificationsIcon from '../../../assets/notifications.svg';
@@ -15,11 +14,11 @@ import './mobileMenu.scss';
 
 const MobileMenu = () => {
 	const dispatch = useDispatch();
+	const { exit } = useUserService();
+
 	const user = useSelector((state) => state.global.user);
 	const isActiveBurger = useSelector((state) => state.global.isActiveBurger);
 	const location = useLocation();
-
-	const { exit } = useUserService();
 
 	useEffect(() => {
 		dispatch(setIsActiveBurger(false));

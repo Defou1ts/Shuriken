@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { fetchSearchAnimeByTitle, setSearch } from '../../../slices/catalogSlice';
 import { useDispatch } from 'react-redux';
 import { CATALOG_ROUTE } from '../../../utils/consts';
@@ -24,7 +24,7 @@ const SearchInput = ({ fullwidth }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setSearchText(searchText);	
+		setSearchText(searchText);
 		dispatch(fetchSearchAnimeByTitle(searchText));
 		navigate(CATALOG_ROUTE);
 	};

@@ -15,16 +15,14 @@ import settingsIcon from '../../../assets/settings.svg';
 
 const ProfileHeader = () => {
 	const dispatch = useDispatch();
+	const { logRegisterTime } = useLog();
+
 	const showProfileSettings = useSelector((state) => state.profile.showProfileSettings);
 	const showProfileMessange = useSelector((state) => state.profile.showProfileMessange);
 	const showVerifyEmail = useSelector((state) => state.profile.showVerifyEmail);
 	const profileMessage = useSelector((state) => state.profile.profileMessage);
 	const fileLoadingStatus = useSelector((state) => state.global.fileLoadingStatus);
 	const { username, email, isVerifiedEmail, createdAt, image } = useSelector((state) => state.global.user);
-
-	console.log(fileLoadingStatus);
-
-	const { logRegisterTime } = useLog();
 
 	if (!username) return <Spinner />;
 

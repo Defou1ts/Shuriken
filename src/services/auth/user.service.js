@@ -1,4 +1,3 @@
-import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
 import { ERROR, IDLE, LOADING, SUCCESS, API_BASE } from '../../utils/consts';
@@ -54,7 +53,6 @@ export const useUserService = () => {
 		dispatch(setRegisterLoadingStatus(IDLE));
 		dispatch(setUser(res));
 		await login({ email, password });
-		<Navigate to="/" />;
 	};
 
 	const exit = () => {
@@ -128,11 +126,6 @@ export const useUserService = () => {
 		}
 		dispatch(setUpdateReviewLoadingStatus(IDLE));
 	};
-
-	// const findReviewsByAnime = async (animeId) => {
-	//     const res = await request(`${API_BASE}/reviews/byAnime/${animeId}`);
-	//     return res;
-	// };
 
 	const likeReview = async (reviewId) => {
 		dispatch(setUpdateReviewLoadingStatus(LOADING));
@@ -299,6 +292,5 @@ export const useUserService = () => {
 		verifyUserEmail,
 		validatePassword,
 		changeUserPassword,
-		// findReviewsByAnime,
 	};
 };

@@ -8,8 +8,6 @@ import { useUserService } from '../../../services/auth/user.service';
 import * as Yup from 'yup';
 
 import './loginForm.scss';
-import vkIcon from '../../../assets/vklogin.svg';
-import facebookIcon from '../../../assets/facebooklogin.svg';
 
 import FormInput from '../../common/formInput/FormInput';
 import Spinner from '../../common/spinner/Spinner';
@@ -17,10 +15,10 @@ import Spinner from '../../common/spinner/Spinner';
 const LoginForm = () => {
 	const location = useLocation();
 	const dispatch = useDispatch();
+	const { login } = useUserService();
+
 	const authLoadingStatus = useSelector((state) => state.global.authLoadingStatus);
 	const showLoginForm = useSelector((state) => state.global.showLoginForm);
-
-	const { login } = useUserService();
 
 	const closeForm = (e) => {
 		if (e.target.classList.contains('black-form-wrapper') && location.pathname !== LOGIN_ROUTE) {
@@ -52,14 +50,6 @@ const LoginForm = () => {
 					<div className="login__header">
 						<h1 className="login__title">Авторизация</h1>
 					</div>
-					<div className="login__social-networks">
-						<div className="login__social-network">
-							<img src={vkIcon} alt="login with vk" className="login__social-network-logo" />
-						</div>
-						<div className="login__social-network login__facebook">
-							<img src={facebookIcon} alt="login with facebook" className="login__social-network-logo" />
-						</div>
-					</div>
 					<div className="login__fields">
 						<FormInput id="email" name="email" type="text" placeholder="Email" form="login" />
 						<FormInput id="password" name="password" type="password" placeholder="Пароль" form="login" />
@@ -75,7 +65,6 @@ const LoginForm = () => {
 						<Link to={REGISTER_ROUTE} className="login__register">
 							Зарегистрироваться
 						</Link>
-						<Link className="login__forgot">Забыли пароль?</Link>
 					</div>
 				</Form>
 			</Formik>

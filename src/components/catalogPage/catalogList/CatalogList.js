@@ -38,7 +38,6 @@ const CatalogList = () => {
 	}
 
 	const renderedAnimes = renderAnimes(catalogAnime);
-
 	const listContent = renderedAnimes.length > 0 ? renderedAnimes : <CatalogNotFound />;
 
 	return <div className="catalog__list">{listContent}</div>;

@@ -23,17 +23,21 @@ const AnimePlayer = () => {
 		return <Spinner small />;
 	}
 
-	const renderedTranslations = translationsList.map(({ title, id }) => (
-		<li
-			onClick={(e) => selectTranslation(e)}
-			key={uuidv4()}
-			id={id}
-			className={`player__translations-item 
+	const renderTranslationsList = (translations) => {
+		return translations.map(({ title, id }) => (
+			<li
+				onClick={(e) => selectTranslation(e)}
+				key={uuidv4()}
+				id={id}
+				className={`player__translations-item 
             ${id === selectedTranslation ? 'active' : ''}`}
-		>
-			{title}
-		</li>
-	));
+			>
+				{title}
+			</li>
+		));
+	};
+
+	const renderedTranslations = renderTranslationsList(translationsList);
 
 	return (
 		<div className="player">

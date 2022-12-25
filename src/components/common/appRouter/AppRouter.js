@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux/es/exports';
 
 import { publicRoutes, privateRoutes, generalRoutes } from '../../../utils/routes';
 
-import { LOGIN_ROUTE, PROFILE_ROUTE, NOT_FOUND_ROUTE } from '../../../utils/consts';
+import { LOGIN_ROUTE, PROFILE_ROUTE, NOT_FOUND_ROUTE, REGISTER_ROUTE, HOMEPAGE_ROUTE } from '../../../utils/consts';
 
 import Spinner from '../spinner/Spinner';
 
@@ -23,6 +23,7 @@ function AppRouter() {
 			{renderedGeneralRoutes}
 			{renderedPrivateRoutes}
 			<Route path={LOGIN_ROUTE} element={<Navigate to={PROFILE_ROUTE} replace />} />
+			<Route path={REGISTER_ROUTE} element={<Navigate to={HOMEPAGE_ROUTE} replace />} />
 			<Route path="*" element={<Navigate to={NOT_FOUND_ROUTE} replace />} />
 		</Routes>
 	) : (

@@ -42,7 +42,6 @@ const useKodikService = () => {
 	};
 
 	const getNewAnimeByOptions = async ({ genres, type, voice, status, ageRating, sort, limit }) => {
-		console.log(type);
 		const res = await request(
 			`${_apiBase}list?token=${_apiToken}&sort=${sort}&camrip=false&types=anime-serial&with_material_data=true&limit=${limit}&translation_type=voice&all_genres=${genres}&anime_kind=${type}&translation_id=${
 				voice.length > 0 ? voice : 610

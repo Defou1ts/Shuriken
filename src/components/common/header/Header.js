@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useLocation } from 'react-router-dom';
 import { setIsMobile, setIsActiveBurger, setShowLoginForm } from '../../../slices/globalSlice';
-
 import { PROFILE_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE } from '../../../utils/consts';
 
 import './header.scss';

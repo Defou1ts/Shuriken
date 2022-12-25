@@ -6,6 +6,7 @@ import {
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
 	NOT_FOUND_ROUTE,
+	SERVER_ERROR_ROUTE,
 } from '../utils/consts';
 
 import Homepage from '../pages/Homepage';
@@ -13,7 +14,7 @@ import Loginpage from '../pages/Loginpage';
 import RegisterPage from '../pages/RegisterPage';
 import AnimePage from '../pages/AnimePage';
 import ProfilePage from '../pages/ProfilePage';
-import NotFound from '../pages/NotFound';
+import ErrorWithCode from '../pages/ErrorWithCode';
 import CatalogPage from '../pages/CatalogPage';
 
 export const generalRoutes = [
@@ -32,7 +33,11 @@ export const generalRoutes = [
 	},
 	{
 		path: NOT_FOUND_ROUTE,
-		Component: <NotFound />,
+		Component: <ErrorWithCode code={404} />,
+	},
+	{
+		path: SERVER_ERROR_ROUTE,
+		Component: <ErrorWithCode code={500} />,
 	},
 ];
 

@@ -13,14 +13,14 @@ const AnimeReviews = () => {
 	const { id } = useParams();
 	const [text, setText] = useState('');
 
+	const { createReview } = useUserService();
+
 	const dispatch = useDispatch();
 
 	const user = useSelector((state) => state.global.user);
 	const reviews = useSelector((state) => state.anime.reviews);
 	const reviewsLoadingStatus = useSelector((state) => state.anime.reviewsLoadingStatus);
 	const updateReviewLoadingStatus = useSelector((state) => state.global.updateReviewLoadingStatus);
-
-	const { createReview } = useUserService();
 
 	useEffect(() => {
 		dispatch(fetchReviews(id));

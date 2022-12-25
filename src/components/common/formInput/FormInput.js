@@ -3,10 +3,13 @@ import { useSelector } from 'react-redux';
 import { useLog } from '../../../services/logService/log.service';
 
 const FormInput = ({ label, form, ...props }) => {
-	const registerErrorMessage = useSelector((state) => state.global.registerErrorMessage);
 	const { logErrorMessage } = useLog();
-	const { message, type, formType } = logErrorMessage(registerErrorMessage);
 	const [field, meta] = useField(props);
+
+	const registerErrorMessage = useSelector((state) => state.global.registerErrorMessage);
+
+	const { message, type, formType } = logErrorMessage(registerErrorMessage);
+
 	return (
 		<>
 			{label ? (

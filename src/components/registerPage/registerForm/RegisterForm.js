@@ -5,6 +5,7 @@ import { LOGIN_ROUTE } from '../../../utils/consts';
 import { useUserService } from '../../../services/auth/user.service';
 
 import './registerForm.scss';
+
 import FormInput from '../../common/formInput/FormInput';
 
 const RegisterForm = () => {

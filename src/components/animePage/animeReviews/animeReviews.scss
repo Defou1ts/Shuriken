@@ -1,67 +1,69 @@
 @import '../../../styles/theme.scss';
 
 .reviews {
-    margin: 100px 0px 0px 0px;
-    &__title {
-        display: block;
-        font-weight: 500;
-        font-size: 36px;
-        line-height: 45px;
-        color: #dedede;
-        border-bottom: 1px solid $red-color;
-        padding: 0px 0px 10px 0px;
-    }
-    &__submit {
-        margin: 25px 0px 0px 0px;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 30px;
-        color: #ffffff;
-        padding: 10px;
-        background-color: $red-color;
-        border-radius: 10px;
-    }
+	margin: 100px 0px 0px 0px;
+	&__title {
+		display: block;
+		font-weight: 500;
+		font-size: 36px;
+		line-height: 45px;
+		color: #dedede;
+		border-bottom: 1px solid $red-color;
+		padding: 0px 0px 10px 0px;
+	}
+	&__submit {
+		margin: 25px 0px 0px 0px;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 30px;
+		color: #ffffff;
+		padding: 10px;
+		background-color: $red-color;
+		border-radius: 10px;
+	}
 
-    &__text-area {
-        display: block;
-        width: 100%;
-        margin: 55px 0px 0px 0px;
-        background: #5a5a5a;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 30px;
-        color: $white-color;
-        padding: 10px;
-    }
+	&__text-area {
+		display: block;
+		width: 100%;
+		margin: 55px 0px 0px 0px;
+		background: #5a5a5a;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 30px;
+		color: $white-color;
+		padding: 10px;
+	}
 
-    &__list {
-        margin: 127px 0px 0px 0px;
-        display: flex;
-        flex-direction: column;
-        gap: 60px;
-    }
+	&__list {
+		margin: 127px 0px 0px 0px;
+		display: flex;
+		flex-direction: column;
+		gap: 60px;
+		padding: 0px 0px 60px 0px;
+	}
 }
 
 @media (max-width: 768px) {
-    .reviews {
-        &__title {
-            font-weight: 400;
-            font-size: 20px;
-            line-height: 25px;
-            color: #ffffff;
-        }
-        &__text-area {
-            margin: 25px 0px 0px 0px;
-            font-size: 16px;
-            line-height: 26px;
-        }
-        &__submit {
-            margin: 25px 0px 0px 0px;
-            font-size: 16px;
-        }
-        &__list {
-            margin: 60px 0px 0px 0px;
-            gap: 40px;
-        }
-    }
+	.reviews {
+		&__title {
+			font-weight: 400;
+			font-size: 20px;
+			line-height: 25px;
+			color: #ffffff;
+		}
+		&__text-area {
+			margin: 25px 0px 0px 0px;
+			font-size: 16px;
+			line-height: 26px;
+		}
+		&__submit {
+			margin: 25px 0px 0px 0px;
+			font-size: 16px;
+		}
+		&__list {
+			margin: 60px 0px 0px 0px;
+			padding: 0px 0px 60px 0px;
+			gap: 40px;
+		}
+	}
 }

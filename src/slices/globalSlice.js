@@ -1,20 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IDLE } from '../utils/consts';
 
 const initialState = {
 	isActiveBurger: false,
 	showLoginForm: false,
 	isMobile: false,
 	user: null,
-	authLoadingStatus: 'idle',
-	registerLoadingStatus: 'idle',
+	authLoadingStatus: IDLE,
+	registerLoadingStatus: IDLE,
 	registerErrorMessage: '',
-	writeLoadingStatus: 'idle',
-	fileLoadingStatus: 'idle',
-	updateReviewLoadingStatus: 'idle',
+	writeLoadingStatus: IDLE,
+	fileLoadingStatus: IDLE,
+	updateReviewLoadingStatus: IDLE,
 	verifyToken: null,
-	verifyTokenSendLoadingStatus: 'idle',
-	verifyLoadingStatus: 'idle',
-	changePasswordLoadingStatus: 'idle',
+	verifyTokenSendLoadingStatus: IDLE,
+	verifyLoadingStatus: IDLE,
+	changePasswordLoadingStatus: IDLE,
 };
 
 const globalSlice = createSlice({

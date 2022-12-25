@@ -24,8 +24,6 @@ const AnimeReviewItem = (review) => {
 	const likedComments = useSelector((state) => state.global.user?.likedComments);
 	const disLikedComments = useSelector((state) => state.global.user?.disLikedComments);
 
-	console.log(likedComments);
-
 	useEffect(() => {
 		if (likedComments) {
 			for (const commentId of likedComments) {
